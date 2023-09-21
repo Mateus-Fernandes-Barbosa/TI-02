@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forum</title>
+  <style>
+    /* Estilos CSS para o fórum */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .post {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    .post .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .post .content {
+      font-size: 14px;
+    }
+
+    .post .author {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .form-group textarea {
+      height: 100px;
+    }
+
+    .form-group button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: rgb(7, 6, 6);
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="Sprint_3_logo_Luis.png" alt="Logo" style="width: 150px!important; height: 30px!important;" class="d-inline-block align-text-top">
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Página inicial</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown link
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="Sprint_2_compatibilidade_Felipe.html">Compatibilidade</a></li>
+              <li><a class="dropdown-item" href="Sprint_3_Precos_Pecas_Luis.html">Produtos de Parceiros</a></li>
+              <li><a class="dropdown-item" href="Sprint_2_cadastro_Luis.html">Cadastro de peças</a></li>
+              <li><a class="dropdown-item" href="Sprint_3_forum_Kauan.html">Fórum</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Forúm</h1>
+
+    <div id="posts"></div>
+
+    <div id="post-form">
+      <h2>Novo Post</h2>
+      <div class="form-group">
+        <label for="post-title">Título:</label>
+        <input type="text" id="post-title">
+      </div>
+      <div class="form-group">
+        <label for="post-content">Conteúdo:</label>
+        <textarea id="post-content"></textarea>
+      </div>
+      <div class="form-group">
+        <button id="submit-post">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Código JavaScript para manipulação do fórum
+
+    // Verifica se há posts no localStorage e os carrega
+    var posts = JSON.parse(localStorage.getItem('forum_posts')) || [];
+
+    // Função para exibir os posts na página
+    function renderPosts() {
+      var postsContainer = document.getElementById('posts');
+      postsContainer.innerHTML = '';
+
+      for (var i = 0; i < posts.length; i++) {
+        var post = posts[i];
+
+        var postElement = document.createElement('div');
+        postElement.classList.add('post');
+        postElement.innerHTML = `
+          <div class="title">${post.title}</div>
+          <div class="content">${post.content}</div>
+          <div class="author">Por: ${post.author}</div>
+        `;
+
+        postsContainer.appendChild(postElement);
+      }
+    }
+
+    // Função para adicionar um novo post
+    function addPost(title, content) {
+      var post = {
+        title: title,
+        content: content,
+        author: 'Anônimo'
+      };
+
+      posts.push(post);
+      localStorage.setItem('forum_posts', JSON.stringify(posts));
+
+      renderPosts();
+    }
+
+    // Manipulador de evento para o envio do formulário
+    document.getElementById('submit-post').addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var titleInput = document.getElementById('post-title');
+      var contentInput = document.getElementById('post-content');
+
+      var title = titleInput.value.trim();
+      var content = contentInput.value.trim();
+
+      if (title === '' || content === '') {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      addPost(title, content);
+
+      titleInput.value = '';
+      contentInput.value = '';
+    });
+
+    // Renderiza os posts ao carregar a página
+    renderPosts();
+  </script>
+</body>
+</html>

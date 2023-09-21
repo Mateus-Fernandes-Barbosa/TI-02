@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="navbar.css">
+  <title>Comparador de Peças de Computador</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
+  <style>
+    .botao{
+      background-color: #0c3a5f;
+    }
+    
+    body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 100px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+} 
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background-color: red;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*#cabecalho1 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}*/
+img {
+  
+}
+
+  </style>
+
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img src="Logo_Icon.png" alt="Bootstrap" width="" height="50" id="icon">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Página Inicial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="Sprint_3_cadastro_Samuel.html">Seja Apoiador</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Info. Peças
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=1">Processador</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=2">Placa de Vídeo</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=3">Placa Mãe</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=4">Cooler</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=5">Memória Ram</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=6">Fonte Alimentação</a></li>
+                  <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=7">HD</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  <h1>Comparador de Peças de Computador</h1>
+
+  <h2>Selecione o tipo de peça para comparar:</h2>
+  <select id="tipo-peca" onchange="atualizarOpcoesPecas()">
+    <option value="">Selecione um tipo de peça</option>
+    <option value="placa-mae">Placa-Mãe</option>
+    <option value="processador">Processador</option>
+    <option value="memoria-ram">Memória RAM</option>
+    <option value="placa-video">Placa de Vídeo</option>
+    <option value="fonte">Fonte</option>
+    <option value="cooler">Cooler</option>
+    <option value="ssd">SSD</option>
+    <option value="hd">HD</option>
+  </select>
+
+  <div id="opcoes-pecas" style="display: none;">
+    <h2>Selecione as peças para comparar:</h2>
+    <select id="peca1"></select>
+    <select id="peca2"></select>
+    <button id="botao" onclick="compararPecas()">Comparar</button>
+  </div>
+
+  <table id="resultado" style="display: none;">
+    <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Peça 1</th>
+          <th>Descrição Peça 1</th>
+          <th>Peça 2</th>
+          <th>Descrição Peça 2</th>
+          <th>Resultado</th> <!-- Nova coluna -->
+        </tr>
+      </thead>
+      
+    <tbody>
+      <!-- As células da tabela serão preenchidas dinamicamente -->
+    </tbody>
+  </table>
+
+  <script>
+    // Mapeamento das opções de peças para cada tipo de peça
+    var opcoesPecas = {
+      "placa-mae": [
+        { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "MSI A520M-A PRO mATX", descricao: "Socket:lga1700 ,Geração_Compatível:12, Frequência máxima XPM:5333 htz, Conectores_M.2: 4 " },
+        { modelo: "Gigabyte Z690 Aorus Elite AX", descricao: "Socket:AM4 ,Geração_Compatível: 1 2 3 4, Frequência máxima XPM:4600 htz, Conectores_M.2: 1 " }
+      ],
+      "processador": [
+        { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "Intel Core i7", descricao: "Frequência_Base: 3.6, frequência turbo: 5.0, Núcleos: 12, Threads:20, memoria cache: 25mb " },
+        { modelo: "AMD Ryzen™ 5", descricao: "Frequência_Base: 3.7, frequência turbo: 4.2, Núcleos: 6, Threads:12, memoria cache: 11mb " }
+
+      ],
+      "memoria-ram": [
+      { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "Kingston Fury Beast", descricao: "Tipo de memoria RAM:DDR4,  Latência: 16, Capacidade 8GB" },
+        { modelo: " Corsair Vengeance LP", descricao: "Tipo de memoria RAM: DDR4, Latência: 16 , Capacidade 8GB " }
+
+
+      ],
+      "placa-video": [
+  { modelo: "Selecione um modelo", descricao: "" },
+  { modelo: "RTX 4090 Gaming Trio MSI NVIDIA", descricao: "potencia da fonte recomendada: 850W, potencia da placa de video: 350W, Base clock: 1.40" },
+  { modelo: "Placa de Vídeo RTX 2060 Ventus MSI", descricao: "potencia da fonte recomendada: 500W, potencia da placa de video: 350W, Base clock: 1.40" }
+],
+
+      " fonte": [
+      { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "MSI MPG A850G PCIE5", descricao: " Potência: 850w, Classificação de eficiência: 80 Plus gold " },
+        { modelo: "Fonte Corsair CV550 ", descricao: " Potência: 550w, Classificação de eficiência: 80 Plus gold" }
+
+      ],
+      "cooler": [
+      { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "Cooler Master HYPER H410R", descricao: "Tamanho_das_fans: 360mm, numero de fans: 3 " },
+        { modelo: "Water Cooler Corsair H150 ", descricao: "Tamanho_das_fans: 92mm, numero de fans: 1 " }
+      ],
+      "ssd": [
+      { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "SSD 240 GB Kingston A400", descricao: "Tipo_de_PCI-E: 3.0, Tecnologia NVME: 1.4,Leitura sequencial: 2400Mb/s, Gravação sequencial: 180Mb/s " },
+        { modelo: " SSD 250 GB WD Blue, M.2", descricao: "Tipo_de_PCI-E: 2.0, Tecnologia NVME: 1.4,Leitura sequencial: 555Mb/s, Gravação sequencial: 440Mb/s " }
+      ],
+      "hd": [
+      { modelo: "Selecione um modelo", descricao: "" },
+        { modelo: "HD Seagate BarraCuda 3.5 SATA - ST4000DM004", descricao: " Armazenamento: 4096GB" },
+        { modelo: " HD Serial ata ", descricao: "Armazenamento:6GB" } 
+      ]
+      
+      
+    };
+
+    function atualizarOpcoesPecas() {
+      var tipoPeca = document.getElementById('tipo-peca').value;
+      var opcoes = opcoesPecas[tipoPeca];
+
+      var peca1Select = document.getElementById('peca1');
+      var peca2Select = document.getElementById('peca2');
+
+      // Limpa as opções de peças anteriores
+      peca1Select.innerHTML = "";
+      peca2Select.innerHTML = "";
+
+      // Adiciona as novas opções de peças
+      for (var i = 0; i < opcoes.length; i++) {
+        var option1 = document.createElement('option');
+        option1.value = opcoes[i].modelo;
+        option1.textContent = opcoes[i].modelo;
+
+        var option2 = document.createElement('option');
+        option2.value = opcoes[i].modelo;
+        option2.textContent = opcoes[i].modelo;
+
+        peca1Select.appendChild(option1);
+        peca2Select.appendChild(option2);
+      }
+
+      // Exibe as opções de peças
+      document.getElementById('opcoes-pecas').style.display = 'block';
+    }
+
+    function compararPecas() {
+      var componente = document.getElementById('tipo-peca').value;  
+      var peca1 = document.getElementById('peca1').value;
+      var peca2 = document.getElementById('peca2').value;
+
+      if (peca1 && peca2) {
+        // Exibe a tabela de resultado
+        document.getElementById('resultado').style.display = 'table';
+
+        // Limpa o corpo da tabela
+        var tbody = document.getElementById('resultado').getElementsByTagName('tbody')[0];
+        tbody.innerHTML = "";
+
+        // Cria uma linha para cada componente e preenche as células com as peças selecionadas
+        criarLinhaComponente(componente,peca1 , peca2);
+      }
+    }
+
+    function criarLinhaComponente(componente, peca1, peca2) {
+      var opcoes = opcoesPecas[componente.toLowerCase()];
+
+      var peca1Descricao = "";
+      var peca2Descricao = "";
+
+      // Encontra as descrições das peças selecionadas
+      for (var i = 0; i < opcoes.length; i++) {
+        if (opcoes[i].modelo === peca1) {
+          peca1Descricao = opcoes[i].descricao;
+        }
+        if (opcoes[i].modelo === peca2) {
+          peca2Descricao = opcoes[i].descricao;
+        }
+      }
+
+      var tbody = document.getElementById('resultado').getElementsByTagName('tbody')[0];
+      var row = tbody.insertRow();
+
+      var componenteCell = row.insertCell();
+      componenteCell.textContent = componente;
+
+      var peca1Cell = row.insertCell();
+      peca1Cell.textContent = peca1;
+
+      var peca1DescricaoCell = row.insertCell();
+      peca1DescricaoCell.textContent = peca1Descricao;
+
+      var peca2Cell = row.insertCell();
+      peca2Cell.textContent = peca2;
+
+      var peca2DescricaoCell = row.insertCell();
+      peca2DescricaoCell.textContent = peca2Descricao;
+    }
+    function criarLinhaComponente(componente, peca1, peca2) {
+  var opcoes = opcoesPecas[componente.toLowerCase()];
+
+  var peca1Descricao = "";
+  var peca2Descricao = "";
+
+  // Encontra as descrições das peças selecionadas
+  for (var i = 0; i < opcoes.length; i++) {
+    if (opcoes[i].modelo === peca1) {
+      peca1Descricao = opcoes[i].descricao;
+    }
+    if (opcoes[i].modelo === peca2) {
+      peca2Descricao = opcoes[i].descricao;
+    }
+  }
+
+  var tbody = document.getElementById('resultado').getElementsByTagName('tbody')[0];
+  var row = tbody.insertRow();
+
+  var componenteCell = row.insertCell();
+  componenteCell.textContent = componente;
+
+  var peca1Cell = row.insertCell();
+  peca1Cell.textContent = peca1;
+
+  var peca1DescricaoCell = row.insertCell();
+  peca1DescricaoCell.textContent = peca1Descricao;
+
+  var peca2Cell = row.insertCell();
+  peca2Cell.textContent = peca2;
+
+  var peca2DescricaoCell = row.insertCell();
+  peca2DescricaoCell.textContent = peca2Descricao;
+
+  var resultadoCell = row.insertCell(); // Cria a célula para o resultado
+  resultadoCell.textContent = calcularResultado(componente, peca1, peca2); // Preenche o resultado
+}
+function calcularResultado(componente, peca1, peca2) {
+  // Lógica para calcular o resultado com base nas peças selecionadas
+  // Você pode adicionar sua própria lógica de comparação aqui
+
+  if (componente === "placa-mae") {
+    // Exemplo de comparação para a placa-mãe
+    if (peca1 === "MSI A520M-A PRO mATX" && peca2 === "Gigabyte Z690 Aorus Elite AX") {
+      return "A MSI é considerada melhor que a Gigabyte";
+    } else if (peca1 === "Gigabyte Z690 Aorus Elite AX" && peca2 === "MSI A520M-A PRO mATX") {
+      return "A MSI é considerada melhor que a Gigabyte";
+    } else {
+      return "Empate";
+    }
+  } else if (componente === "processador") {
+    // Exemplo de comparação para o processador
+    if (peca1 === "Intel core i7" && peca2 === "AMD Ryzen™ 5") {
+      return "Intel core i7 é uma melhor opção";
+    } else if (peca1 === "AMD Ryzen™ 5" && peca2 === "Intel core i7") {
+      return "AMD Ryzen™ 5 é uma melhor opção";
+    } else {
+      return "Intel core i7 é uma melhor opção";
+    }
+  } else if (componente === "memoria-ram") {
+    // Exemplo de comparação para a memória RAM
+    if (peca1 === "Kingston Fury Beast" && peca2 === "Corsair Vengeance LP") {
+      return "A Kingston Fury Beast é uma melhor opção de memoria Ram";
+    } else if (peca1 === "Corsair Vengeance LP" && peca2 === "Kingston Fury Beast") {
+      return "A Kingston Fury Beast é uma melhor opção de memoria Ram";
+    } else {
+      return "A Kingston Fury Beast é uma melhor opção de memoria Ram ";
+    }
+  } else if (componente === "placa-video") {
+    // Exemplo de comparação para a placa de vídeo
+    if (peca1 === "RTX 4090 Gaming Trio MSI NVIDIA" && peca2 === "Placa de Vídeo RTX 2060 Ventus MSI") {
+      return "Placa de Vídeo RTX 2060 Ventus MSI é uma melhor placa de video";
+    } else if (peca1 === "Placa de Vídeo RTX 2060 Ventus MSI" && peca2 === "RTX 4090 Gaming Trio MSI NVIDIA") {
+      return "Placa de Vídeo RTX 2060 Ventus MSI é uma melhor placa de video";
+    } else {
+      return "Placa de Vídeo RTX 2060 Ventus MSI é uma melhor placa de video";
+    }
+  } else if (componente === "fonte") {
+    // Exemplo de comparação para a fonte
+    if (peca1 === "" && peca2 === "") {
+      return "";
+    } else if (peca1 === "" && peca2 === "") {
+      return "";
+    } else {
+      return " ";
+    }
+  } else if (componente === "cooler") {
+    // Exemplo de comparação para o cooler
+    if (peca1 === "Cooler Master HYPER H410R" && peca2 === "Water Cooler Corsair H150") {
+      return "Water Cooler Corsair H150 é um melhor cooler sendo mais silêcioso.  ";
+    } else if (peca1 === "Water Cooler Corsair H150" && peca2 === "Cooler Master HYPER H410R") {
+      return "Water Cooler Corsair H150 é um melhor cooler sendo mais silêcioso. ";
+    } else {
+      return " Water Cooler Corsair H150 é um melhor cooler sendo mais silêcioso.";
+    }
+  } else if (componente === "ssd") {
+    // Exemplo de comparação para o SSD
+    if (peca1 === "SSD 240 GB Kingston A400" && peca2 === "SSD 250 GB WD Blue, M.2") {
+      return "O SSD 250 GB WD Blue, M.2 , é um melhor ssd sendo mais veloz.";
+    } else if (peca1 === "SSD 250 GB WD Blue, M.2" && peca2 === "SSD 240 GB Kingston A400") {
+      return "O SSD 250 GB WD Blue, M.2 , é um melhor ssd sendo mais veloz.";
+    } else {
+      return "O SSD 250 GB WD Blue, M.2 , é um melhor ssd sendo mais veloz.";
+    }
+  } else if (componente === "hd") {
+    // Exemplo de comparação para o HD
+    if (peca1 === "HD Seagate BarraCuda 3.5 SATA - ST4000DM004" && peca2 === "HD Serial ata") {
+      return "HD Seagate BarraCuda 3.5 SATA - ST4000DM004 é melhor.";
+    } else if (peca1 === "HD Serial ata" && peca2 === "HD Seagate BarraCuda 3.5 SATA - ST4000DM004") {
+      return "HD Seagate BarraCuda 3.5 SATA - ST4000DM004 é melhor";
+    } else {
+      return "HD Seagate BarraCuda 3.5 SATA - ST4000DM004 é melhor ";
+    }
+  }
+
+  return ""; // Retorno vazio se não houver lógica de comparação definida
+}
+
+
+  </script>
+</body>
+</html>

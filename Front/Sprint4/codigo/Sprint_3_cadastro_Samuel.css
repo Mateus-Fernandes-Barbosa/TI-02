@@ -1,0 +1,459 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+/*-----------------------BACKGROUND---------------------------*/
+body{
+    /*background: linear-gradient(#);*/
+}
+/*---------------------PÁGINA INICIAL-------------------------*/
+
+
+/*HEADER*/
+header{
+    background-color: #1874be;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px ;
+}
+
+#drop{
+    background-color:#0c3a5f !important;
+    color: rgb(255, 240, 240) !important;
+}
+
+#Header #sejaApoiador {
+
+    background-color:#0c3a5f;
+    color: rgb(255, 240, 240);
+    padding: 5px;
+    margin-top: 10px;
+
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 8px;
+
+    /*text-shadow: -1px 0 #d2e9fb, 0 1px #d2e9fb, 1px 0 #d2e9fb, 0 -1px white;*/
+    transition: 0.3s;
+}
+
+#Header #sejaApoiador:hover {
+
+    background-color: #061d2f;
+    color: rgb(255, 240, 240);
+
+    /*padding: 3%;*/
+
+    /*text-shadow: -1px 0 #d2e9fb, 0 1px #d2e9fb, 1px 0 #d2e9fb, 0 -1px white;*/
+    transition: 0.3s;
+}
+
+#Header #logo img {
+    width: 75%;
+    height: 70%;
+    display: block;
+    justify-self: center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: brightness(15);
+}
+
+/*MAIN*/
+#Principal {
+
+}
+
+#Principal p {
+    text-align: center;
+}
+
+
+#Principal #Escolha .BotõesPeça {
+
+    margin: auto 25%;
+
+    height: 65px;
+    width: 200px;
+
+    padding: 5px;
+    margin-top: 10px;
+
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#Principal #Escolha .BotõesPeça:hover {
+
+    height: 75px;
+    width: 200px;
+
+    padding: 10px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+/*COR ESCOLHA DAS PEÇAS*/
+
+#ProcessadorBtn {
+    background-color: #4ba7f1;
+    color: rgb(255, 255, 255);
+    text-shadow: -1.3px 0 Black, 0 1.0px Black, 1.0px 0 Black, 0 -1.0px Black;
+    transition: 0.3s;
+}
+
+#ProcessadorBtn:hover {
+    background-color: #1874be;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.0px 0 White, 0 1.0px White, 1.0px 0 White, 0 -1.0px White;
+    transition: 0.3s;
+
+}
+
+#PlacaVideoBtn {
+    background-color: #4ba7f1;
+    color: white;
+    text-shadow: -1.0px 0 Black, 0 1.0px Black, 1.0px 0 Black, 0 -1.0px Black;
+    transition: 0.3s;
+}
+
+#PlacaVideoBtn:hover {
+    background-color: #1874be;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.0px 0 White, 0 1.0px White, 1.0px 0 White, 0 -1.0px White;
+    transition: 0.3s;
+
+}
+
+#PlacaMãeBtn {
+    background-color: #4ba7f1 ;
+    color: white;
+    text-shadow: -1.0px 0 Black, 0 1.0px Black, 1.0px 0 Black, 0 -1.0px Black;
+    transition: 0.3s;
+}
+
+#PlacaMãeBtn:hover {
+    background-color: #1874be;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.0px 0 White, 0 1.0px White, 1.0px 0 White, 0 -1.0px White;
+    transition: 0.3s;
+
+}
+
+#CoolerBtn {
+    background-color: #4ba7f1;
+    color: white;
+    text-shadow: -1.0px 0 Black, 0 1.0px Black, 1.0px 0 Black, 0 -1.0px Black;
+    transition: 0.3s;
+}
+
+#CoolerBtn:hover {
+    background-color: #1874be;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.0px 0 White, 0 1.0px White, 1.0px 0 White, 0 -1.0px White;
+    transition: 0.3s;
+
+}
+
+#RamBtn {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    text-shadow: -1.0px 0 Black, 0 1.0px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#RamBtn:hover {
+    background-color: rgb(138, 0, 0);
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 White, 0 1.3px White, 1.3px 0 White, 0 -1.3px White;
+    transition: 0.3s;
+
+}
+
+#FonteBtn {
+    background-color: rgb(251, 255, 0);
+    color: white;
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#FonteBtn:hover {
+    background-color: rgb(138, 138, 0);
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 White, 0 1.3px White, 1.3px 0 White, 0 -1.3px White;
+    transition: 0.3s;
+
+}
+
+#HDBtn {
+    background-color: rgb(26, 255, 0);
+    color: white;
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#HDBtn:hover {
+    background-color: rgb(7, 138, 0);
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 White, 0 1.3px White, 1.3px 0 White, 0 -1.3px White;
+    transition: 0.3s;
+
+}
+
+#FocosBtn {
+    background-color: rgb(255, 90, 90);
+    color: white;
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#FocosBtn:hover {
+    background-color: rgb(140, 48, 48);
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 White, 0 1.3px White, 1.3px 0 White, 0 -1.3px White;
+    transition: 0.3s;
+
+}
+
+/*---------------------PÁGINA DE CADASTRO-------------------------*/
+
+#Cadastrar {
+    width: 100%;
+    margin: 0 auto;
+    background: transparent;
+}
+
+#Cadastrar #container-cadastro {
+
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-float input {
+    width: 100%;
+    padding: 5px 5px;
+    display: inline-block;
+    border: 0;
+    border-bottom: 2px solid #ff5100;
+    background-color: transparent;
+    outline: none;
+    min-width: 180px;
+    font-size: 16px;
+    transition: all .3s ease-out;
+    border-radius: 0;
+
+}
+
+#Cadastrar .label-float {
+    margin-top: 0%;
+    margin-bottom: 10%;
+    padding: 2%;
+
+    background-color: rgb(255, 255, 255);
+
+    width: 100%;
+    position: relative;
+    border-bottom: 3px solid rgb(42, 149, 248);
+}
+
+#Cadastrar .input-form {
+
+    font-size: 18px;
+    color: rgb(0, 153, 255);
+
+    height: 25px;
+    line-height: 1.5;
+    background: transparent;
+    display: block;
+    padding: 0 5px;
+
+}
+
+#Cadastrar .focus-input-form {
+
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    top: 15px;
+    left: 0px;
+    font-size: 1.2rem;
+
+    padding-bottom: 5px;
+
+    pointer-events: none;
+
+}
+
+.formularioCadastro .FaçaCadastro h1 {
+
+    display: block;
+    font-size: 45px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+#Cadastrar input,
+button {
+
+    margin-top: 10%;
+    outline: none;
+    border: none;
+}
+
+#Cadastrar button {
+
+    margin: 5% auto;
+
+    height: 40px;
+    width: 200px;
+
+    padding: 5px;
+    margin-top: 10px;
+
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 8px;
+
+    background-color: #0c3a5f;
+    color: aliceblue;
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+
+    transition: all 0.4s;
+}
+
+#Cadastrar #BtnGoBack button {
+
+    margin: 5% auto;
+
+    height: 40px;
+    width: 220px;
+
+    padding: 5px;
+    margin-top: 10px;
+
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 8px;
+
+    background-color: #0c3a5f;
+    color: white;
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+
+    transition: all 0.4s;
+}
+
+#Cadastrar #BtnGoBack button:hover {
+
+    background-color: #061d2f;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 white, 0 1.3px white, 1.3px 0 white, 0 -1.3px white;
+
+    width: 105%;
+    height: 105%;
+    padding: 2%;
+
+    transition: all 0.4s;
+
+    cursor: pointer;
+}
+
+#Cadastrar button:hover {
+
+    background-color: #061d2f;
+    color: rgb(0, 0, 0);
+    text-shadow: -1.3px 0 white, 0 1.3px white, 1.3px 0 white, 0 -1.3px white;
+
+    width: 105%;
+    height: 105%;
+    padding: 2%;
+
+    transition: all 0.4s;
+
+    cursor: pointer;
+}
+
+#Cadastrar .RemoveBtn:hover {
+
+    background-color: #061d2f;
+}
+
+#msgError {
+    text-align: center;
+    color: rgb(63, 0, 0);
+    background-color: rgb(210, 0, 0);
+    padding: 5px;
+    border-radius: 4px;
+    display: none;
+    text-shadow: -1.3px 0 white, 0 1.3px white, 1.3px 0 white, 0 -1.3px white;
+}
+
+#msgSuccess {
+    text-align: center;
+    color: #4ba7f1;
+    background-color: #1874be;
+    padding: 5px;
+    border-radius: 4px;
+    display: none;
+    text-shadow: -1.3px 0 white, 0 1.3px white, 1.3px 0 white, 0 -1.3px white;
+}
+
+/*---------------------------PÁGINA DE DESCRIÇÃO DAS PEÇAS-------------------------------*/
+
+#logo{
+    filter: brightness(15)!important;
+}
+
+#btnVoltar{
+
+    border: solid #061d2f 2px;
+    border-radius: 8px;
+    background-color: #0c3a5f;
+    color: white;
+
+    margin: 5px;
+    padding: 5px;
+
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#btnVoltar:hover{
+
+    border: solid #061d2f;
+    background-color: #061d2f;
+    transition: 0.3s;
+}
+
+#btnCompatibilidade{
+    border: solid #061d2f 2px;
+    border-radius: 8px;
+    background-color: #0c3a5f;
+    color: white;
+
+    margin: 5px;
+    padding: 5px;
+
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#btnCompatibilidade:hover{
+    border: solid #061d2f 2px;
+    background-color: #061d2f;
+
+    text-shadow: -1.3px 0 Black, 0 1.3px Black, 1.3px 0 Black, 0 -1.3px Black;
+    transition: 0.3s;
+}
+
+#Conteudo iframe{
+
+    border: solid black 2px;
+    border-radius: 5px;
+}
