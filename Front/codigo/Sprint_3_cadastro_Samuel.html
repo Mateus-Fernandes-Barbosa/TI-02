@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <title>PC Master - Cadastro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="Sprint_3_cadastro_Samuel.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+</head>
+
+
+<body>
+
+    <div id="Cadastrar" class="container-fluid align-items-center m-2">
+
+        <div id="container-cadastro" class="container-cadastro">
+            <div class="wrapper-cadastro">
+
+                <form class="formularioCadastro">
+
+                    <div class="FaçaCadastro">
+                        <h1>Faça Cadastro</h1>
+                    </div>
+
+                    <div id="msgError"></div>
+                    <div id="msgSuccess"></div>
+
+                    <div class="label-float">
+                        <input type="text" id="nome" placeholder=" " required>
+                        <label id="labelNome" for="nome">Nome</label>
+                    </div>
+
+                    <div class="label-float">
+                        <input type="text" id="Email" placeholder=" " required>
+                        <label id="labelEmail" for="Email">Email</label>
+                    </div>
+
+                    <div class="label-float">
+                        <input type="password" id="senha" placeholder=" " required>
+                        <label id="labelSenha" for="senha">Senha</label>
+
+                    </div>
+
+                    <div class="label-float">
+                        <input type="password" id="confirmSenha" placeholder=" " required>
+                        <label id="labelConfirmSenha" for="confirmSenha">Confirmar Senha</label>
+
+                    </div>
+
+
+                    <div class="container-SignInBtn">
+                        <button onclick='cadastrar()' class="SignInBtn">Cadastrar</button>
+                    </div>
+
+                    <div class="BtnRemove">
+                        <button onclick="remover()" class="RemoveBtn">Remover Conta</button>
+                    </div>
+
+                    <div id="BtnGoBack">
+                        <button onclick="location.href='index.html';" id="GoBack">Voltar Á Pagina Principal</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="container border border-black border-2 my-5">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="grid-usuarios" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Senha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="table-usuarios">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script src="Sprint_3_cadastro_Samuel.js"></script>
+
+
+</html>
