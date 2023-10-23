@@ -7,9 +7,7 @@ CREATE TABLE IF NOT EXISTS public."Parceiro"
     id_parceiro integer NOT NULL,
     nome_usuario character(50)[] COLLATE pg_catalog."default" NOT NULL,
     senha character(50)[] COLLATE pg_catalog."default" NOT NULL,
-    lista_favoritos integer[] NOT NULL,
-    historico_buscas integer[] NOT NULL,
-    peca_vinculada integer[] NOT NULL,
+    peca_vinculada integer[],
     CONSTRAINT "Parceiro_pkey" PRIMARY KEY (id_parceiro)
 )
 

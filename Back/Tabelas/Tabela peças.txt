@@ -1,10 +1,10 @@
 --Tabela peças
 
--- Table: public.pacas
+-- Table: public.pecas
 
 -- DROP TABLE IF EXISTS public.pacas;
 
-CREATE TABLE IF NOT EXISTS public.pacas
+CREATE TABLE IF NOT EXISTS public.pecas
 (
     id integer NOT NULL,
     nome character(50)[] COLLATE pg_catalog."default" NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS public.pacas
 
 TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public.pacas
+ALTER TABLE IF EXISTS public.pecas
     OWNER to postgres;
 
 
