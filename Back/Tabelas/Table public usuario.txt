@@ -1,0 +1,18 @@
+-- Table: public.usuario
+
+-- DROP TABLE IF EXISTS public.usuario;
+
+CREATE TABLE IF NOT EXISTS public.usuario
+(
+    id integer NOT NULL,
+    nome_usuario character(50)[] COLLATE pg_catalog."default" NOT NULL,
+    senha character(50)[] COLLATE pg_catalog."default" NOT NULL,
+    lista_favoritos integer[] NOT NULL,
+    historico_buscas integer[] NOT NULL,
+    CONSTRAINT usuario_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.usuario
+    OWNER to postgres;

@@ -1,0 +1,19 @@
+-- Table: public.Parceiro
+
+-- DROP TABLE IF EXISTS public."Parceiro";
+
+CREATE TABLE IF NOT EXISTS public."Parceiro"
+(
+    id_parceiro integer NOT NULL,
+    nome_usuario character(50)[] COLLATE pg_catalog."default" NOT NULL,
+    senha character(50)[] COLLATE pg_catalog."default" NOT NULL,
+    lista_favoritos integer[] NOT NULL,
+    historico_buscas integer[] NOT NULL,
+    peca_vinculada integer[] NOT NULL,
+    CONSTRAINT "Parceiro_pkey" PRIMARY KEY (id_parceiro)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Parceiro"
+    OWNER to postgres;
