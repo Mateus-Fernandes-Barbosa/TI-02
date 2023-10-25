@@ -22,10 +22,10 @@ public class PecaDAO extends DAO {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = "";/*"INSERT INTO usuario (codigo, login, senha, sexo) "
-                    + "VALUES ("+peca.getId()+ ", '" + peca.getCategoria() + "', '"
-                    + peca.getDistribuidor() + "', '" + peca.getFabricante() + "', '"
-                    + peca.getNome_componente() + "','" + peca.getInfo_especifica() + ");";*/
+            String sql = "INSERT INTO usuario (id, nome, fabricante, distribuidor, categoria, info_especifica) "
+                    + "VALUES ("+peca.getId()+ ", '" + peca.getNome_componente() + "','"
+                    + peca.getFabricante() + "', '" + peca.getDistribuidor() + "', '"
+                    + peca.getCategoria() + "', '" + peca.getInfo_especifica() + ");";
                     /*--------------------------PREENCHER COM INFORMAÇÕES DO BD------------------------------*/
             System.out.println(sql);
             st.executeUpdate(sql);
@@ -47,7 +47,7 @@ public class PecaDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
-                peca = new Peca(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                peca = new Peca(rs.getInt("id"), rs.getString("nome"), rs.getString("fabricante"), rs.getString("distribuidor"), rs.getString("categoria"), rs.getString("info_especifica"));
                                                 /*Preencher com as devidas informações do BD*/
             }
             st.close();
@@ -88,7 +88,7 @@ public class PecaDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()) {
-                Peca u = new Peca(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                Peca u = new Peca(rs.getInt("id"), rs.getString("nome"), rs.getString("fabricante"), rs.getString("distribuidor"), rs.getString("categoria"), rs.getString("info_especifica"));
                 /*Preencher com as devidas informações do BD*/
                 pecas.add(u);
             }
@@ -135,9 +135,11 @@ private List<Peca> OrganizaOrganizado(List<Peca> pecas, String opcao){
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = ""/*"UPDATE usuario SET login = '" + usuario.getLogin() + "', senha = '"
-                    + usuario.getSenha() + "', sexo = '" + usuario.getSexo() + "'"
-                    + " WHERE codigo = " + usuario.getCodigo();*/;
+            String sql = "UPDATE usuario SET nome = '"
+                    + peca.getNome_componente() + "', fabricante = '" + peca.getFabricante()
+                    + "', distribuidor = '" + peca.getDistribuidor() + "', categoria"
+                    + peca.getCategoria() + "', info_especifica = '" + peca.getInfo_especifica()
+                    + "'" + " WHERE codigo = " + peca.getId();
                     /*Preencher com as devidas informações do BD*/
             System.out.println(sql);
             st.executeUpdate(sql);

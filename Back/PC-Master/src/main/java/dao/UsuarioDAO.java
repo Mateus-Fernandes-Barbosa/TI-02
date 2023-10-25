@@ -23,10 +23,10 @@ public class UsuarioDAO extends DAO {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = "";/*"INSERT INTO usuario (codigo, login, senha, sexo) "
-                    + "VALUES ("+peca.getId()+ ", '" + peca.getCategoria() + "', '"
-                    + peca.getDistribuidor() + "', '" + peca.getFabricante() + "', '"
-                    + peca.getNome_componente() + "','" + peca.getInfo_especifica() + ");";*/
+            String sql = "INSERT INTO usuario (id, nome_usuario, senha, lista_favorito, historico_buscas) "
+                    + "VALUES ("+usuario.getId() +", '" + usuario.getNome_usuario() + "', '"
+                    + usuario.getSenha() + "'," + usuario.getArrayInt(usuario.getLista_favoritos()) + ","
+                    + usuario.getArrayInt(usuario.getHistorico_buscas()) + ");";
             /*--------------------------PREENCHER COM INFORMAÇÕES DO BD------------------------------*/
             System.out.println(sql);
             st.executeUpdate(sql);
@@ -48,7 +48,16 @@ public class UsuarioDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
-                usuario = new Usuario(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                int codigo = rs.getInt("id");
+                String senha = rs.getString("senha");
+                String nome = rs.getString("nome");
+                Array temp = rs.getArray("lista_favoritos");
+                int [] lista_favoritos = (int [])temp.getArray();
+                temp = rs.getArray("historico_buscas");
+                int [] historico_buscas = (int [])temp.getArray();
+                Usuario u = new Usuario();
+                usuario = u.criaUsuario(codigo, senha, nome, lista_favoritos, historico_buscas);
+
                 /*Preencher com as devidas informações do BD*/;
             }
             st.close();
@@ -84,7 +93,15 @@ public class UsuarioDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()) {
-                Usuario u = new Usuario(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                int codigo = rs.getInt("id");
+                String senha = rs.getString("senha");
+                String nome = rs.getString("nome");
+                Array temp = rs.getArray("lista_favoritos");
+                int [] lista_favoritos = (int [])temp.getArray();
+                temp = rs.getArray("historico_buscas");
+                int [] historico_buscas = (int[])temp.getArray();
+                Usuario u = new Usuario();
+                u = u.criaUsuario(codigo, senha, nome, lista_favoritos, historico_buscas);
                 /*Preencher com as devidas informações do BD*/
                 usuarios.add(u);
             }
@@ -100,9 +117,11 @@ public class UsuarioDAO extends DAO {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = "";/*"UPDATE usuario SET login = '" + usuario.getLogin() + "', senha = '"
-                    + usuario.getSenha() + "', sexo = '" + usuario.getSexo() + "'"
-                    + " WHERE codigo = " + usuario.getCodigo();*/
+            String sql = "UPDATE usuario SET nome = '" + usuario.getNome_usuario() + "', senha = '"
+                    + usuario.getSenha() + "', lista_historico = '"
+                    + usuario.getArrayInt(usuario.getLista_favoritos())
+                    + "', historico_buscas = '" + usuario.getArrayInt(usuario.getHistorico_buscas()) + "'"
+                    + " WHERE id = " + usuario.getId();
                     /*------------Inserir as alterações do BD-----------*/
             System.out.println(sql);
             st.executeUpdate(sql);
