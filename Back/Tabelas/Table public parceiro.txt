@@ -1,4 +1,4 @@
--- Table: public.Parceiro
+-- Table: public.parceiro
 
 -- DROP TABLE IF EXISTS public."parceiro";
 
