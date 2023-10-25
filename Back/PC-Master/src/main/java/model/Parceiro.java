@@ -9,6 +9,9 @@ public class Parceiro extends Usuario{
 
     private List<Peca> pecas_vinculadas;
 
+    public Parceiro(int codigo, String nome, String senha, List<Peca> pecas_vinculadas) {
+    }
+
     /*Métodos Sets e Gets*/
     public void setId_parceiro(int id_parceiro){
         this.id_parceiro = id_parceiro;
@@ -16,6 +19,14 @@ public class Parceiro extends Usuario{
 
     public void setPecas_vinculadas(List<Peca> pecas_vinculadas){
         this.pecas_vinculadas = pecas_vinculadas;
+    }
+
+    public int getId_parceiro(){
+        return this.id_parceiro;
+    }
+
+    public List<Peca> getPecas_vinculadas(){
+        return this.pecas_vinculadas;
     }
 
     /*Método Construtor*/

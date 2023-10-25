@@ -7,7 +7,6 @@ import java.util.List;
 
 import model.Parceiro;
 import model.Peca;
-import model.Usuario;
 
 public class ParceiroDAO extends DAO {
 
@@ -25,10 +24,9 @@ public class ParceiroDAO extends DAO {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = "";/*"INSERT INTO usuario (codigo, login, senha, sexo) "
-                    + "VALUES ("+peca.getId()+ ", '" + peca.getCategoria() + "', '"
-                    + peca.getDistribuidor() + "', '" + peca.getFabricante() + "', '"
-                    + peca.getNome_componente() + "','" + peca.getInfo_especifica() + ");";*/
+            String sql = "INSERT INTO parceiro (id_parceiro, nome_usuario, senha, peca_vinculada) "
+                    + "VALUES ("+parceiro.getId_parceiro()+ ", '" + parceiro.getNome_usuario() + "', '"
+                    + parceiro.getSenha() + "', '" + parceiro.getArrayInt(parceiro.getPecas_vinculadas()) + ");";
             /*--------------------------PREENCHER COM INFORMAÇÕES DO BD------------------------------*/
             System.out.println(sql);
             st.executeUpdate(sql);
@@ -50,7 +48,13 @@ public class ParceiroDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if(rs.next()){
-                parceiro = new Parceiro(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                int codigo = rs.getInt("id_parceiro");
+                String nome = rs.getString("nome_usuario");
+                String senha = rs.getString("senha");
+                Array temp = rs.getArray("peca_vinculada");
+                int [] pecas_vinculadas_int = (int[]) temp.getArray();
+                List<Peca> pecas_vinculadas = parceiro.encontraPecas(pecas_vinculadas_int);
+                parceiro = new Parceiro(codigo, nome, senha, pecas_vinculadas);
                 /*Preencher com as devidas informações do BD*/;
             }
             st.close();
@@ -95,9 +99,16 @@ public class ParceiroDAO extends DAO {
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()) {
-                Parceiro u = new Parceiro(/*rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0)*/);
+                Parceiro parceiro = new Parceiro();
+                int codigo = rs.getInt("id_parceiro");
+                String nome = rs.getString("nome_usuario");
+                String senha = rs.getString("senha");
+                Array temp = rs.getArray("peca_vinculada");
+                int [] pecas_vinculadas_int = (int[]) temp.getArray();
+                List<Peca> pecas_vinculadas = parceiro.encontraPecas(pecas_vinculadas_int);
+                parceiro = new Parceiro(codigo, nome, senha, pecas_vinculadas);
                 /*Preencher com as devidas informações do BD*/
-                parceiros.add(u);
+                parceiros.add(parceiro);
             }
             st.close();
         } catch (Exception e) {
@@ -107,13 +118,13 @@ public class ParceiroDAO extends DAO {
     }
 
 
-    public boolean update(Usuario usuario) {
+    public boolean update(Parceiro parceiro) {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
-            String sql = "";/*"UPDATE usuario SET login = '" + usuario.getLogin() + "', senha = '"
-                    + usuario.getSenha() + "', sexo = '" + usuario.getSexo() + "'"
-                    + " WHERE codigo = " + usuario.getCodigo();*/
+            String sql = "UPDATE usuario SET nome = '" + parceiro.getNome_usuario() + "', senha = '"
+                    + parceiro.getSenha() + "', peca_vinculada = '" + parceiro.getArrayInt(parceiro.getPecas_vinculadas()) + "'"
+                    + " WHERE codigo = " + parceiro.getId_parceiro();
                     /*------------Inserir as alterações do BD-----------*/
                     System.out.println(sql);
             st.executeUpdate(sql);
