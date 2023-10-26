@@ -98,11 +98,11 @@
       <select class="form-select form-select-lg mb-3" id="Tipo_peca" aria-label=".form-select-lg example">
         <option selected disabled value="all">Escolha o tipo de peça</option>
         <option value="all">Todas</option>
-        <option value="placa_mae">Placa-mãe</option>
-        <option value="processador">Processador</option>
-        <option value="ram">Memória RAM</option>
-        <option value="gpu">Placa de Vídeo</option>
-        <option value="fonte">Fonte</option>
+        <option value="Placa_Mãe">Placa-mãe</option>
+        <option value="Processador">Processador</option>
+        <option value="Memória_RAM">Memória RAM</option>
+        <option value="Placa_de_Vídeo">Placa de Vídeo</option>
+        <option value="Fontes">Fonte</option>
       </select>
       <div id="Conteudo_cadastro"></div>
 
@@ -137,11 +137,7 @@
   $('#Tipo_peca').change(function () {
     let escolha = $('#Tipo_peca').val();
     let shortBy = location.href.split('/')[5];
-    if(escolha == "all"){
-      location.href = `/produto/list/${shortBy}`;
-    } else {
-      location.href = `/produto/list/${shortBy}/${escolha}`;
-    }
+    location.href = `/produto/list/${shortBy}/${escolha}`;
     
   })
 </script>

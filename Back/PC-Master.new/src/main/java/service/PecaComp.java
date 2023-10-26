@@ -1,25 +1,54 @@
 package service;
 
 import model.Peca;
+import DAO.PecaDAO;
+import DAO.DAO;
+
+import java.sql.*;
+import java.util.List;
+
 
 public class PecaComp extends Peca{
 
+	private PecaDAO pecaDAO;
+	
 	public PecaComp() {
         super();
+        pecaDAO = new PecaDAO();
     }
-
 	
+	public String retirarChaves(String inicial) {
+		
+		String string = "";
+		
+		for(int i = 2; i < inicial.length()-2; i++) {
+			string += inicial.charAt(i);
+		}
+		return string;
+	}
+
 	//--|CLASSE PARA COMPARAR Pecas, IDENTIFICANDO QUAL A MELHOR DE ACORDO COM AS INFO.Especificas|--
-		public void Comparacao(Peca []pecaComparar, int x, int y){
+		public void Comparacao(int x, int y){
+
+			Peca pecaComparar1 = pecaDAO.get(x);
+			Peca pecaComparar2 = pecaDAO.get(y);
 			
 			//---|VERIFICANDO A CATEGORIA DE CADA COMPONENTE PARA SER COMPARADO|---
-			
+
 			//Comparação de Processadores
-			if(pecaComparar[x].getCategoria().equals("Processador") && pecaComparar[y].getCategoria().equals("Processador")){
+			if(pecaComparar1.getCategoria().contains("Processador") && pecaComparar2.getCategoria().contains("Processador")){
+				
+				String Nome1 = pecaComparar1.getNome_componente();
+				String Nome2 = pecaComparar2.getNome_componente();
+
 				
 				//Seperando a Informação Especifica
-				String[]infoEspecificasX = pecaComparar[x].getInfo_especifica().split(";");
-				String[]infoEspecificasY = pecaComparar[y].getInfo_especifica().split(";");
+				String pecaProInfo1 = pecaComparar1.getInfo_especifica();
+				String pecaProInfo2 = pecaComparar2.getInfo_especifica();
+				
+				String[]infoEspecificasX = pecaProInfo1.split(";");
+				String[]infoEspecificasY = pecaProInfo2.split(";");
+				
 				
 				int geracaoX = Integer.parseInt(infoEspecificasX[0]);
 				int geracaoY = Integer.parseInt(infoEspecificasY[0]);
@@ -56,20 +85,20 @@ public class PecaComp extends Peca{
 				//Se Processador X possuir frequencia maior que Processador Y 
 				if(freqBaseX > freqBaseY){
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " É um processador melhor que " + pecaComparar[y].getNome_componente()); 
+					System.out.println(Nome1 + " É um processador melhor que " + Nome2); 
 					System.out.println("Isto devido á suas frequencias basicas: "); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + freqBaseX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + freqBaseY); 
+					System.out.println(Nome1 + " : " + freqBaseX); 
+					System.out.println(Nome2 + " : " + freqBaseY); 
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX < freqMaxY){
 						
-						System.out.println("Porem, o processador " + pecaComparar[y].getNome_componente() + " possui um overclock melhor que o " + pecaComparar[x].getNome_componente()); 
+						System.out.println("Porem, o processador " + Nome2 + " possui um overclock melhor que o " + Nome1); 
 						System.out.println("Isto devido á suas frequencias maximas(overclock): "); 
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + freqMaxX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + freqMaxY); 
+						System.out.println(Nome1 + " : " + freqMaxX); 
+						System.out.println(Nome2 + " : " + freqMaxY); 
 					}
 				}
 				
@@ -77,20 +106,20 @@ public class PecaComp extends Peca{
 				//Se Processador Y possuir frequencia maior que Processador X
 				else if(freqBaseX < freqBaseY){
 					
-					System.out.println(pecaComparar[y].getNome_componente() + " É um processador melhor que " + pecaComparar[x].getNome_componente()); 
+					System.out.println(Nome2 + " É um processador melhor que " + Nome1); 
 					System.out.println("Isto devido á suas frequencias basicas: "); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + freqBaseX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + freqBaseY); 
+					System.out.println(Nome1 + " : " + freqBaseX); 
+					System.out.println(Nome2 + " : " + freqBaseY); 
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX > freqMaxY){
 						
-						System.out.println("Porem, o processador " + pecaComparar[x].getNome_componente() + " possui um overclock melhor que o " + pecaComparar[y].getNome_componente()); 
+						System.out.println("Porem, o processador " + Nome1 + " possui um overclock melhor que o " + Nome2); 
 						System.out.println("Isto devido á suas frequencias maximas(overclock): "); 
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + freqMaxX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + freqMaxY); 
+						System.out.println(Nome1 + " : " + freqMaxX); 
+						System.out.println(Nome2 + " : " + freqMaxY); 
 					}
 				}
 				
@@ -102,20 +131,20 @@ public class PecaComp extends Peca{
 					//Se Processador X possuir mais nucleos que Processador Y 
 					if(nucleosX > nucleosY){
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " É um processador melhor que " + pecaComparar[y].getNome_componente()); 
+						System.out.println(Nome1 + " É um processador melhor que " + Nome2); 
 						System.out.println("Isto devido a quantidade de nucleos: "); 
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + nucleosX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + nucleosY); 
+						System.out.println(Nome1 + " : " + nucleosX); 
+						System.out.println(Nome2 + " : " + nucleosY); 
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
 						if(threadsX < threadsY){
 						
-							System.out.println("Porem, o processador " + pecaComparar[y].getNome_componente() + " possui mais threads que o " + pecaComparar[x].getNome_componente()); 
+							System.out.println("Porem, o processador " + Nome2 + " possui mais threads que o " + Nome1); 
 							
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + threadsX); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + threadsY); 
+							System.out.println(Nome1 + " : " + threadsX); 
+							System.out.println(Nome2 + " : " + threadsY); 
 						}
 						
 					}
@@ -123,19 +152,19 @@ public class PecaComp extends Peca{
 					//Se Processador Y possuir mais nucleos que Processador X
 					else if(nucleosX < nucleosY){
 						
-						System.out.println(pecaComparar[y].getNome_componente() + " É um processador melhor que " + pecaComparar[x].getNome_componente()); 
+						System.out.println(Nome2 + " É um processador melhor que " + Nome1); 
 						System.out.println("Isto devido a sua quantidade de nucleos: "); 
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + freqBaseX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + freqBaseY); 
+						System.out.println(Nome1 + " : " + freqBaseX); 
+						System.out.println(Nome2 + " : " + freqBaseY); 
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
 						if(threadsX > threadsY){
 							
-							System.out.println("Porem, o processador " + pecaComparar[x].getNome_componente() + " possui mais threads que o " + pecaComparar[y].getNome_componente()); 
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + threadsX); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + threadsY); 
+							System.out.println("Porem, o processador " + Nome1 + " possui mais threads que o " + Nome2); 
+							System.out.println(Nome1 + " : " + threadsX); 
+							System.out.println(Nome2 + " : " + threadsY); 
 						}
 						
 					}
@@ -149,11 +178,18 @@ public class PecaComp extends Peca{
 			
 			
 			//Comparação de Placa de Videos
-			else if(pecaComparar[x].getCategoria().equals("Placa de Vídeo") && pecaComparar[y].getCategoria().equals("Placa de Vídeo")){
+			else if(pecaComparar1.getCategoria().contains("Placa de Vídeo") && pecaComparar2.getCategoria().contains("Placa de Vídeo")){
+				
+				String Nome1 = pecaComparar1.getNome_componente();
+				String Nome2 = pecaComparar2.getNome_componente();
 				
 				//Separando a Informação Especifica
-				String[]infoEspecificasX = pecaComparar[x].getInfo_especifica().split(";");
-				String[]infoEspecificasY = pecaComparar[y].getInfo_especifica().split(";");
+				String pecaGPUInfo1 = pecaComparar1.getInfo_especifica();
+				String pecaGPUInfo2 = pecaComparar2.getInfo_especifica();
+				
+				
+				String[]infoEspecificasX = pecaGPUInfo1.split(";");
+				String[]infoEspecificasY = pecaGPUInfo2.split(";");
 				
 				int TDPX = Integer.parseInt(infoEspecificasX[0]);
 				int TDPY = Integer.parseInt(infoEspecificasY[0]);
@@ -176,6 +212,7 @@ public class PecaComp extends Peca{
 				int memoryClockX = Integer.parseInt(infoEspecificasX[6]);
 				int memoryClockY = Integer.parseInt(infoEspecificasY[6]);
 							
+				
 				int qtdCoresX = Integer.parseInt(infoEspecificasX[7]);
 				int qtdCoresY = Integer.parseInt(infoEspecificasY[7]);
 				
@@ -183,37 +220,37 @@ public class PecaComp extends Peca{
 				//COMPARANDO PLACA DE VIDEO DE ACORDO COM AS ESPECIFICAÇÕES
 				if(qtdCoresX > qtdCoresY){
 					
-					System.out.println("A placa de vídeo " + pecaComparar[x].getNome_componente() + " é mais rapida que a placa de vídeo " + pecaComparar[y].getNome_componente()); 
+					System.out.println("A placa de vídeo " + Nome1 + " é mais rapida que a placa de vídeo " + Nome2); 
 					System.out.println("Isto devido a quantidade de cores de cada uma: ");  
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + qtdCoresX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + qtdCoresY); 
+					System.out.println(Nome1 + " : " + qtdCoresX); 
+					System.out.println(Nome2 + " : " + qtdCoresY); 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX < baseClockY){
 						
-						System.out.println("Porém, a placa de vídeo " + pecaComparar[y].getNome_componente() + " possui uma frequencia basica maior que a " + pecaComparar[x].getNome_componente()); 
+						System.out.println("Porém, a placa de vídeo " + Nome2 + " possui uma frequencia basica maior que a " + Nome1); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + baseClockX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + baseClockY); 
+						System.out.println(Nome1 + " : " + baseClockX); 
+						System.out.println(Nome2 + " : " + baseClockY); 
 					}
 				}
 				
 				else if(qtdCoresX < qtdCoresY){
 					
-					System.out.println("A placa de vídeo " + pecaComparar[y].getNome_componente() + " é mais rapida que a placa de vídeo " + pecaComparar[x].getNome_componente()); 
+					System.out.println("A placa de vídeo " + Nome2 + " é mais rapida que a placa de vídeo " + Nome1); 
 					System.out.println("Isto devido a quantidade de cores de cada uma: ");  
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + qtdCoresX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + qtdCoresY); 
+					System.out.println(Nome1 + " : " + qtdCoresX); 
+					System.out.println(Nome2 + " : " + qtdCoresY); 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX > baseClockY){
 						
-						System.out.println("Porém, a placa de vídeo " + pecaComparar[x].getNome_componente() + " possui uma frequencia basica maior que a " + pecaComparar[y].getNome_componente()); 
+						System.out.println("Porém, a placa de vídeo " + Nome1 + " possui uma frequencia basica maior que a " + Nome2); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + baseClockX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + baseClockY); 
+						System.out.println(Nome1 + " : " + baseClockX); 
+						System.out.println(Nome2 + " : " + baseClockY); 
 					}
 				}
 				
@@ -222,18 +259,18 @@ public class PecaComp extends Peca{
 					
 					if(baseClockX > baseClockY){
 						
-						System.out.println("A placa de vídeo " + pecaComparar[x].getNome_componente() + " possui uma frequencia Basica maior que a " + pecaComparar[y].getNome_componente()); 
+						System.out.println("A placa de vídeo " + Nome1 + " possui uma frequencia Basica maior que a " + Nome2); 
 						
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + baseClockX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + baseClockY); 
+						System.out.println(Nome1 + " : " + baseClockX); 
+						System.out.println(Nome2 + " : " + baseClockY); 
 					}
 					
 					else if(baseClockX < baseClockY){
 						
-						System.out.println("A placa de vídeo " + pecaComparar[y].getNome_componente() + " possui uma frequencia Basica maior que a " + pecaComparar[x].getNome_componente()); 
+						System.out.println("A placa de vídeo " + Nome2 + " possui uma frequencia Basica maior que a " + Nome1); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + baseClockX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + baseClockY); 
+						System.out.println(Nome1 + " : " + baseClockX); 
+						System.out.println(Nome2 + " : " + baseClockY); 
 					}
 					
 					//CASO A FREQ.Basica SEJA IGUAL, COMPARAR A FREQ. Maxima
@@ -241,18 +278,18 @@ public class PecaComp extends Peca{
 						
 						if(boostClockX > boostClockY){
 							
-							System.out.println("A placa de vídeo " + pecaComparar[x].getNome_componente() + " possui uma frequencia Maxima maior que a " + pecaComparar[y].getNome_componente()); 
+							System.out.println("A placa de vídeo " + Nome1 + " possui uma frequencia Maxima maior que a " + Nome2); 
 					
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + boostClockX); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + boostClockY); 
+							System.out.println(Nome1 + " : " + boostClockX); 
+							System.out.println(Nome2 + " : " + boostClockY); 
 						}
 						
 						else if(boostClockX < boostClockY){
 							
-							System.out.println("A placa de vídeo " + pecaComparar[y].getNome_componente() + " possui uma frequencia Maxima maior que a " + pecaComparar[x].getNome_componente()); 
+							System.out.println("A placa de vídeo " + Nome2 + " possui uma frequencia Maxima maior que a " + Nome1); 
 					
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + boostClockX); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + boostClockY); 
+							System.out.println(Nome1 + " : " + boostClockX); 
+							System.out.println(Nome2 + " : " + boostClockY); 
 						}
 					}
 					
@@ -269,11 +306,17 @@ public class PecaComp extends Peca{
 			
 			
 			//Comparação de Placa Mães
-			else if(pecaComparar[x].getCategoria().equals("Placa Mãe") && pecaComparar[y].getCategoria().equals("Placa Mãe")){
+			else if(pecaComparar1.getCategoria().contains("Placa Mãe") && pecaComparar2.getCategoria().contains("Placa Mãe")){
+				
+				String Nome1 = pecaComparar1.getNome_componente();
+				String Nome2 = pecaComparar2.getNome_componente();
 				
 				//Separando as especificações
-				String[]infoEspecificasX = pecaComparar[x].getInfo_especifica().split(";");
-				String[]infoEspecificasY = pecaComparar[y].getInfo_especifica().split(";");
+				String pecaMotherInfo1 = pecaComparar1.getInfo_especifica();
+				String pecaMotherInfo2 = pecaComparar2.getInfo_especifica();
+				
+				String[]infoEspecificasX = pecaMotherInfo1.split(";");
+				String[]infoEspecificasY = pecaMotherInfo2.split(";");
 				
 				
 				String[] geracoesX = infoEspecificasX[0].split("/");
@@ -313,19 +356,19 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM QUANTIDADE DE PORTAS SATA
 				if(QtdRAMX > QtdRAMY){
 					
-					System.out.println("A placa mãe " + pecaComparar[x].getNome_componente() + " possui mais conectadores de memoria RAM que a placa " + pecaComparar[y].getNome_componente()); 
+					System.out.println("A placa mãe " + Nome1 + " possui mais conectadores de memoria RAM que a placa " + Nome2); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdRAMX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdRAMY); 
+					System.out.println(Nome1 + " : " + QtdRAMX); 
+					System.out.println(Nome2 + " : " + QtdRAMY); 
 					
 				}
 				
 				else if(QtdRAMX < QtdRAMY){
 					
-					System.out.println("A placa mãe " + pecaComparar[y].getNome_componente() + " possui mais conectadores de memoria RAM que a placa " + pecaComparar[x].getNome_componente()); 
+					System.out.println("A placa mãe " + Nome2 + " possui mais conectadores de memoria RAM que a placa " + Nome1); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdRAMX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdRAMY); 
+					System.out.println(Nome1 + " : " + QtdRAMX); 
+					System.out.println(Nome2 + " : " + QtdRAMY); 
 				}
 				
 				//CASO A Quantidade de RAM SEJAM IGUAIS, COMPARAR AS ENTRADAS SATAs
@@ -333,18 +376,18 @@ public class PecaComp extends Peca{
 					
 					if(QtdSATAX > QtdSATAY){
 						
-						System.out.println("A placa mãe " + pecaComparar[x].getNome_componente() + " possui mais entradas SATAs que a placa " + pecaComparar[y].getNome_componente()); 
+						System.out.println("A placa mãe " + Nome1 + " possui mais entradas SATAs que a placa " + Nome2); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdSATAX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdSATAY); 
+						System.out.println(Nome1 + " : " + QtdSATAX); 
+						System.out.println(Nome2 + " : " + QtdSATAY); 
 					}
 					
 					else if(QtdSATAX < QtdSATAY){
 						
-						System.out.println("A placa mãe " + pecaComparar[y].getNome_componente() + " possui mais entradas SATAs que a placa " + pecaComparar[x].getNome_componente()); 
+						System.out.println("A placa mãe " + Nome2 + " possui mais entradas SATAs que a placa " + Nome1); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdSATAX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdSATAY); 
+						System.out.println(Nome1 + " : " + QtdSATAX); 
+						System.out.println(Nome2 + " : " + QtdSATAY); 
 					}
 					
 					//CASO A Quantidade de ENTRADAS SATAs SEJAM IGUAIS, COMPARAR A AS ENTRADAS M.2
@@ -352,18 +395,18 @@ public class PecaComp extends Peca{
 						
 						if(QtdM2X > QtdM2Y){
 							
-							System.out.println("A placa mãe " + pecaComparar[x].getNome_componente() + " possui mais entradas M.2 que a placa " + pecaComparar[y].getNome_componente()); 
+							System.out.println("A placa mãe " + Nome1 + " possui mais entradas M.2 que a placa " + Nome2); 
 					
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdM2X); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdM2Y); 
+							System.out.println(Nome1 + " : " + QtdM2X); 
+							System.out.println(Nome2 + " : " + QtdM2Y); 
 					}
 						
 						else if(QtdM2X < QtdM2Y){
 							
-							System.out.println("A placa mãe " + pecaComparar[y].getNome_componente() + " possui mais entradas M.2 que a placa " + pecaComparar[x].getNome_componente()); 
+							System.out.println("A placa mãe " + Nome2 + " possui mais entradas M.2 que a placa " + Nome1); 
 					
-							System.out.println(pecaComparar[x].getNome_componente() + " : " + QtdM2X); 
-							System.out.println(pecaComparar[y].getNome_componente() + " : " + QtdM2Y); 
+							System.out.println(Nome1 + " : " + QtdM2X); 
+							System.out.println(Nome2 + " : " + QtdM2Y); 
 						}
 					}	
 					
@@ -379,11 +422,17 @@ public class PecaComp extends Peca{
 			
 			
 			//Comparação de RAM
-			else if(pecaComparar[x].getCategoria().equals("Memória RAM") && pecaComparar[y].getCategoria().equals("Memória RAM")){
+			else if(pecaComparar1.getCategoria().contains("Memória RAM") && pecaComparar2.getCategoria().contains("Memória RAM")){
+				
+				String Nome1 = pecaComparar1.getNome_componente();
+				String Nome2 = pecaComparar2.getNome_componente();
 				
 				//Separando as especificações
-				String[]infoEspecificasX = pecaComparar[x].getInfo_especifica().split(";");
-				String[]infoEspecificasY = pecaComparar[y].getInfo_especifica().split(";");
+				String pecaRAMInfo1 = pecaComparar1.getInfo_especifica();
+				String pecaRAMInfo2 = pecaComparar2.getInfo_especifica();
+				
+				String[]infoEspecificasX = pecaRAMInfo1.split(";");
+				String[]infoEspecificasY = pecaRAMInfo2.split(";");
 				
 				
 				String tipoRamX = infoEspecificasX[0];
@@ -402,19 +451,19 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM O TAMANHO DA MEMORIA
 				if(tamRamX > tamRamY){
 					
-					System.out.println("A RAM " + pecaComparar[x].getNome_componente() + " possui mais memoria que a RAM " + pecaComparar[y].getNome_componente()); 
+					System.out.println("A RAM " + Nome1 + " possui mais memoria que a RAM " + Nome2); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + tamRamX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + tamRamY); 
+					System.out.println(Nome1 + " : " + tamRamX); 
+					System.out.println(Nome2 + " : " + tamRamY); 
 					
 				}
 				
 				else if(tamRamX < tamRamY){
 					
-					System.out.println("A RAM " + pecaComparar[y].getNome_componente() + " possui mais memoria que a RAM " + pecaComparar[x].getNome_componente()); 
+					System.out.println("A RAM " + Nome2 + " possui mais memoria que a RAM " + Nome1); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + tamRamX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + tamRamY); 
+					System.out.println(Nome1 + " : " + tamRamX); 
+					System.out.println(Nome2 + " : " + tamRamY); 
 				}
 				
 				//CASO O TAMANHO DA MEMORIA SEJA IGUAL, COMPARAR O TIPO
@@ -424,18 +473,18 @@ public class PecaComp extends Peca{
 					
 					if(resultado > 0){
 						
-						System.out.println("A placa mãe " + pecaComparar[x].getNome_componente() + " possui um tipo de memoria RAM melhor que a " + pecaComparar[y].getNome_componente()); 
+						System.out.println("A placa mãe " + Nome1 + " possui um tipo de memoria RAM melhor que a " + Nome2); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + tipoRamX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + tipoRamY); 
+						System.out.println(Nome1 + " : " + tipoRamX); 
+						System.out.println(Nome2 + " : " + tipoRamY); 
 					}
 					
 					else if(resultado < 0){
 						
-						System.out.println("A placa mãe " + pecaComparar[y].getNome_componente() + " possui um tipo de memoria RAM melhor que a " + pecaComparar[x].getNome_componente()); 
+						System.out.println("A placa mãe " + Nome2 + " possui um tipo de memoria RAM melhor que a " + Nome1); 
 					
-						System.out.println(pecaComparar[x].getNome_componente() + " : " + tipoRamX); 
-						System.out.println(pecaComparar[y].getNome_componente() + " : " + tipoRamY); 
+						System.out.println(Nome1 + " : " + tipoRamX); 
+						System.out.println(Nome2 + " : " + tipoRamY); 
 					}
 				}
 				else{
@@ -447,11 +496,14 @@ public class PecaComp extends Peca{
 			
 			
 			//Comparação de Fonte
-			else if(pecaComparar[x].getCategoria().equals("Fontes") && pecaComparar[y].getCategoria().equals("Fontes")){
+			else if(pecaComparar1.getCategoria().contains("Fontes") && pecaComparar2.getCategoria().contains("Fontes")){
+				
+				String Nome1 = pecaComparar1.getNome_componente();
+				String Nome2 = pecaComparar2.getNome_componente();
 				
 				//Separando as especificações
-				String[]infoEspecificasX = pecaComparar[x].getInfo_especifica().split(";");
-				String[]infoEspecificasY = pecaComparar[y].getInfo_especifica().split(";");
+				String[]infoEspecificasX = pecaComparar1.getInfo_especifica().split(";");
+				String[]infoEspecificasY = pecaComparar2.getInfo_especifica().split(";");
 				
 				int potenciaX = Integer.parseInt(infoEspecificasX[0]);
 				int potenciaY = Integer.parseInt(infoEspecificasY[0]);
@@ -463,31 +515,31 @@ public class PecaComp extends Peca{
 				int compSeloX;
 				int compSeloY;
 
-				if(seloX.equals("Bronze")){ compSeloX = 0; }
-				else if(seloX.equals("White")){ compSeloX = 1; }
-				else if(seloX.equals("Gold")){ compSeloX = 2;}
+				if(seloX.contains("Bronze")){ compSeloX = 0; }
+				else if(seloX.contains("White")){ compSeloX = 1; }
+				else if(seloX.contains("Gold")){ compSeloX = 2;}
 				else{ compSeloX = -1;}
 				
-				if(seloY.equals("Bronze")){ compSeloY = 0; }
-				else if(seloY.equals("White")){ compSeloY = 1; }
-				else if(seloY.equals("Gold")){ compSeloY = 2;}
+				if(seloY.contains("Bronze")){ compSeloY = 0; }
+				else if(seloY.contains("White")){ compSeloY = 1; }
+				else if(seloY.contains("Gold")){ compSeloY = 2;}
 				else{ compSeloY = -1;}
 				
 				
 				//COMPARANDO DE ACORDO COM O SELO
 				if(compSeloX > compSeloY){
 					
-					System.out.println("A fonte " + pecaComparar[x].getNome_componente() + " é melhor que a fonte " + pecaComparar[y].getNome_componente()); 
+					System.out.println("A fonte " + Nome1 + " é melhor que a fonte " + Nome2); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + seloX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + seloY); 
+					System.out.println(Nome1 + " : " + seloX); 
+					System.out.println(Nome2 + " : " + seloY); 
 				}
 				else if(compSeloX < compSeloY){
 					
-					System.out.println("A fonte " + pecaComparar[y].getNome_componente() + " é melhor que a fonte " + pecaComparar[x].getNome_componente()); 
+					System.out.println("A fonte " + Nome2 + " é melhor que a fonte " + Nome1); 
 					
-					System.out.println(pecaComparar[x].getNome_componente() + " : " + seloX); 
-					System.out.println(pecaComparar[y].getNome_componente() + " : " + seloY); 
+					System.out.println(Nome1 + " : " + seloX); 
+					System.out.println(Nome2 + " : " + seloY); 
 				}
 				else{
 					
@@ -507,16 +559,26 @@ public class PecaComp extends Peca{
 		//-----| COMPATIBILIDADE DE Pecas |------
 		
 			//---|Compatibilidade entre Processador e Placa Mãe|---
-			public void CompatibilidadeProcessadorMotherBoard(Peca peçaCompatibilidade[], int x, int y){
+			public void CompatibilidadeProcessadorMotherBoard(int x, int y){
+				
+				Peca pecaCompatibilidade1 = pecaDAO.get(x);
+				Peca pecaCompatibilidade2 = pecaDAO.get(y);
+				
 				
 				//--|VERIFICANDO QUAL O TIPO DE COMPATIBILIDADE DEVE SER FEITA|--
 				
-				if(peçaCompatibilidade[x].getCategoria().equals("Processador") && peçaCompatibilidade[y].getCategoria().equals("Placa Mãe")){
+				if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Placa Mãe")){
+					
+					String Nome1 = pecaCompatibilidade1.getNome_componente();
+					String Nome2 = pecaCompatibilidade2.getNome_componente();
 					
 					//Seperando as informações especificas do Processador e da Placa Mae
+					String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
+					String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
 					
-					String[]ProcessInfo = peçaCompatibilidade[x].getInfo_especifica().split(";");
-					String[]MotherBInfo = peçaCompatibilidade[y].getInfo_especifica().split(";");
+					String[]ProcessInfo = pecaInfo1.split(";");
+					String[]MotherBInfo = pecaInfo2.split(";");
+					
 					
 					//Especificações do Processador
 					
@@ -558,29 +620,29 @@ public class PecaComp extends Peca{
 					int QtdRAM = Integer.parseInt(MotherBInfo[8]);
 					//-------------------------------------------------------------------
 					
-					if(((geracaoPro == geracao1) || (geracaoPro == geracao2)) && (socketPro.equals(socketMother))){
+					if(((geracaoPro == geracao1) || (geracaoPro == geracao2)) && (socketPro.contains(socketMother))){
 						
-						System.out.println("O processador " + peçaCompatibilidade[x].getNome_componente() + " É compativel com a Placa Mãe " + peçaCompatibilidade[y].getNome_componente()); 
+						System.out.println("O processador " + Nome1 + " É compativel com a Placa Mãe " + Nome2); 
 						
-						System.out.println(peçaCompatibilidade[x].getNome_componente() + " : " + geracaoPro); 
-						System.out.println(peçaCompatibilidade[y].getNome_componente() + " : " + geracao1 + "/" + geracao2 + "\n"); 
+						System.out.println(Nome1 + " : " + geracaoPro); 
+						System.out.println(Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"); 
 						
-						System.out.println(peçaCompatibilidade[x].getNome_componente() + " : " + socketPro); 
-						System.out.println(peçaCompatibilidade[y].getNome_componente() + " : " + socketMother); 
+						System.out.println(Nome1 + " : " + socketPro); 
+						System.out.println(Nome2 + " : " + socketMother); 
 					}
 					else{
 						
-						System.out.println("O processador " + peçaCompatibilidade[x].getNome_componente() + " NAO é compativel com a Placa Mãe " + peçaCompatibilidade[y].getNome_componente()); 
+						System.out.println("O processador " + Nome1 + " NAO é compativel com a Placa Mãe " + Nome2); 
 						
-						System.out.println(peçaCompatibilidade[x].getNome_componente() + " : " + geracaoPro); 
-						System.out.println(peçaCompatibilidade[y].getNome_componente() + " : " + geracao1 + "/" + geracao2 + "\n"); 
+						System.out.println(Nome1 + " : " + geracaoPro); 
+						System.out.println(Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"); 
 						
-						System.out.println(peçaCompatibilidade[x].getNome_componente() + " : " + socketPro); 
-						System.out.println(peçaCompatibilidade[y].getNome_componente() + " : " + socketMother); 
+						System.out.println(Nome1 + " : " + socketPro); 
+						System.out.println(Nome2 + " : " + socketMother); 
 						
 					}
 					
-					if(GPUPro.equals("NAO")){
+					if(GPUPro.contains("NAO")){
 						
 						System.out.println("Como este processador não possui uma GPU integrada. Caso não haja uma placa de vídeo, o computador irá ligar, mas não possuirá vídeo. Sendo assim inutilizavel"); 
 					}
@@ -599,15 +661,31 @@ public class PecaComp extends Peca{
 		
 			*/
 			
-			public void Compatibilidade(Peca peçaCompatibilidade[], int x, int y, int z){
+			public void Compatibilidade(int x, int y, int z){
+				
+				Peca pecaCompatibilidade1 = pecaDAO.get(x);
+				Peca pecaCompatibilidade2 = pecaDAO.get(y);
+				Peca pecaCompatibilidade3 = pecaDAO.get(z);
+
 				
 				//-------|COMPATIBILIDADE ENTRE PROCESSADOR, PLACA DE VIDEO E PLACA MAE|-------
-				if(peçaCompatibilidade[x].getCategoria().equals("Processador") && peçaCompatibilidade[y].getCategoria().equals("Placa de Vídeo") && peçaCompatibilidade[z].getCategoria().equals("Placa Mãe")){
+				if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Placa de Vídeo") && pecaCompatibilidade3.getCategoria().contains("Placa Mãe")){
+					
+					String Nome1 = pecaCompatibilidade1.getNome_componente();
+					String Nome2 = pecaCompatibilidade2.getNome_componente();
+					String Nome3 = pecaCompatibilidade3.getNome_componente();
+					
 					
 					//Separando as informações especificas
-					String[]ProcessInfo = peçaCompatibilidade[x].getInfo_especifica().split(";");
-					String[]PlacaVideo	= peçaCompatibilidade[y].getInfo_especifica().split(";");
-					String[]MotherBInfo	= peçaCompatibilidade[z].getInfo_especifica().split(";");
+					
+					String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
+					String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
+					String pecaInfo3 = pecaCompatibilidade3.getInfo_especifica();
+
+					
+					String[]ProcessInfo = pecaInfo1.split(";");
+					String[]PlacaVideo	= pecaInfo2.split(";");
+					String[]MotherBInfo	= pecaInfo3.split(";");
 					
 					//Especificações do Processador
 					int geracaoPro = Integer.parseInt(ProcessInfo[0]);
@@ -667,33 +745,32 @@ public class PecaComp extends Peca{
 					int QtdRAM = Integer.parseInt(MotherBInfo[8]);
 					//------------------------
 					
-					
 					//---|CONDIÇÃO DE COMPATIBILIDADE (PLACA MÃE E PLACA DE VIDEO)|---
 					//Compatibilidade de acordo com a tecnologia pCLE
 					if(pCLEMother > pCLEVideo){
 						
-						System.out.println("A placa de Vídeo " + peçaCompatibilidade[y].getNome_componente() + " é compativel com " + peçaCompatibilidade[z].getNome_componente()); 
+						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
 						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é maior que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + peçaCompatibilidade[y].getNome_componente() + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + peçaCompatibilidade[z].getNome_componente() + " - pCLE : " +  pCLEMother); 
+						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 					}
 					else if (pCLEMother == pCLEVideo){
 						
-						System.out.println("A placa de Vídeo " + peçaCompatibilidade[y].getNome_componente() + " é compativel com " + peçaCompatibilidade[z].getNome_componente()); 
+						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
 						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é igual que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + peçaCompatibilidade[y].getNome_componente() + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + peçaCompatibilidade[z].getNome_componente() + " - pCLE : " +  pCLEMother); 
+						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 						
 					}
 					else{
 						
-						System.out.println("A placa de Vídeo " + peçaCompatibilidade[y].getNome_componente() + " é compativel com " + peçaCompatibilidade[z].getNome_componente()); 
+						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
 						
 						System.out.println("POREM, a placa nao será usada 100%"); 
 						
 						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é menor que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + peçaCompatibilidade[y].getNome_componente() + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + peçaCompatibilidade[z].getNome_componente() + " - pCLE : " +  pCLEMother); 
+						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 					
 					}
 					
@@ -701,12 +778,21 @@ public class PecaComp extends Peca{
 				
 				
 				//-------|COMPATIBILIDADE ENTRE PROCESSADOR, MEMORIA RAM E PLACA MAE|----------
-				else if(peçaCompatibilidade[x].getCategoria().equals("Processador") && peçaCompatibilidade[y].getCategoria().equals("Memória RAM") && peçaCompatibilidade[z].getCategoria().equals("Placa Mãe")){
+				else if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Memória RAM") && pecaCompatibilidade3.getCategoria().contains("Placa Mãe")){
+					
+					String Nome1 = pecaCompatibilidade1.getNome_componente();
+					String Nome2 = pecaCompatibilidade2.getNome_componente();
+					String Nome3 = pecaCompatibilidade3.getNome_componente();
 					
 					//Separando as informações especificas
-					String[]ProcessInfo = peçaCompatibilidade[x].getInfo_especifica().split(";");
-					String[]MemRamInfo 	= peçaCompatibilidade[y].getInfo_especifica().split(";");
-					String[]MotherBInfo	 = peçaCompatibilidade[z].getInfo_especifica().split(";");
+					
+					String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
+					String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
+					String pecaInfo3 = pecaCompatibilidade3.getInfo_especifica();
+					
+					String[]ProcessInfo = pecaInfo1.split(";");
+					String[]MemRamInfo 	= pecaInfo2.split(";");
+					String[]MotherBInfo	 = pecaInfo3.split(";");
 					
 					//Especificações do Processador
 					int geracaoPro = Integer.parseInt(ProcessInfo[0]);
@@ -765,35 +851,45 @@ public class PecaComp extends Peca{
 					
 					//Verificando compatibilidade de acordo com o tipo de RAM
 					
-					if(tipoRam.equals(RAMPro) && tipoRam.equals(RAMMother)){
+					if(tipoRam.contains(RAMPro) && tipoRam.contains(RAMMother)){
 						
 						System.out.println("A memoria RAM é compativel com a placa mãe e com o processador"); 
 						System.out.println("Isto porque o tipode de RAM é o mesmo dos outros dois componentes"); 
 						
-						System.out.println("---\nMemoria RAM : " + peçaCompatibilidade[y].getNome_componente() + " - Tipo de RAM : " + tipoRam); 
-						System.out.println("Processador : " + peçaCompatibilidade[x].getNome_componente() + " - Tipo de RAM : " + RAMPro); 
-						System.out.println("Placa Mae : " + peçaCompatibilidade[z].getNome_componente() + " - Tipo de RAM : " + RAMMother); 
+						System.out.println("---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam); 
+						System.out.println("Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro); 
+						System.out.println("Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother); 
 					}
 					else{
 						
 						System.out.println("A memoria RAM NAO é compativel com a placa mãe e com o processador"); 
 						System.out.println("Isto porque o tipode de RAM NAO é o mesmo dos outros dois componentes. Confira abaixo"); 
 						
-						System.out.println("---\nMemoria RAM : " + peçaCompatibilidade[y].getNome_componente() + " - Tipo de RAM : " + tipoRam); 
-						System.out.println("Processador : " + peçaCompatibilidade[x].getNome_componente() + " - Tipo de RAM : " + RAMPro); 
-						System.out.println("Placa Mae : " + peçaCompatibilidade[z].getNome_componente() + " - Tipo de RAM : " + RAMMother); 
+						System.out.println("---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam); 
+						System.out.println("Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro); 
+						System.out.println("Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother); 
 					}
 					
 				}
 				
 				
 				//-------|COMPATIBILIDADE ENTRE PROCESSADOR, PLACA DE VIDEO E FONTES|-----
-				else if(peçaCompatibilidade[x].getCategoria().equals("Processador") && peçaCompatibilidade[y].getCategoria().equals("Placa de Vídeo") && peçaCompatibilidade[z].getCategoria().equals("Fontes")){
+				else if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Placa de Vídeo") && pecaCompatibilidade3.getCategoria().contains("Fontes")){
 				
+					String Nome1 = pecaCompatibilidade1.getNome_componente();
+					String Nome2 = pecaCompatibilidade2.getNome_componente();
+					String Nome3 = pecaCompatibilidade3.getNome_componente();
+					
 					//Separando as informações especificas
-					String[]ProcessInfo = peçaCompatibilidade[x].getInfo_especifica().split(";");
-					String[]PlacaVideo	= peçaCompatibilidade[y].getInfo_especifica().split(";");
-					String[]FonteInfo = peçaCompatibilidade[z].getInfo_especifica().split(";");
+					
+					String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
+					String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
+					String pecaInfo3 = pecaCompatibilidade3.getInfo_especifica();
+					
+					
+					String[]ProcessInfo = pecaInfo1.split(";");
+					String[]PlacaVideo	= pecaInfo2.split(";");
+					String[]FonteInfo = pecaInfo3.split(";");
 					
 					//Especificações do Processador
 					int geracaoPro = Integer.parseInt(ProcessInfo[0]);
@@ -840,27 +936,26 @@ public class PecaComp extends Peca{
 					
 					if(potencia >= resultado){
 						
-						System.out.println("A Fonte " + peçaCompatibilidade[z].getNome_componente() + " é compativel com as Pecas escolhidas"); 
+						System.out.println("A Fonte " + Nome3 + " é compativel com as Pecas escolhidas"); 
 						System.out.println("Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MENOR ou IGUAL a potencia da Fonte, confira: "); 
 						
-						System.out.println("---\nFonte: " + peçaCompatibilidade[z].getNome_componente() + " - Potencia : " + potencia); 
-						System.out.println("Processador: " + peçaCompatibilidade[x].getNome_componente() + " - Potencia : " + TDPPro); 
-						System.out.println("Placa de Video: " + peçaCompatibilidade[y].getNome_componente() + " - Potencia : " + TDPVideo); 
+						System.out.println("---\nFonte: " + Nome3 + " - Potencia : " + potencia); 
+						System.out.println("Processador: " + Nome1 + " - Potencia : " + TDPPro); 
+						System.out.println("Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo); 
 						System.out.println("Potencia do PC: " + resultado); 
 					}
 					else{
 						
-						System.out.println("A Fonte " + peçaCompatibilidade[z].getNome_componente() + " NAO é compativel com as Pecas escolhidas"); 
+						System.out.println("A Fonte " + Nome3 + " NAO é compativel com as Pecas escolhidas"); 
 						System.out.println("Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MAIOR que a potencia da Fonte, confira:"); 
 						
-						System.out.println("---\nFonte: " + peçaCompatibilidade[z].getNome_componente() + " - Potencia : " + potencia); 
-						System.out.println("Processador: " + peçaCompatibilidade[x].getNome_componente() + " - Potencia : " + TDPPro); 
-						System.out.println("Placa de Video: " + peçaCompatibilidade[y].getNome_componente() + " - Potencia : " + TDPVideo); 
+						System.out.println("---\nFonte: " + Nome3 + " - Potencia : " + potencia); 
+						System.out.println("Processador: " + Nome1 + " - Potencia : " + TDPPro); 
+						System.out.println("Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo); 
 						System.out.println("Potencia do PC: " + resultado); 
 					}	
 				
 				}
 			
 			}
-	
 }
