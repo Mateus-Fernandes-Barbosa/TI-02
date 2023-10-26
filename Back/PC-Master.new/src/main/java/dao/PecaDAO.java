@@ -67,7 +67,10 @@ public class PecaDAO extends DAO {
         return get("id");
     }
 
-
+    public List<Peca> getOrderByNome() {
+        return get("nome");
+    }
+    
     public List<Peca> getOrderByFabricante() {
         return get("fabricante");
     }
@@ -75,6 +78,10 @@ public class PecaDAO extends DAO {
 
     public List<Peca> getOrderByDistribuidor() {
         return get("distribuidor");
+    }
+    
+    public List<Peca> getOrderByCategoria() {
+        return get("categoria");
     }
 
 

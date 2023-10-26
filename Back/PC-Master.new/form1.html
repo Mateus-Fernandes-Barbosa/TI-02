@@ -24,7 +24,7 @@
         background-color: white;
       }
       #conteudo{
-        background-color: #88b0d8 !important;
+        background-color: #d3eafa  !important;
         margin: 0 auto !important;
         padding: 20px 60px 40px 60px;
         width: 80%;
@@ -136,7 +136,13 @@
 
   $('#Tipo_peca').change(function () {
     let escolha = $('#Tipo_peca').val();
-    location.href = `/produto/list/1/${escolha}`;
+    let shortBy = location.href.split('/')[5];
+    if(escolha == "all"){
+      location.href = `/produto/list/${shortBy}`;
+    } else {
+      location.href = `/produto/list/${shortBy}/${escolha}`;
+    }
+    
   })
 </script>
 

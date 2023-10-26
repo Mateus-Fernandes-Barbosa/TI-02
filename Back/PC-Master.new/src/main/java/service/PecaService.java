@@ -17,8 +17,9 @@ public class PecaService {
 	private final int FORM_DETAIL = 2;
 	private final int FORM_UPDATE = 3;
 	private final int FORM_ORDERBY_ID = 1;
-	private final int FORM_ORDERBY_DESCRICAO = 2;
-	private final int FORM_ORDERBY_PRECO = 3;
+	private final int FORM_ORDERBY_NOME = 2;
+	private final int FORM_ORDERBY_CATEGORIA = 3;
+	private final int FORM_ORDERBY_FABRICANTE = 4;
 
 	public String retirarChaves(String inicial) {
 		String string = "";
@@ -32,7 +33,7 @@ public class PecaService {
 	}
 	
 	public void makeForm() {
-		makeForm(FORM_INSERT, new Peca(), FORM_ORDERBY_DESCRICAO);
+		makeForm(FORM_INSERT, new Peca(), FORM_ORDERBY_NOME);
 	}
 
 	
@@ -52,7 +53,7 @@ public class PecaService {
 		}  catch (Exception e) { System.out.println(e.getMessage()); }
 		String umaPeca = "";
 		if(tipo != FORM_INSERT) {
-			umaPeca += "\t<table width=\"80%\" bgcolor=\"#88b0d8\" align=\"center\">";
+			umaPeca += "\t<table width=\"90%\" bgcolor=\"#c0e0f7\" align=\"center\">";
 			umaPeca += "\t\t<tr>";
 			umaPeca += "\t\t\t<td align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;<a href=\"/produto/list/1\">Nova Peca</a></b></font></td>";
 			umaPeca += "\t\t</tr>";
@@ -75,7 +76,7 @@ public class PecaService {
 				buttonLabel = "Atualizar";
 			}
 			umaPeca += "\t<form class=\"form--register\" action=\"" + action + "\" method=\"post\" id=\"form-add\">";
-			umaPeca += "\t<table width=\"80%\" bgcolor=\"#88b0d8\" align=\"center\">";
+			umaPeca += "\t<table width=\"90%\" bgcolor=\"#9cbbd6\" align=\"center\">";
 			umaPeca += "\t\t<tr>";
 			umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;" + name + "</b></font></td>";
 			umaPeca += "\t\t</tr>";
@@ -93,7 +94,7 @@ public class PecaService {
 			umaPeca += "\t</table>";
 			umaPeca += "\t</form>";		
 		} else if (tipo == FORM_DETAIL){
-			umaPeca += "\t<table width=\"80%\" bgcolor=\"#88b0d8\" align=\"center\">";
+			umaPeca += "\t<table width=\"90%\" bgcolor=\"#9cbbd6\" align=\"center\">";
 			umaPeca += "\t\t<tr>";
 			umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;Detalhar Produto (ID " + peca.getId() + ")</b></font></td>";
 			umaPeca += "\t\t</tr>";
@@ -113,13 +114,14 @@ public class PecaService {
 		}
 		form = form.replaceFirst("<UM-PRODUTO>", umaPeca);
 		
-		String list = new String("<table width=\"80%\" align=\"center\" bgcolor=\"#88b0d8\">");
-		list += "\n<tr><td colspan=\"6\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;Relação de Produtos</b></font></td></tr>\n" +
+		String list = new String("<table width=\"90%\" align=\"center\" bgcolor=\"#9cbbd6\">");
+		list += "\n<td colspan=\"6\" align=\"left\"><font size=\"+1\"><b>&nbsp;&nbsp;&nbsp;Relação de Produtos</b></font></td>\n" +
 				"\n<tr><td colspan=\"6\">&nbsp;</td></tr>\n" +
     			"\n<tr>\n" + 
         		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_ID + "\"><b>ID</b></a></td>\n" +
-        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_DESCRICAO + "\"><b>Descrição</b></a></td>\n" +
-        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_PRECO + "\"><b>Preço</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_NOME + "\"><b>Nome</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_FABRICANTE + "\"><b>Fabricante</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_CATEGORIA + "\"><b>Categoria</b></a></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Detalhar</b></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Atualizar</b></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Excluir</b></td>\n" +
@@ -127,19 +129,21 @@ public class PecaService {
 		
 		List<Peca> produtos;
 		if (orderBy == FORM_ORDERBY_ID) {                 	produtos = pecaDao.getOrderById();
-		} else if (orderBy == FORM_ORDERBY_DESCRICAO) {		produtos = pecaDao.getOrderByFabricante();
-		} else if (orderBy == FORM_ORDERBY_PRECO) {			produtos = pecaDao.getOrderByDistribuidor();
+		} else if (orderBy == FORM_ORDERBY_NOME) {		produtos = pecaDao.getOrderByNome();
+		} else if (orderBy == FORM_ORDERBY_CATEGORIA) {			produtos = pecaDao.getOrderByCategoria();
+		} else if (orderBy == FORM_ORDERBY_FABRICANTE) {			produtos = pecaDao.getOrderByFabricante();
 		} else {											produtos = pecaDao.get();
 		}
 
 		int i = 0;
 		String bgcolor = "";
 		for (Peca p : produtos) {
-			bgcolor = (i++ % 2 == 0) ? "#fff5dd" : "#dddddd";
+			bgcolor = (i++ % 2 == 0) ? "#bce0f9" : "#78b7e3";
 			list += "\n<tr bgcolor=\""+ bgcolor +"\">\n" + 
             		  "\t<td>" + p.getId() + "</td>\n" +
             		  "\t<td>" + retirarChaves(p.getNome_componente()) + "</td>\n" +
             		  "\t<td>" + retirarChaves(p.getFabricante()) + "</td>\n" +
+            		  "\t<td>" + retirarChaves(p.getCategoria()) + "</td>\n" +
             		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
             		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
             		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
