@@ -13,6 +13,7 @@ import spark.Response;
 public class PecaService {
 	PecaDAO pecaDao = new PecaDAO();
 	private String form;
+	private String category = "";
 	private final int FORM_INSERT = 1;
 	private final int FORM_DETAIL = 2;
 	private final int FORM_UPDATE = 3;
@@ -42,7 +43,7 @@ public class PecaService {
 	}
 	
 	public void makeForm(int tipo, Peca peca, int orderBy) {
-		String nomeArquivo = "form1.html";
+		String nomeArquivo = "pecas.html";
 		form = "";
 		try{
 			Scanner entrada = new Scanner(new File(nomeArquivo));
@@ -137,20 +138,39 @@ public class PecaService {
 
 		int i = 0;
 		String bgcolor = "";
-		for (Peca p : produtos) {
-			bgcolor = (i++ % 2 == 0) ? "#bce0f9" : "#78b7e3";
-			list += "\n<tr bgcolor=\""+ bgcolor +"\">\n" + 
-            		  "\t<td>" + p.getId() + "</td>\n" +
-            		  "\t<td>" + retirarChaves(p.getNome_componente()) + "</td>\n" +
-            		  "\t<td>" + retirarChaves(p.getFabricante()) + "</td>\n" +
-            		  "\t<td>" + retirarChaves(p.getCategoria()) + "</td>\n" +
-            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-            		  "</tr>\n";
+		if(category == "") {
+			for (Peca p : produtos) {
+				bgcolor = (i++ % 2 == 0) ? "#bce0f9" : "#78b7e3";
+				list += "\n<tr bgcolor=\""+ bgcolor +"\">\n" + 
+	            		  "\t<td>" + p.getId() + "</td>\n" +
+	            		  "\t<td>" + retirarChaves(p.getNome_componente()) + "</td>\n" +
+	            		  "\t<td>" + retirarChaves(p.getFabricante()) + "</td>\n" +
+	            		  "\t<td>" + retirarChaves(p.getCategoria()) + "</td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "</tr>\n";
+			}
+			list += "</table>";		
+		} else {
+			for (Peca p : produtos) {
+				if(retirarChaves(p.getCategoria()).equals(category)){
+					bgcolor = (i++ % 2 == 0) ? "#bce0f9" : "#78b7e3";
+					list += "\n<tr bgcolor=\""+ bgcolor +"\">\n" + 
+		            		  "\t<td>" + p.getId() + "</td>\n" +
+		            		  "\t<td>" + retirarChaves(p.getNome_componente()) + "</td>\n" +
+		            		  "\t<td>" + retirarChaves(p.getFabricante()) + "</td>\n" +
+		            		  "\t<td>" + retirarChaves(p.getCategoria()) + "</td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "</tr>\n";
+				}
+			}
+			list += "</table>";	
+			category = "";
 		}
-		list += "</table>";		
-		form = form.replaceFirst("<LISTAR-PRODUTO>", list);		
+		form = form.replaceFirst("<LISTAR-PRODUTO>", list);	
 	}
 	
 	public Object getAll(Request request, Response response) {
@@ -161,17 +181,16 @@ public class PecaService {
 	    response.header("Content-Encoding", "UTF-8");
 		return form;
 	}	
-	public Object basic(Request request, Response response) {
-		String nomeArquivo = "form1.html";
-		form = "";
-		try{
-			Scanner entrada = new Scanner(new File(nomeArquivo));
-		    while(entrada.hasNext()){
-		    	form += (entrada.nextLine() + "\n");
-		    }
-		    entrada.close();
-		}  catch (Exception e) { System.out.println(e.getMessage()); }
+	
+	public Object getCategory(Request request, Response response) {
+		int orderBy = Integer.parseInt(request.params(":orderby"));
+		category = request.params(":category");
+		makeForm(orderBy);
+	
+	    response.header("Content-Type", "text/html");
+	    response.header("Content-Encoding", "UTF-8");
 		return form;
-	}
+	}	
+	
 	
 }
