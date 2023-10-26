@@ -1,0 +1,164 @@
+<html>
+<head>
+<meta content="text/html; charset = UTF-8" http-equiv="content-type">
+
+<title>Controle de Estoque</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+
+function confirmarDeleteProduto(id, descricao, preco) {  
+	
+    if (confirm('Confirmar a exclusão do produto [' + descricao + '] (ID ' + id + ') com preço R$ ' + preco)) {  
+        location.href = '/produto/delete/' + id;
+    }
+}
+function onLoad() {
+    if(document.getElementById("msg").value != ""){
+      alert(document.getElementById("msg").value);
+    }
+}
+</script>
+
+
+<body onload="onLoad()">
+    <header class="header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+          <img src="Logo_Icon.png" alt="Bootstrap" width="50" height="50" id="icon">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Página Inicial</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Sprint_3_cadastro_Samuel.html">Seja Apoiador</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Info. Peças
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=1">Processador</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=2">Placa de Vídeo</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=3">Placa Mãe</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=4">Cooler</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=5">Memória Ram</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=6">Fonte Alimentação</a></li>
+                <li><a class="dropdown-item" href="Sprint_3_pecas_Samuel.html?id=7">HD</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+   
+	<input type="hidden" id="msg" name="msg" value="">
+    <UM-PRODUTO>
+	<br>
+	<LISTAR-PRODUTO>
+	<style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: white;
+}
+.header {
+    background-color: #1874be;
+}
+#icon{
+    filter: brightness(15);
+}
+.nav-link{
+    color: white !important;
+    background-color: #0c3a5f !important;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+  
+  .nav-link :hover{
+    padding: 1% !important;
+    background-color: #061d2f !important;
+    color: rgb(255, 240, 240) !important;
+    text-shadow: -1px 0 #d2e9fb, 0 1px #d2e9fb, 1px 0 #d2e9fb, 0 -1px white !important;
+    transition: 0.3s;
+  }
+    body{
+        background-color: white;
+      }
+    #Cadastrar{
+        background-color: rgb(247, 247, 247);
+        margin: 0 auto !important;
+        padding: 20px 60px 40px 60px;
+        width: 80%;
+        height: 100%;
+      }
+      #conteiner{
+        width: 100%;
+      }
+      img{
+        width: auto;
+      }
+      button{
+        margin: 10px auto;
+      }
+      .card{
+        padding: 10px;
+      }
+      
+.input--main__style {
+	background-color: #00FF00;
+}
+
+.input--button {
+	font-weight: bold;
+	font-family: Arial;
+	font-size: medium;
+	border-color: transparent;
+	display: block;
+	margin: 0px auto;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.input--register {
+	display: inline;
+}
+
+input {
+	display: block;
+	border-radius: 7px;
+	padding: 10px;
+	border-style: solid;
+	border-color: lightgray;
+	color: black;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+form p {
+	text-align: initial;
+	display: inline;
+	margin-left: 15px;
+}
+
+.p--nomargin {
+	margin-left: 0px;
+	margin-right: 10px;
+}
+</style>
+</body>
+</html>

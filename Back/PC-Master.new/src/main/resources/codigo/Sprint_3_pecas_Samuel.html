@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <title>PC Master - Peças</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="Sprint_3_cadastro_Samuel.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div id="Conteudo">
+
+    </div>
+
+    <script>
+
+        /*----------------------------------JSON PARA AS PEÇAS---------------------------------------------*/
+
+        const jsondata = {
+            pecas: [{
+                id: 1,
+                nome: 'Processador',
+                imagem: 'ImagensPeças/2015-10-07-processador-da-intel-alcancou-altissima-velocidade.webp',
+                descricao: 'O processador é a unidade central de processamento de um computador (CPU), que funciona como o cérebro do computador, pois interage e faz as conexões necessárias entre todos os programas instalados. Neste processo, ele também interpreta as informações enviadas pelos programas, realiza diversas operações, inclusive gerando a interface que nós interagimos quando usamos um computador. Os processadores são colocados na Placa-Mãe, por soquetes, e sua estrutura é composta por bilhões de transistores. Nos processadores, um dos detalhes importantes que deve ser analisado é o seu "Clock". Sendo o fator demonstrando a sua velocidade o qual um processador possa lidar com as informações, essa velocidade é medida em GigaHertz(GHz). Como também, em cada processador, pode-se encontrar diferentes numeros de núcleos, assim, sendo capaz de trabalhar melhor com uma grande variedade de informações recebidas de forma simultanea.',
+                video: 'src="https://www.youtube.com/embed/R5cXyq3kbDQ?start=28&end=482"'
+            },
+            { id: 2, nome: 'Placa de Vídeo', imagem: 'ImagensPeças/gigabyte-aorus-570.webp', descricao: 'A placa de vídeo é o componente responsável por exibir imagens na tela. Além disso, ela também pode ser utilizada para rodar games e softwares que demandem muito processamento visual. Ocasionalmente a placa de vídeo pode ser usada também como auxiliar em alguns programas, normalmente como "aceleração por hardware". A potência da placa de vídeo é um dos principais fatores para determinar quais jogos funcionarão e como será a performance deles enquanto são jogados, como nível de qualidade e taxa de quadros FPS. Ela também determinará como o PC se sai ao lidar com elementos gráficos pesados, como, por exemplo, softwares de modelagem 3D. As Placas de Vídeo possuem dois tipos, integrada ou dedicada. Na maioria das vezes, ao receber um computador, sua placa de vídeo será integrada, no qual costuma ser básica, focada em mostrar vídeos, e não possui foco em jogos ou programas pesados. Agora a Placa de Vídeo dedicada possui vantagem na sua grande potência, produzidas especialmente por fabricantes que sempre tentam alcançar a melhor velocidade.', video: 'src="https://www.youtube.com/embed/BAntQj_DW4k?start=978&end=1240"'},
+            { id: 3, nome: 'Placa Mãe', imagem: 'ImagensPeças/71qZEnN5xPL._AC_UF1000,1000_QL80_.jpg', descricao: 'As placas-mãe são os componentes responsáveis por abrigar e conectar todas as outras peças do seu computador. É na placa-mãe que são instalados processador, memória RAM, placa de vídeo e todas as outras peças de expansão que conhecemos. Outro papel crucial da placa-mãe é a correta alimentação de energia para cada uma das peças do computador. Imagine, por exemplo, o seu processador: ele é um circuito extremamente sensível a qualquer variação de energia, precisando de um sinal puro para funcionar corretamente. Para ajustar a quantidade de energia que vai para a CPU, a placa-mãe utiliza diversos módulos reguladores de tensão(VRM). A quantidade e a qualidade dos VRMs utilizados varia de acordo com o preço e fabricante da placa.', video: 'src="https://www.youtube.com/embed/BAntQj_DW4k?start=15&end=1380"' },
+            { id: 4, nome: 'Cooler', imagem: 'ImagensPeças/61MF9-BTNKL._AC_SY450_.jpg', descricao: 'Cooler (do inglês: refrigerador) é um sistema de reesfriamento usado em diversos tipos de hardwares eletrônicos com o objetivo de evitar a sobrecarga de calor que estes componentes geram. Microprocessadores de placas de computadores, por exemplo, realizam milhões de cálculos por segundo e o seu funcionamento só é possível com um sistema de cooler adaptado ao componente. Existem diversos tipos de Coolers com sistemas de reesfriamento diferentes. Air-Cooler: Sistema composto por um ventilador e um dissipador metálico de temperatura. É o conjunto mais usual em função de seu baixo custo. Water-Cooler: Sistema com maior eficiência e de maior complexidade que o air-cooler. Utilizados em equipamentos de alta frequência de processamento, seu conjunto é formado por bomba integrada, um dissipador, um radiador, mangueiras e um fluido. E por ultimo, o Cooler Heat Pipe: Este tipo de cooler utiliza, simultaneamente, o princípio do Air-Cooler com complementação do princípio do Water-Cooler, ou seja, uma junção do Air-Cooler e do Water-Cooler', video: 'src="https://www.youtube.com/embed/_ZuUY4_coMo?start=60&end895"' },
+            { id: 5, nome: 'Memória Ram', imagem: 'ImagensPeças/kllisre_ddr3_8gb_1600mhz_dissipador_memoria_ram_pc_gamer_prat_1569815861_e21f_600x600.avif', descricao: 'Esse componente é responsável por dar mais agilidade e velocidade no funcionamento geral do sistema. Sem a memória RAM, tarefas como abrir programas e editar arquivos demorariam muito para serem realizadas. Na verdade, um computador nem liga se você não tiver memória RAM instalada. Resumidamente, a função da memória RAM é guardar temporariamente toda a informação que o computador precisa, seja para aquele momento ou para um futuro próximo. Num exemplo mais prático, quando você abre um jogo ou uma página em seu navegador, é a RAM que está trabalhando. Existem três critérios fundamentais a observar quando se está querendo saber o que é memória RAM e como ela irá te servir. Capacidade: Sendo o critério principal que deve ser analisado, medida em gigabytes (GB), indica quantos arquivos temporários ele pode armazenar simultaneamente. DDR: Acompanhado de um número, indica a geração da placa de memória RAM. Quanto maior, mais moderna é a peça.', video: 'src="https://www.youtube.com/embed/BAntQj_DW4k?start=597&end=664"' },
+            { id: 6, nome: 'Fonte de Alimentação', imagem: 'ImagensPeças/2015-03-30-fonte-corsair-cx-750w.webp', descricao: 'As fontes de alimentação possuem função principal de transformar a corrente elétrica da rede, que chega em uma voltagem alta, para uma voltagem menor, que é a indicada para o hardware do computador. Geralmente a rede elétrica possui a voltagem em 110V ou 220V. A maioria dos componentes, quando falamos de PC, trabalham na voltagem de 12V.  E a fonte faz essa transformação, tornando a energia compatível com o funcionamento do computador. Por ter um papel fundamental, é preciso que se escolha corretamente a fonte de alimentação. Observar a capacidade de alimentação da fonte é essencial para que o PC não sofra com falta de energia e tenha um rendimento abaixo do esperado. Ter uma noção do quanto os componentes do PC exigem para funcionar é o primeiro passo para se atentar na hora da escolha de uma nova fonte. Existem fontes com diferentes capacidades de alimentação, justamente porque cada computador terá uma combinação diferente de peças, com diferentes placas de vídeo, memórias RAM, processadores, placa mãe, entre outros componentes. A fonte precisa acompanhar o gasto de energia desse conjunto. As fabricantes informam o gasto energético de suas peças, mas existem sites que fazem o cálculo de acordo com a configuração informada pelo usuário. Basta colocar quais são os componentes do seu computador e eles darão a quantidade aproximada de watts que será necessária para alimentar todo o conjunto. Os sites recomendados são o OuterVision (https://outervision.com/power-supply-calculator) e Newegg (https://www.newegg.com/tools/power-supply-calculator/).', video: 'src="https://www.youtube.com/embed/kJ_dCS4kIbQstart=00&end=543"'},
+            { id: 7, nome: 'Armazenamento', imagem: 'ImagensPeças/Design-sem-nome-2-3.png', descricao: 'A tecnologia de armazenamento de dados para computador pode ser baseada entre dois hardwares, o HD e o SSD. O HD utiliza basicamente a mesma tecnologia desde 1956, conta com discos móveis, utilizados para armazenar os dados, e um braço mecânico, que faz a leitura e escrita. Sua vantagem em comparação ao SSD é o seu preço e a capacidade de armazenamento. Enquanto o SSD possui uma tecnologia mais atual, possuindo também foco em velocidade. Possuem como vantagem a sua velocidade e resistencia. Em ambos os hardwares, deve ser analisado primeiramente a sua capacidade de armazenamento de cada. Mas como também, é possível usar ambos no mesmo PC.', video: 'src="https://www.youtube.com/embed/ODIQAn0q0W8?start=72&end=446"'},
+            ]
+        }
+
+        function mostrarpecas() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pecaId = urlParams.get('id');
+            let str = '';
+
+            let idx = jsondata.pecas.findIndex(elem => elem.id == pecaId);
+
+            if (idx != -1) {
+                let componentes = jsondata.pecas[idx];
+
+                str = `<header>
+                    <img src="Sprint_3_logo_Samuel.png" class="w-25 mx-auto d-block" id="logo" alt="PCMaster Logo">
+            <h1 class="text-center">${componentes.nome}</h1>
+        </header>
+
+        <main>
+            <img src="${componentes.imagem}" alt="image" class="mx-auto d-block border border-2 border-black rounded-2 w-25">
+            <p class="text-center m-4">${componentes.descricao}</p>
+
+            <h2 class="text-center my-2">Agora, veja como instalar a peça: ${componentes.nome}<h2>
+            <iframe width="560" height="315" ${componentes.video} title="YouTube video player" class="mx-auto d-block" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        </main>
+        
+        <footer class="text-center">
+            <button id="btnVoltar" onclick="location.href='index.html';">Voltar a Página Inicial</button>
+            <button id="btnCompatibilidade" onclick="location.href='Sprint_2_compatibilidade_Felipe.html';">Ir Para Compatibilidade</button>
+        </footer>`;
+
+                document.getElementById("Conteudo").innerHTML = str;
+            }
+        }
+
+        mostrarpecas();
+    </script>
+
+</body>
