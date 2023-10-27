@@ -119,7 +119,7 @@ public class PecaService {
 		if(tipo != FORM_INSERT) {
 			umaPeca += "\t<table width=\"90%\"  align=\"center\">";
 			umaPeca += "\t\t<tr>";
-			umaPeca += "\t\t\t<td align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;<a href=\"/peca/list/1/all\">Nova Peca</a></b></font></td>";
+			umaPeca += "\t\t\t<td align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;<a href=\"/produto/list/1/all\">Nova Peca</a></b></font></td>";
 			umaPeca += "\t\t</tr>";
 			umaPeca += "\t</table>";
 			umaPeca += "\t<br>";			
@@ -211,12 +211,15 @@ public class PecaService {
 		form = form.replaceFirst("<UM-PRODUTO>", umaPeca);
 		
 		String list = new String("<table width=\"100%\" align=\"center\" bgcolor=\"#9cbbd6\" >");
+		if (category == "") {
+			category = "all";
+		}
 		list += "\n<tr><td colspan=\"6\">&nbsp;</td></tr>\n" +
     			"\n<tr>\n" + 
-        		"\t<td><a href=\"/peca/list/" + FORM_ORDERBY_ID + "/" + category +"\"><b>ID</b></a></td>\n" +
-        		"\t<td><a href=\"/peca/list/" + FORM_ORDERBY_NOME + "/" + category +"\"><b>Nome</b></a></td>\n" +
-        		"\t<td><a href=\"/peca/list/" + FORM_ORDERBY_FABRICANTE + "/" + category +"\"><b>Fabricante</b></a></td>\n" +
-        		"\t<td><a href=\"/peca/list/" + FORM_ORDERBY_CATEGORIA + "/" + category +"\"><b>Categoria</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_ID + "/" + category +"\"><b>ID</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_NOME + "/" + category +"\"><b>Nome</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_FABRICANTE + "/" + category +"\"><b>Fabricante</b></a></td>\n" +
+        		"\t<td><a href=\"/produto/list/" + FORM_ORDERBY_CATEGORIA + "/" + category +"\"><b>Categoria</b></a></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Detalhar</b></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Atualizar</b></td>\n" +
         		"\t<td width=\"100\" align=\"center\"><b>Excluir</b></td>\n" +
@@ -240,8 +243,8 @@ public class PecaService {
 	            		  "\t<td>" + (p.getNome_componente()) + "</td>\n" +
 	            		  "\t<td>" + (p.getFabricante()) + "</td>\n" +
 	            		  "\t<td>" + (p.getCategoria()) + "</td>\n" +
-	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/peca/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/peca/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeletepeca('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 	            		  "</tr>\n";
 			}
@@ -256,8 +259,8 @@ public class PecaService {
 		            		  "\t<td>" + (p.getNome_componente()) + "</td>\n" +
 		            		  "\t<td>" + (p.getFabricante()) + "</td>\n" +
 		            		  "\t<td>" + (p.getCategoria()) + "</td>\n" +
-		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/peca/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/peca/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeletepeca('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 		            		  "</tr>\n";
 				}

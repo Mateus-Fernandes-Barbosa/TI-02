@@ -16,7 +16,7 @@ public class Aplicacao {
 		staticFiles.location("/public");
 		
 
-		get("produto/list/:orderby/:category", (request, response) -> Ps.getCategory(request, response));
+		get("/produto/list/:orderby/:category", (request, response) -> Ps.getCategory(request, response));
 		get("/produto/update/:id", (request, response) -> Ps.getToUpdate(request, response));
 		get("/produto/:id", (request, response) -> Ps.get(request, response));
 		post("/produto/update/:id", (request, response) -> Ps.update(request, response));

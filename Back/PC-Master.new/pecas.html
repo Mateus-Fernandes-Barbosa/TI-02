@@ -147,7 +147,12 @@
   $('#Tipo_peca').change(function () {
     let escolha = $('#Tipo_peca').val();
     let shortBy = location.href.split('/')[5];
-    location.href = `/produto/list/${shortBy}/${escolha}`;
+    if(shortBy == null){
+      location.href = `/produto/list/1/${escolha}`;
+    } else {
+      location.href = `/produto/list/${shortBy}/${escolha}`;
+    }
+    
     
   })
 </script>
