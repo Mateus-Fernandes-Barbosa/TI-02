@@ -14,6 +14,7 @@ public class PecaService {
 	PecaDAO pecaDao = new PecaDAO();
 	private String form;
 	private String category = "";
+	private String[] legenda_info;
 	private final int FORM_INSERT = 1;
 	private final int FORM_DETAIL = 2;
 	private final int FORM_UPDATE = 3;
@@ -27,6 +28,71 @@ public class PecaService {
 		makeForm();
 	}
 	
+	public int legendaInfoEspecifica(String categoria) {
+		int qtde = 0;
+		if(categoria.equals("Processador")) {
+			qtde = 10;
+			String[] legenda_info = {
+				    "Geração", 
+				    "Socket", 
+				    "Tipo RAM Compatível", 
+				    "Tamanho Máximo de RAM", 
+				    "TDP", 
+				    "Possui GPU Integrada", 
+				    "Quantidade de Núcleos", 
+				    "Quantidade de Threads", 
+				    "Frequência Base", 
+				    "Frequência Máxima"
+			};
+			this.legenda_info = legenda_info;
+		} else if(categoria.equals("Placa Mãe")) {
+			qtde = 9;
+			
+			String[] legenda_info = {
+				    "Geração Processador",
+				    "Socket",
+				    "Tipo RAM Compatível",
+				    "Frequência RAM (Máxima Base)",
+				    "Frequência RAM",
+				    "Tecnologia PCI Express x16",
+				    "Quantidade Conectores SATA",
+				    "Quantidade Conectores M.2",
+				    "Quantidade Máxima de RAM"
+			};
+			this.legenda_info = legenda_info;
+		} else if(categoria.equals("Memória RAM")) {
+			qtde = 4;
+			String[] legenda_info = {
+				    "Tipo de RAM",
+				    "Frequência (Mhz)",
+				    "Tamanho (gb)",
+				    "Latência (cl)",
+			};
+			this.legenda_info = legenda_info;
+		} else if(categoria.equals("Placa de Vídeo")) {
+			qtde = 8;
+			String[] legenda_info = {
+				    "TDP",
+				    "Tecnologia PCI Express x16",
+				    "Quantidade de VRAM",
+				    "Tecnologia de VRAM",
+				    "Clock Base",
+				    "Clock de Boost",
+				    "Clock de Memória",
+				    "Quantidade de Núcleos"
+				};
+			this.legenda_info = legenda_info;
+		} else if(categoria.equals("Fontes")) {
+			qtde = 2;
+			String[] legenda_info = {
+				    "Potência",
+				    "Selo 80 plus",
+				};
+			this.legenda_info = legenda_info;
+		}
+		return qtde;
+	}
+	
 	public void makeForm() {
 		makeForm(FORM_INSERT, new Peca(), FORM_ORDERBY_NOME);
 	}
@@ -37,6 +103,7 @@ public class PecaService {
 	}
 	
 	public void makeForm(int tipo, Peca peca, int orderBy) {
+		String[] info = peca.getInfo_especifica().split(";");
 		String nomeArquivo = "pecas.html";
 		form = "";
 		try{
@@ -48,9 +115,9 @@ public class PecaService {
 		}  catch (Exception e) { System.out.println(e.getMessage()); }
 		String umaPeca = "";
 		if(tipo != FORM_INSERT) {
-			umaPeca += "\t<table width=\"90%\" bgcolor=\"#c0e0f7\" align=\"center\">";
+			umaPeca += "\t<table width=\"90%\"  align=\"center\">";
 			umaPeca += "\t\t<tr>";
-			umaPeca += "\t\t\t<td align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;<a href=\"/produto/list/1\">Nova Peca</a></b></font></td>";
+			umaPeca += "\t\t\t<td align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;<a href=\"/produto/list/1/all\">Nova Peca</a></b></font></td>";
 			umaPeca += "\t\t</tr>";
 			umaPeca += "\t</table>";
 			umaPeca += "\t<br>";			
@@ -67,6 +134,7 @@ public class PecaService {
 				action += "update/" + peca.getId();
 				name = "Atualizar Produto (ID " + peca.getId() + ")";
 				buttonLabel = "Atualizar";
+				System.out.println(info[0]);
 			}
 			umaPeca += "\t<form class=\"form--register\" action=\"" + action + "\" method=\"post\" id=\"form-add\">";
 			umaPeca += "\t<table width=\"90%\" bgcolor=\"#9cbbd6\" align=\"center\">";
@@ -93,14 +161,31 @@ public class PecaService {
 		} else if (tipo == FORM_DETAIL){
 			umaPeca += "\t<table width=\"90%\" bgcolor=\"#9cbbd6\" align=\"center\">";
 			umaPeca += "\t\t<tr>";
-			umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;Detalhar Produto (ID " + peca.getId() + ")</b></font></td>";
+			umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;Detalhar Produto (ID " + peca.getId() + peca.getNome_componente() +")</b></font></td>";
 			umaPeca += "\t\t</tr>";
 			umaPeca += "\t\t<tr>";
 			umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\">&nbsp;</td>";
 			umaPeca += "\t\t</tr>";
 			umaPeca += "\t\t<tr>";
-			umaPeca += "\t\t\t<td>&nbsp;Descrição: "+ peca.getNome_componente() +"</td>";
-			umaPeca += "\t\t\t<td>Quantidade: "+ peca.getFabricante() +"</td>";
+			umaPeca += "\t\t\t<td>&nbsp;Nome: "+ peca.getNome_componente() +"</td>";
+			umaPeca += "\t\t\t<td>Fabricante: "+ peca.getFabricante() +"</td>";
+			if(peca.getDistribuidor().length() < 2) {
+				umaPeca += "\t\t\t<td>Distribuidor: Não informado</td>";
+			} else {
+				umaPeca += "\t\t\t<td>Distribuidor: "+ peca.getDistribuidor() +"</td>";
+			}
+			umaPeca += "\t\t</tr>";
+			umaPeca += "\t\t<tr>";
+			for(int i = 0, tam = legendaInfoEspecifica(peca.getCategoria()); i<tam; i++ ) {
+				if(i%3 == 0) {
+					umaPeca += "\t\t</tr>";
+					umaPeca += "\t\t<tr>";
+					umaPeca += "\t\t\t<td>" + legenda_info[i] +": " + info[i] +"</td>";
+				} else {
+					umaPeca += "\t\t\t<td>" + legenda_info[i] +": " + info[i] +"</td>";
+				}
+			}
+			
 			umaPeca += "\t\t</tr>";
 			umaPeca += "\t\t<tr>";
 			umaPeca += "\t\t\t<td>&nbsp;</td>";
@@ -150,7 +235,7 @@ public class PecaService {
 			list += "</table>";		
 		} else {
 			for (Peca p : produtos) {
-				System.out.println((p.getCategoria()) + " - " + category);
+				
 				if((p.getCategoria()).contains(category)){
 					bgcolor = (i++ % 2 == 0) ? "#bce0f9" : "#78b7e3";
 					list += "\n<tr bgcolor=\""+ bgcolor +"\">\n" + 
@@ -169,6 +254,17 @@ public class PecaService {
 		}
 		form = form.replaceFirst("<LISTAR-PRODUTO>", list);	
 	}
+	
+	public Object get(Request request, Response response) {
+		int id = Integer.parseInt(request.params(":id"));
+		Peca peca = (Peca) pecaDao.get(id);
+		makeForm(FORM_DETAIL, peca, FORM_ORDERBY_ID);
+	
+	    response.header("Content-Type", "text/html");
+	    response.header("Content-Encoding", "UTF-8");
+		return form;
+	}	
+	
 	
 	public Object getAll(Request request, Response response) {
 		int orderBy = Integer.parseInt(request.params(":orderby"));

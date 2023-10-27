@@ -1,8 +1,8 @@
 package service;
 
 import model.Peca;
-import DAO.PecaDAO;
-import DAO.DAO;
+import dao.PecaDAO;
+import dao.DAO;
 
 import java.sql.*;
 import java.util.List;
