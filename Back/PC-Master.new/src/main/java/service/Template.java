@@ -6,7 +6,7 @@ import java.util.Scanner;
 import spark.Request;
 import spark.Response;
 
-public class inicioService {
+public class Template {
 	public Object update(Request request, Response response) {
 		String nomeArquivo = "inicio.html";
 		String form = "";
