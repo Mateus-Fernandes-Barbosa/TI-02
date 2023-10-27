@@ -32,7 +32,7 @@ public class PecaService {
 	
 	public int legendaInfoEspecifica(String categoria) {
 		int qtde = 0;
-		if(categoria.equals("Processador")) {
+		if(categoria.equals("Processador") || category.equals("Processador")) {
 			qtde = 10;
 			String[] legenda_info = {
 				    "Geração", 
@@ -47,7 +47,7 @@ public class PecaService {
 				    "Frequência Máxima"
 			};
 			this.legenda_info = legenda_info;
-		} else if(categoria.equals("Placa Mãe")) {
+		} else if(categoria.equals("Placa Mãe") || category.equals("Placa Mãe")) {
 			qtde = 9;
 			
 			String[] legenda_info = {
@@ -62,7 +62,7 @@ public class PecaService {
 				    "Quantidade Máxima de RAM"
 			};
 			this.legenda_info = legenda_info;
-		} else if(categoria.equals("Memória RAM")) {
+		} else if(categoria.equals("Memória RAM") || category.equals("Memória RAM")) {
 			qtde = 4;
 			String[] legenda_info = {
 				    "Tipo de RAM",
@@ -71,7 +71,7 @@ public class PecaService {
 				    "Latência (cl)",
 			};
 			this.legenda_info = legenda_info;
-		} else if(categoria.equals("Placa de Vídeo")) {
+		} else if(categoria.equals("Placa de Vídeo") || category.equals("Placa de Vídeo")) {
 			qtde = 8;
 			String[] legenda_info = {
 				    "TDP",
@@ -84,7 +84,7 @@ public class PecaService {
 				    "Quantidade de Núcleos"
 				};
 			this.legenda_info = legenda_info;
-		} else if(categoria.equals("Fontes")) {
+		} else if(categoria.equals("Fontes") || category.equals("Fontes")) {
 			qtde = 2;
 			String[] legenda_info = {
 				    "Potência",
@@ -136,9 +136,43 @@ public class PecaService {
 				action += "update/" + peca.getId();
 				name = "Atualizar peca (ID " + peca.getId() + ")";
 				buttonLabel = "Atualizar";
-				System.out.println(info[0]);
+				System.out.println(!category.equals("all"));
+				
 			}
-			if(!category.equals("all")) {
+			if (tipo == FORM_UPDATE) {
+				umaPeca += "\t<form class=\"form--register\" action=\"" + action + "\" method=\"post\" id=\"form-add\">";
+				umaPeca += "\t<table width=\"100%\" bgcolor=\"#9cbbd6\" align=\"center\">";
+				umaPeca += "\t\t<tr>";
+				umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\"><font size=\"+2\"><b>&nbsp;&nbsp;&nbsp;" + name + "</b></font></td>";
+				umaPeca += "\t\t</tr>";
+				umaPeca += "\t\t<tr>";
+				umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\">&nbsp;</td>";
+				umaPeca += "\t\t</tr>";
+				umaPeca += "\t\t<tr>";
+				umaPeca += "\t\t\t<td>&nbsp;Nome: <br><input class=\"input--register\" type=\"text\" name=\"Nome\" value=\" " + peca.getNome_componente() + " \" width=\"90%\"></td>";
+				umaPeca += "\t\t\t<td>&nbsp;Fabricante: <br><input class=\"input--register\" type=\"text\" name=\"Fabricante\" value=\" " + peca.getFabricante() +"\" width=\"90%\"></td>";
+				umaPeca += "\t\t\t<td>Distribuidor: <br><input class=\"input--register\" type=\"text\" name=\"Distribuidor\" value=\" " + peca.getDistribuidor() + " \" width=\"90%\"></td>";
+				umaPeca += "\t\t</tr>";
+				umaPeca += "\t\t<tr>";
+				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\" " + peca.getCategoria() + "\"></td>";
+				String[] infos = peca.getInfo_especifica().split(";");
+				for(int i = 0, tam = legendaInfoEspecifica(peca.getCategoria()); i<tam; i++ ) {
+					if((i+1)%3 == 0) {
+						umaPeca += "\t\t</tr>";
+						umaPeca += "\t\t<tr>";
+						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br><input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\" "+ infos[i] +"\" width=\"100%\"></td>";
+					} else {
+						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br> <input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\"" + infos[i] +"\" width=\"90%\"></td>";
+					}
+				}
+				umaPeca += "\t\t</tr>";
+				umaPeca += "\t\t<tr>";
+				umaPeca += "\t\t<td> </td>";
+				umaPeca += "\t\t\t<br><td align=\"center\"><input type=\"submit\" value=\""+ buttonLabel +"\" class=\"input--main__style input--button\" width = \"100%\"></td>";
+				umaPeca += "\t\t</tr>";
+				umaPeca += "\t</table>";
+				umaPeca += "\t</form>";		
+			} else if(!category.equals("all")) {
 				umaPeca += "\t<form class=\"form--register\" action=\"" + action + "\" method=\"post\" id=\"form-add\">";
 				umaPeca += "\t<table width=\"100%\" bgcolor=\"#9cbbd6\" align=\"center\">";
 				umaPeca += "\t\t<tr>";
@@ -154,14 +188,13 @@ public class PecaService {
 				umaPeca += "\t\t</tr>";
 				umaPeca += "\t\t<tr>";
 				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\"\"></td>";
-				System.out.println(category);
-				for(int i = 0, tam = legendaInfoEspecifica(category); i<tam; i++ ) {
+				for(int i = 0, tam = legendaInfoEspecifica(peca.getCategoria()); i<tam; i++ ) {
 					if((i+1)%3 == 0) {
 						umaPeca += "\t\t</tr>";
 						umaPeca += "\t\t<tr>";
-						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br><input class=\"input--register\" type=\"text\" name=\"" + legenda_info[i] + "\" value=\"\" width=\"100%\"></td>";
+						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br><input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\"\" width=\"100%\"></td>";
 					} else {
-						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br> <input class=\"input--register\" type=\"text\" name=\"" + legenda_info[i] + "\" value=\"\" width=\"90%\"></td>";
+						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br> <input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\"\" width=\"90%\"></td>";
 					}
 				}
 				umaPeca += "\t\t</tr>";
