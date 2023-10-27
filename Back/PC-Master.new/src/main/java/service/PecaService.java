@@ -149,18 +149,18 @@ public class PecaService {
 				umaPeca += "\t\t\t<td colspan=\"3\" align=\"left\">&nbsp;</td>";
 				umaPeca += "\t\t</tr>";
 				umaPeca += "\t\t<tr>";
-				umaPeca += "\t\t\t<td>&nbsp;Nome: <br><input class=\"input--register\" type=\"text\" name=\"Nome\" value=\" " + peca.getNome_componente() + " \" width=\"90%\"></td>";
-				umaPeca += "\t\t\t<td>&nbsp;Fabricante: <br><input class=\"input--register\" type=\"text\" name=\"Fabricante\" value=\" " + peca.getFabricante() +"\" width=\"90%\"></td>";
-				umaPeca += "\t\t\t<td>Distribuidor: <br><input class=\"input--register\" type=\"text\" name=\"Distribuidor\" value=\" " + peca.getDistribuidor() + " \" width=\"90%\"></td>";
+				umaPeca += "\t\t\t<td>&nbsp;Nome: <br><input class=\"input--register\" type=\"text\" name=\"Nome\" value=\"" + peca.getNome_componente() + "\" width=\"90%\"></td>";
+				umaPeca += "\t\t\t<td>&nbsp;Fabricante: <br><input class=\"input--register\" type=\"text\" name=\"Fabricante\" value=\"" + peca.getFabricante() +"\" width=\"90%\"></td>";
+				umaPeca += "\t\t\t<td>Distribuidor: <br><input class=\"input--register\" type=\"text\" name=\"Distribuidor\" value=\"" + peca.getDistribuidor() + "\" width=\"90%\"></td>";
 				umaPeca += "\t\t</tr>";
 				umaPeca += "\t\t<tr>";
-				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\" " + peca.getCategoria() + "\"></td>";
+				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\"" + peca.getCategoria() + "\"></td>";
 				String[] infos = peca.getInfo_especifica().split(";");
 				for(int i = 0, tam = legendaInfoEspecifica(peca.getCategoria()); i<tam; i++ ) {
 					if((i+1)%3 == 0) {
 						umaPeca += "\t\t</tr>";
 						umaPeca += "\t\t<tr>";
-						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br><input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\" "+ infos[i] +"\" width=\"100%\"></td>";
+						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br><input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\""+ infos[i] +"\" width=\"100%\"></td>";
 					} else {
 						umaPeca += "\t\t\t<td>&nbsp;"+ legenda_info[i] +": <br> <input class=\"input--register\" type=\"text\" name=\"" + i + "\" value=\"" + infos[i] +"\" width=\"90%\"></td>";
 					}
@@ -187,7 +187,7 @@ public class PecaService {
 				umaPeca += "\t\t\t<td>Distribuidor: <br><input class=\"input--register\" type=\"text\" name=\"Distribuidor\" value=\"\" width=\"90%\"></td>";
 				umaPeca += "\t\t</tr>";
 				umaPeca += "\t\t<tr>";
-				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\"\"></td>";
+				umaPeca += "\t\t\t<td>Categoria: <br><input class=\"input--register\" type=\"text\" name=\"Categoria\" value=\""+ category +"\"></td>";
 				for(int i = 0, tam = legendaInfoEspecifica(peca.getCategoria()); i<tam; i++ ) {
 					if((i+1)%3 == 0) {
 						umaPeca += "\t\t</tr>";
@@ -359,15 +359,16 @@ public class PecaService {
 
         if (peca != null) {
         	int qtde = legendaInfoEspecifica(peca.getCategoria());
-        	peca.setNome_componente(request.queryParams("Nome").replaceAll(" ", ""));
-        	peca.setFabricante(request.queryParams("Fabricante").replaceAll(" ", ""));
-        	peca.setDistribuidor(request.queryParams("Distribuidor").replaceAll(" ", ""));
-        	peca.setCategoria(request.queryParams("Categoria").replaceAll(" ", ""));
+        	peca.setNome_componente(request.queryParams("Nome"));
+        	peca.setFabricante(request.queryParams("Fabricante"));
+        	peca.setDistribuidor(request.queryParams("Distribuidor"));
+        	peca.setCategoria(request.queryParams("Categoria"));
         	String infEspecifica = "";
         	infEspecifica += request.queryParams("0");
         	for(int i = 1; i<qtde; i++) {
         		infEspecifica += ";" + request.queryParams(Integer.toString(i));
         	}
+        	peca.setInfo_especifica(infEspecifica.replaceAll(" ", ""));
         	pecaDao.update(peca);
         	response.status(200); // success
             resp = "peca (ID " + peca.getId() + ") atualizado!";
@@ -379,5 +380,33 @@ public class PecaService {
 		return form.replaceFirst("<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\"\">", "<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\""+ resp +"\">");
 	}
 	
+	public Object insert(Request request, Response response) {
+		Peca peca = new Peca();     
+    	peca.setNome_componente(request.queryParams("Nome"));
+    	peca.setFabricante(request.queryParams("Fabricante"));
+    	peca.setDistribuidor(request.queryParams("Distribuidor"));
+    	peca.setCategoria(request.queryParams("Categoria"));
+    	int qtde = legendaInfoEspecifica(peca.getCategoria());
+    	String infEspecifica = "";
+    	infEspecifica += request.queryParams("0");
+    	for(int i = 1; i<qtde; i++) {
+    		infEspecifica += ";" + request.queryParams(Integer.toString(i));
+    	}
+    	peca.setInfo_especifica(infEspecifica.replaceAll(" ", ""));
+        
+        
+		String resp = "";
+		
+		if(pecaDao.insert(peca) == true) {
+            resp = "Produto (" + peca.getNome_componente() + ") inserido!";
+            response.status(201); // 201 Created
+		} else {
+			resp = "Produto (" + peca.getNome_componente() + ") não inserido!";
+			response.status(404); // 404 Not found
+		}
+			
+		makeForm();
+		return form.replaceFirst("<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\"\">", "<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\""+ resp +"\">");
+	}
 	
 }

@@ -22,10 +22,19 @@ public class PecaDAO extends DAO {
         boolean status = false;
         try {
             Statement st = conexao.createStatement();
+            //gabiarra para pegar id
+            int id = 0;
+            List<Peca> pecas;
+            pecas = getOrderById();
+            for (Peca p : pecas) {
+				id = p.getId();
+			}
+            id++;
+            //fim
             String sql = "INSERT INTO pecas (id, nome, fabricante, distribuidor, categoria, info_especifica) "
-                    + "VALUES ("+peca.getId()+ ", '" + peca.getNome_componente() + "','"
+                    + "VALUES ("+id+ ", '" + peca.getNome_componente() + "','"
                     + peca.getFabricante() + "', '" + peca.getDistribuidor() + "', '"
-                    + peca.getCategoria() + "', '" + peca.getInfo_especifica() + ");";
+                    + peca.getCategoria() + "', '" + peca.getInfo_especifica() + "');";
                     /*--------------------------PREENCHER COM INFORMAÇÕES DO BD------------------------------*/
             System.out.println(sql);
             st.executeUpdate(sql);
