@@ -144,9 +144,9 @@ private List<Peca> OrganizaOrganizado(List<Peca> pecas, String opcao){
             Statement st = conexao.createStatement();
             String sql = "UPDATE pecas SET nome = '"
                     + peca.getNome_componente() + "', fabricante = '" + peca.getFabricante()
-                    + "', distribuidor = '" + peca.getDistribuidor() + "', categoria"
+                    + "', distribuidor = '" + peca.getDistribuidor() + "', categoria = '"
                     + peca.getCategoria() + "', info_especifica = '" + peca.getInfo_especifica()
-                    + "'" + " WHERE codigo = " + peca.getId();
+                    + "'" + " WHERE id = " + peca.getId();
                     /*Preencher com as devidas informações do BD*/
             System.out.println(sql);
             st.executeUpdate(sql);

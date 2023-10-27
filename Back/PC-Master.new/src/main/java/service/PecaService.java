@@ -126,7 +126,7 @@ public class PecaService {
 		}
 		
 		if(tipo == FORM_INSERT || tipo == FORM_UPDATE) {
-			String action = "/peca/";
+			String action = "/produto/";
 			String name, buttonLabel;
 			if (tipo == FORM_INSERT){
 				action += "insert";
@@ -359,14 +359,14 @@ public class PecaService {
 
         if (peca != null) {
         	int qtde = legendaInfoEspecifica(peca.getCategoria());
-        	peca.setNome_componente(request.queryParams("Nome"));
-        	peca.setFabricante(request.queryParams("Fabricante"));
-        	peca.setDistribuidor(request.queryParams("Distribuidor"));
-        	peca.setCategoria(request.queryParams("Categoria"));
+        	peca.setNome_componente(request.queryParams("Nome").replaceAll(" ", ""));
+        	peca.setFabricante(request.queryParams("Fabricante").replaceAll(" ", ""));
+        	peca.setDistribuidor(request.queryParams("Distribuidor").replaceAll(" ", ""));
+        	peca.setCategoria(request.queryParams("Categoria").replaceAll(" ", ""));
         	String infEspecifica = "";
-        	infEspecifica += legenda_info[0];
+        	infEspecifica += request.queryParams("0");
         	for(int i = 1; i<qtde; i++) {
-        		infEspecifica += ";" + legenda_info[0];
+        		infEspecifica += ";" + request.queryParams(Integer.toString(i));
         	}
         	pecaDao.update(peca);
         	response.status(200); // success
