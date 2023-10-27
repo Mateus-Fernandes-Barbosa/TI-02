@@ -208,7 +208,7 @@ public class PecaService {
 		} else {
 			System.out.println("ERRO! Tipo não identificado " + tipo);
 		}
-		form = form.replaceFirst("<UM-peca>", umaPeca);
+		form = form.replaceFirst("<UM-PRODUTO>", umaPeca);
 		
 		String list = new String("<table width=\"100%\" align=\"center\" bgcolor=\"#9cbbd6\" >");
 		list += "\n<tr><td colspan=\"6\">&nbsp;</td></tr>\n" +
@@ -265,7 +265,7 @@ public class PecaService {
 			list += "</table>";	
 			category = "";
 		}
-		form = form.replaceFirst("<LISTAR-peca>", list);	
+		form = form.replaceFirst("<LISTAR-PRODUTO>", list);	
 	}
 	
 	public Object get(Request request, Response response) {
@@ -301,7 +301,6 @@ public class PecaService {
 	
 	public Object getToUpdate(Request request, Response response) {
 		int id = Integer.parseInt(request.params(":id"));		
-		//int orderBy = Integer.parseInt(request.params(":orderby"));
 		Peca peca = (Peca) pecaDao.get(id);
 		
 		if (peca != null) {
