@@ -278,7 +278,7 @@ public class PecaService {
 	            		  "\t<td>" + (p.getCategoria()) + "</td>\n" +
 	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeletepeca('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+	            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 	            		  "</tr>\n";
 			}
 			list += "</table>";		
@@ -294,7 +294,7 @@ public class PecaService {
 		            		  "\t<td>" + (p.getCategoria()) + "</td>\n" +
 		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/" + p.getId() + "\"><img src=\"/image/detail.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"/produto/update/" + p.getId() + "\"><img src=\"/image/update.png\" width=\"20\" height=\"20\"/></a></td>\n" +
-		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeletepeca('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
+		            		  "\t<td align=\"center\" valign=\"middle\"><a href=\"javascript:confirmarDeleteProduto('" + p.getId() + "', '" + p.getNome_componente() + "', '" + p.getFabricante() + "');\"><img src=\"/image/delete.png\" width=\"20\" height=\"20\"/></a></td>\n" +
 		            		  "</tr>\n";
 				}
 			}
@@ -408,5 +408,20 @@ public class PecaService {
 		makeForm();
 		return form.replaceFirst("<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\"\">", "<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\""+ resp +"\">");
 	}
-	
+	public Object delete(Request request, Response response) {
+        int id = Integer.parseInt(request.params(":id"));
+        Peca produto = pecaDao.get(id);
+        String resp = "";       
+
+        if (produto != null) {
+            pecaDao.delete(id);
+            response.status(200); // success
+            resp = "Produto (" + id + ") excluído!";
+        } else {
+            response.status(404); // 404 Not found
+            resp = "Produto (" + id + ") não encontrado!";
+        }
+		makeForm();
+		return form.replaceFirst("<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\"\">", "<input type=\"hidden\" id=\"msg\" name=\"msg\" value=\""+ resp +"\">");
+	}
 }

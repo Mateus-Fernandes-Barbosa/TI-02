@@ -8,9 +8,9 @@
 
 <script type="text/javascript">
 
-	function confirmarDeleteProduto(id, descricao, preco) {
+	function confirmarDeleteProduto(id, nome, fabricante) {
 
-		if (confirm('Confirmar a exclusão do produto [' + descricao + '] (ID ' + id + ') com preço R$ ' + preco)) {
+		if (confirm('Confirmar a exclusão do produto' + nome + ' (ID ' + id + ') fabricante: ' + fabricante)) {
 			location.href = '/produto/delete/' + id;
 		}
 	}
