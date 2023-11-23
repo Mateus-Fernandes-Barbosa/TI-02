@@ -558,98 +558,121 @@ public class PecaComp extends Peca{
 		
 		//-----| COMPATIBILIDADE DE Pecas |------
 		
-			//---|Compatibilidade entre Processador e Placa Mãe|---
-			public void CompatibilidadeProcessadorMotherBoard(int x, int y){
+		//---|Compatibilidade entre Processador e Placa Mãe|---//
+		//---|Testa a compatibilidade entre as peças e retorna o pedaço do html pronto|---//
+		
+		public String CompatibilidadeProcessadorMotherBoard(int x, int y){
+			String htmlResposta = "";
+			Peca pecaCompatibilidade1 = pecaDAO.get(x);
+			Peca pecaCompatibilidade2 = pecaDAO.get(y);
 				
-				Peca pecaCompatibilidade1 = pecaDAO.get(x);
-				Peca pecaCompatibilidade2 = pecaDAO.get(y);
+			//--|VERIFICANDO QUAL O TIPO DE COMPATIBILIDADE DEVE SER FEITA|--
 				
+			if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Placa Mãe")){
+				String fabricantePro = pecaCompatibilidade1.getFabricante();
 				
-				//--|VERIFICANDO QUAL O TIPO DE COMPATIBILIDADE DEVE SER FEITA|--
+				String Nome1 = pecaCompatibilidade1.getNome_componente();
+				String Nome2 = pecaCompatibilidade2.getNome_componente();
+						
+				//Seperando as informações especificas do Processador e da Placa Mae
+				String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
+				String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
+						
+				String[]ProcessInfo = pecaInfo1.split(";");
+				String[]MotherBInfo = pecaInfo2.split(";");
+						
+						
+				//Especificações do Processador
+						
+				int geracaoPro = Integer.parseInt(ProcessInfo[0]);
+						
+				String socketPro = ProcessInfo[1];
+				String RAMPro = ProcessInfo[2];
+						
+				int tamMaxRamPro = Integer.parseInt(ProcessInfo[3]);
+				int TDPPo = Integer.parseInt(ProcessInfo[4]);
+						
+				String GPUPro = ProcessInfo[5];
+						
+				int nucleosPro = Integer.parseInt(ProcessInfo[6]);
+				int threadsPro = Integer.parseInt(ProcessInfo[7]);
+				double freqBasePro = Double.parseDouble(ProcessInfo[8]);
+				double freqMaxPro = Double.parseDouble(ProcessInfo[9]);
+					
+				//---------------------------------------------------
+						
+				//Especificações da Placa Mãe
+						
+				//Condicao especial caso a placa mae NAO POSSUI COMPATIBILIDADE COM 2 PROCESSADORES
 				
-				if(pecaCompatibilidade1.getCategoria().contains("Processador") && pecaCompatibilidade2.getCategoria().contains("Placa Mãe")){
-					
-					String Nome1 = pecaCompatibilidade1.getNome_componente();
-					String Nome2 = pecaCompatibilidade2.getNome_componente();
-					
-					//Seperando as informações especificas do Processador e da Placa Mae
-					String pecaInfo1 = pecaCompatibilidade1.getInfo_especifica();
-					String pecaInfo2 = pecaCompatibilidade2.getInfo_especifica();
-					
-					String[]ProcessInfo = pecaInfo1.split(";");
-					String[]MotherBInfo = pecaInfo2.split(";");
-					
-					
-					//Especificações do Processador
-					
-					int geracaoPro = Integer.parseInt(ProcessInfo[0]);
-					
-					String socketPro = ProcessInfo[1];
-					String RAMPro = ProcessInfo[2];
-					
-					int tamMaxRamPro = Integer.parseInt(ProcessInfo[3]);
-					int TDPPo = Integer.parseInt(ProcessInfo[4]);
-					
-					String GPUPro = ProcessInfo[5];
-					
-					int nucleosPro = Integer.parseInt(ProcessInfo[6]);
-					int threadsPro = Integer.parseInt(ProcessInfo[7]);
-					double freqBasePro = Double.parseDouble(ProcessInfo[8]);
-					double freqMaxPro = Double.parseDouble(ProcessInfo[9]);
-					
-					//---------------------------------------------------
-					
-					//Especificações da Placa Mãe
-					
-					//Condicao especial caso a placa mae NAO POSSUI COMPATIBILIDADE COM 2 PROCESSADORES
-			
-					String[] geracoes = MotherBInfo[0].split("/");
-					int geracao1 = Integer.parseInt(geracoes[0]);
-					int geracao2 = Integer.parseInt(geracoes[1]);
-					
-					String socketMother = MotherBInfo[1];
+				String[] geracoes = MotherBInfo[0].split("/");
+				int geracao1 = Integer.parseInt(geracoes[0]);
+				int geracao2 = Integer.parseInt(geracoes[1]);
 						
-					//ESPECIFICAÇÕES NÃO NECESSÁRIAS APENAS PARA PROCESSADOR -> PLACA MÃE
-					String RAMMother = MotherBInfo[2];
-					
-					int FreqRam = Integer.parseInt(MotherBInfo[3]);
-					int FreqRamMax = Integer.parseInt(MotherBInfo[4]);
-					double pCLE = Double.parseDouble(MotherBInfo[5]);
-					int QtdSATA = Integer.parseInt(MotherBInfo[6]);
-					int QtdM2 = Integer.parseInt(MotherBInfo[7]);
-					int QtdRAM = Integer.parseInt(MotherBInfo[8]);
-					//-------------------------------------------------------------------
-					
-					if(((geracaoPro == geracao1) || (geracaoPro == geracao2)) && (socketPro.contains(socketMother))){
+				String socketMother = MotherBInfo[1];
+							
+				//ESPECIFICAÇÕES NÃO NECESSÁRIAS APENAS PARA PROCESSADOR -> PLACA MÃE
+				String RAMMother = MotherBInfo[2];
 						
-						System.out.println("O processador " + Nome1 + " É compativel com a Placa Mãe " + Nome2); 
-						
-						System.out.println(Nome1 + " : " + geracaoPro); 
-						System.out.println(Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"); 
-						
-						System.out.println(Nome1 + " : " + socketPro); 
-						System.out.println(Nome2 + " : " + socketMother); 
-					}
-					else{
-						
-						System.out.println("O processador " + Nome1 + " NAO é compativel com a Placa Mãe " + Nome2); 
-						
-						System.out.println(Nome1 + " : " + geracaoPro); 
-						System.out.println(Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"); 
-						
-						System.out.println(Nome1 + " : " + socketPro); 
-						System.out.println(Nome2 + " : " + socketMother); 
-						
-					}
-					
-					if(GPUPro.contains("NAO")){
-						
-						System.out.println("Como este processador não possui uma GPU integrada. Caso não haja uma placa de vídeo, o computador irá ligar, mas não possuirá vídeo. Sendo assim inutilizavel"); 
-					}
-					
+				int FreqRam = Integer.parseInt(MotherBInfo[3]);
+				int FreqRamMax = Integer.parseInt(MotherBInfo[4]);
+				double pCLE = Double.parseDouble(MotherBInfo[5]);
+				int QtdSATA = Integer.parseInt(MotherBInfo[6]);
+				int QtdM2 = Integer.parseInt(MotherBInfo[7]);
+				int QtdRAM = Integer.parseInt(MotherBInfo[8]);
+				//-------------------------------------------------------------------
+				
+				boolean genCompativel = false;
+				if(fabricantePro.contains(("Intel"))) {
+					if((geracaoPro == geracao1) || (geracaoPro == geracao2))
+						genCompativel = true;
+				} else {
+					if(geracaoPro >= geracao1 && geracaoPro <= geracao2)
+						genCompativel = true;
 				}
 				
+				if( genCompativel && (socketPro.contains(socketMother))){
+							
+					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " É compativel com a Placa Mãe" + Nome2 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + geracaoPro + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"; 			
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + socketPro + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + socketMother + "</p>"; 
+				}
+				else{
+							
+					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " <b>NAO</b> é compativel com a Placa Mãe " + Nome2 + "</p>";  
+					htmlResposta += "\n\t\t\t\t<p><b> " + "Geração ";
+					if(socketPro.contains(socketMother))
+						htmlResposta += " igual</b></p>";
+					else
+						htmlResposta += " diferente</b></p>";
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + geracaoPro + "</p>";  
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + geracao1 + "/" + geracao2 + "\n" + "</p>";  
+					
+					htmlResposta += "\n\t\t\t\t<p><b> " + "Socket ";
+					
+					if(socketPro.contains(socketMother))
+						htmlResposta += " igual</b></p>";
+					else
+						htmlResposta += " diferente</b></p>";
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + socketPro + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + socketMother + "</p>"; 
+							
+				}
+					
+				if(GPUPro.contains("NAO")){
+						
+					htmlResposta += "\n\t\t\t\t<p>" + "<b>Atenção: </b>" +"Como este processador não possui uma GPU integrada."+
+					"Caso não haja uma placa de vídeo, o computador irá ligar, mas não possuirá vídeo. Sendo assim inutilizavel" + "</p>"; 
+				}
+					
+			} else if(!pecaCompatibilidade1.getCategoria().contains("Processador") || !pecaCompatibilidade2.getCategoria().contains("Placa Mãe")){
+				htmlResposta += "<p>Não possivel verificar compatibilidade entre processador e Placa Mãe devido à"+
+								" uma das peças informadas estar incorreto. <br>Escolha peças válidas e realize o teste novamente </p>";
 			}
+			return htmlResposta;
+		}
 			
 			/*EM COMPATIBILIDADE, É SEGUIDO UMA REGRA. NO QUAL PARA SER FEITO A COMPATIBILIDADE DE 3 COMPONENTES. 
 			O PRIMEIRO COMPONENTE DEVE SER UM PROCESSADOR(Index de [0 a 4]). 
@@ -661,7 +684,8 @@ public class PecaComp extends Peca{
 		
 			*/
 			
-			public void Compatibilidade(int x, int y, int z){
+			public String Compatibilidade(int x, int y, int z){
+				String htmlResposta = "";
 				
 				Peca pecaCompatibilidade1 = pecaDAO.get(x);
 				Peca pecaCompatibilidade2 = pecaDAO.get(y);
@@ -749,28 +773,28 @@ public class PecaComp extends Peca{
 					//Compatibilidade de acordo com a tecnologia pCLE
 					if(pCLEMother > pCLEVideo){
 						
-						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
-						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é maior que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é maior que da placa de vídeo"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 					}
 					else if (pCLEMother == pCLEVideo){
 						
-						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
-						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é igual que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é igual que da placa de vídeo"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 						
 					}
 					else{
 						
-						System.out.println("A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
 						
-						System.out.println("POREM, a placa nao será usada 100%"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "POREM, a placa nao será usada 100%"); 
 						
-						System.out.println("Isto porque a tecnologia da entrada pCLE da placa mae é menor que da placa de vídeo"); 
-						System.out.println("----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						System.out.println("Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é menor que da placa de vídeo"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
 					
 					}
 					
@@ -956,6 +980,7 @@ public class PecaComp extends Peca{
 					}	
 				
 				}
-			
+				
+				return htmlResposta = "";
 			}
 }

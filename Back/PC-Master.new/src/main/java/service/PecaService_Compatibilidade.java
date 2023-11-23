@@ -5,11 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import dao.PecaDAO;
+import service.PecaComp;
 import model.Peca;
 import spark.Request;
 import spark.Response;
-import dao.PecaDAO;
-import model.Peca;
 
 public class PecaService_Compatibilidade {
 	PecaDAO pecaDao = new PecaDAO();
@@ -18,20 +17,21 @@ public class PecaService_Compatibilidade {
 	private final int FORM_UPDATE = 1;
 	private final int FORM_TEST = 2;
 	
-	
-	public void makeForm(int tipo) {
+	//---Funcao para montar os botões com as peças que podem ser escolhidas---//
+	public void makeForm(int tipo, Request request) {
 		String dropdowns = "";
 		String category = "", category_ = "";
 		String textoExtra = "";
 		
 		List<Peca> tmp = pecaDao.getOrderByCategoria();
-		//texto a ser removido posteriormente
+		//texto a ser removido posteriormente 
 		textoExtra += "\n\t\t\t\t\t\t<input type='hidden' id='in_"+ category_ +"' name='in_"+ category_ +"' value=''>"
 				  +  "\n\t\t\t\t\t</div>"
 				  +  "\n\t\t\t\t</div>";
 		
 		
 		if(tipo == FORM_UPDATE) {
+			//----preencher com cada peça nos dropdowns----//
 			for (Peca p : tmp) {
 				if(! p.getCategoria().equals(category)) {
 					dropdowns += "\n\t\t\t\t\t\t<input type='hidden' id='in_"+ category_ +"' name='in_"+ category_ +"' value=''>"
@@ -60,8 +60,10 @@ public class PecaService_Compatibilidade {
 					  +  "\n\t\t\t\t\t</div>"
 					  +  "\n\t\t\t\t</div>";
 			
+			//excluir texto que sobrar no início inutilizado 
 			dropdowns = dropdowns.replaceFirst(textoExtra, "");
 		} else if(tipo == FORM_TEST) {
+			//----preencher com cada peça nos dropdowns----//
 			for (Peca p : tmp) {
 				if(! p.getCategoria().equals(category)) {
 					dropdowns += "\n\t\t\t\t\t\t<input type='hidden' id='in_"+ category_ +"' name='in_"+ category_ +"' value=''>"
@@ -90,23 +92,44 @@ public class PecaService_Compatibilidade {
 					  +  "\n\t\t\t\t\t</div>"
 					  +  "\n\t\t\t\t</div>";
 			
+			//excluir texto que sobrar no início inutilizado 
 			dropdowns = dropdowns.replaceFirst(textoExtra, "");
+			//Alterar layout dos botões para melhorar visualização
 			form = form.replaceFirst("flex-direction: column;", "flex-direction: row;");
+			
+			//----alterar os resultados do teste----//
+			
+			//Armazenar parametros da url
+			String idFonte = request.params(":idFonte");
+			String idMemoria = request.params(":idMemoria");
+			String idPlacaVideo = request.params(":idPlacaVideo");
+			String idProcessador = request.params(":idProcessador");
+			String idPlacaMae = request.params(":idPlacaMae");
+			//Executar os testes e atualizar o form
+			String test = "";
+			PecaComp pc = new PecaComp();
+			System.out.println(idProcessador);
+			System.out.println(idPlacaMae);
+			
+			test += "<br>";
+			if(idProcessador.contains("O") || idPlacaMae.contains("O")) {
+				test += "<p>Não possivel verificar compatibilidade entre processador e Placa Mãe devido à"+
+						" uma das peças informadas estar incorreto. <br>Escolha peças válidas e realize o teste novamente </p>";
+			} else {
+				test += pc.CompatibilidadeProcessadorMotherBoard(Integer.parseInt(idProcessador), Integer.parseInt(idPlacaMae));
+			}
+			test += "<p><b>---------------------------------------------------------------------------------------------------------------</b></p>";
+			form = form.replaceFirst("<TEST>", test);
 		}
 		
+		//Substituir pelos dropdowns montados anteriormente
 		form = form.replaceFirst("<DROPDOWN-PECA>", dropdowns);
-	}
-
-	public String doTest(String idFonte, String idMemoria, String idPlacaVideo, String idProcessador) {
-		String test = "";
-		
-		
-		
-		return test;
 	}
 	
 	public Object update(Request request, Response response) {
 		String nomeArquivo = "compatibilidade.html";
+		
+		//leitura do html inicial
 		form = "";
 		try{
 			Scanner entrada = new Scanner(new File(nomeArquivo));
@@ -115,18 +138,15 @@ public class PecaService_Compatibilidade {
 		    }
 		    entrada.close();
 		}  catch (Exception e) { System.out.println(e.getMessage()); }
-		makeForm(FORM_TEST);
 		
+		//modificação da string que possui o html
+		makeForm(FORM_UPDATE, request);	
 		return form;
 	}
 	public Object test(Request request, Response response) {
 		String nomeArquivo = "compatibilidade.html";
-		//:idFonte/:idMemoria/:idPlacaVideo/:idPlacaMae/:idProcessador
-		String idFonte = request.params(":idFonte");
-		String idMemoria = request.params(":idMemoria");
-		String idPlacaVideo = request.params(":idPlacaVideo");
-		String idProcessador = request.params(":idProcessador");
 		
+		//leitura do html inicial
 		form = "";
 		try{
 			Scanner entrada = new Scanner(new File(nomeArquivo));
@@ -135,8 +155,10 @@ public class PecaService_Compatibilidade {
 		    }
 		    entrada.close();
 		}  catch (Exception e) { System.out.println(e.getMessage()); }
-		makeForm(FORM_TEST);
-		form = form.replaceFirst("<TEST>", doTest(idFonte, idMemoria, idPlacaVideo, idProcessador));
+		
+		//modificação da string que possui o html
+		makeForm(FORM_TEST, request);
+		
 		return form;
 	}
 }

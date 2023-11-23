@@ -75,19 +75,31 @@
             height: 100%;
         }
 
-        .dropbtn {
+        .dropbtn, #compPeca {
+            width: 100%;
             background-color: #000000;
             color: white;
-            width: 100%;
             padding: 16px;
             font-size: 16px;
             border: none;
             cursor: pointer;
             transition: 0.2s ease-in-out background-color; 
         }
+        #compPeca{
+           width: 35% !important;
+        }
+        #tests{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+        }
 
         /* botão dropdown com hover e focus */
-        .dropbtn:hover, .dropbtn:focus {
+        .dropbtn:hover, .dropbtn:focus , #compPeça:hover, #compPeça:focus{
             background-color: #363636;
             transition: 0.2s ease-in-out background-color; 
         }
@@ -204,7 +216,9 @@
                 <button id="compPeca" type="button" onclick="comp()" >Comparar peças</button>
             </div>
             
+            <div id="tests">
             <TEST>
+            </div>
 
             <input type="hidden" id="msg" name="msg" value="">
         </div>
@@ -254,19 +268,19 @@
         let idProcessador = document.getElementById("in_Processador").value;
 
         if (idFonte === "") {
-            idFonte = '#';
+            idFonte = 'O';
         } 
         if (idMemoria === "") {
-            idMemoria = '#';
+            idMemoria = 'O';
         }
         if (idPlacaVideo === "") {
-            idPlacaVideo = '#';
+            idPlacaVideo = 'O';
         }
         if (idPlacaMae === "") {
-            idPlacaMae = '#';
+            idPlacaMae = 'O';
         }
         if (idProcessador === "") {
-            idProcessador = '#';
+            idProcessador = 'O';
         }
 
         location.href = `/compatibilidade/${idFonte}/${idMemoria}/${idPlacaVideo}/${idPlacaMae}/${idProcessador}`;
