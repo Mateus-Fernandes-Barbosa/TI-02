@@ -12,7 +12,7 @@ import model.Peca;
 import spark.Request;
 import spark.Response;
 
-public class PecaService {
+public class PecaService_Cadastro {
 	PecaDAO pecaDao = new PecaDAO();
 	private String form;
 	private String category = "";
@@ -26,7 +26,7 @@ public class PecaService {
 	private final int FORM_ORDERBY_FABRICANTE = 4;
 
 	
-	public PecaService() {
+	public PecaService_Cadastro() {
 		makeForm();
 	}
 	

@@ -17,9 +17,9 @@ public class DAO {
         String mydatabase = "PC_MASTER"; //<---- Alterar Nome do Banco de Dados
         int porta = 5432;
         String url = "jdbc:postgresql://" + serverName + ":" + porta +"/" + mydatabase;
-        String username = "postgres"; //<----- Alterar usuário do banco de dados 
+        String username = "ti2cc"; //<----- Alterar usuário do banco de dados 
         // Arthur: postgres  -   Luís - ti2cc
-		String password = "1768"; //<----- Alterar senha do banco de dados 
+		String password = "ti@cc"; //<----- Alterar senha do banco de dados 
         // Arthur: 1768   -   Luís - ti@cc
 		boolean status = false;
 
