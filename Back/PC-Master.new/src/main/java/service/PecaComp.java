@@ -85,20 +85,25 @@ public class PecaComp extends Peca{
 				//Se Processador X possuir frequencia maior que Processador Y 
 				if(freqBaseX > freqBaseY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " É um processador melhor que " + Nome2 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> Possui uma frequência melhor que <b>" + Nome2 + "</b></p>";
 					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias basicas: " + "</p>";
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + freqBaseX + "</b></p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + freqBaseY + "</b></p>";
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX < freqMaxY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome2 + " possui um overclock melhor que o " + Nome1 + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador <b>" + Nome2 + "</b> possui um overclock melhor que o <b>" + Nome1 + "</b></p>";
 						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias maximas(overclock): " + "</p>"; 
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqMaxX + "</p>";
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqMaxY + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red>" + freqMaxX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + freqMaxY + "</b></p>";
+					} else {
+						htmlResposta += "\n\t\t\t\t<p>" + "E suas frequencias maximas(overclock): " + "</p>"; 
+						
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green>" + freqMaxX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + freqMaxY + "</b></p>";
 					}
 				}
 				
@@ -106,36 +111,42 @@ public class PecaComp extends Peca{
 				//Se Processador Y possuir frequencia maior que Processador X
 				else if(freqBaseX < freqBaseY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " É um processador melhor que " + Nome1 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> Possui uma frequência melhor que <b>" + Nome1 + "</b></p>";
 					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias basicas: " + "</p>";
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + freqBaseX + "</b></p>";
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + freqBaseY + "</b></p>";
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX > freqMaxY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome1 + " possui um overclock melhor que o " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador <b>" + Nome1 + "</b> possui um overclock melhor que o <b>" + Nome2 + "</b></p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias maximas(overclock): " + "</p>";
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqMaxX + "</p>";
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqMaxY + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + freqMaxX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + freqMaxY + "</b></p>";
+					}  else {
+						htmlResposta += "\n\t\t\t\t<p>" + "E suas frequencias maximas(overclock): " + "</p>"; 
+						
+						htmlResposta += "\n\t\t\t\t<p><b><b>" + Nome1 + "</b> : <b class='red>" + freqMaxX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b><b>" + Nome2 + "</b> : <b class='green'>" + freqMaxY + "</b></p>";
 					}
 				}
 				
 				
-				//--|CASO A FREQUENCIA DE AMBOS SEJA IGUAIS, SERÁ COMPARADO A QUANTIDADE DE NUCLEOS|--
-				else if(freqBaseX == freqBaseY){
+				if(freqBaseX == freqBaseY){
+					htmlResposta += "\n\t\t\t\t<p>" + "As frequências dos dois processadores são iguais" + "</p>";
+				}
 					
-					
+				//--| SERÁ COMPARADO A QUANTIDADE DE NUCLEOS|--	
 					//Se Processador X possuir mais nucleos que Processador Y 
 					if(nucleosX > nucleosY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " É um processador melhor que " + Nome2 + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> É melhor que <b>" + Nome2 + "</b> quando comparado à quantidade de núcleos</p>";
 						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de nucleos: " + "</p>";
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + nucleosX + "</p>";
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + nucleosY + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + nucleosX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + nucleosY + "</b></p>";
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
@@ -143,8 +154,13 @@ public class PecaComp extends Peca{
 						
 							htmlResposta += "\n\t\t\t\t<p>" +"Porem, o processador " + Nome2 + " possui mais threads que o " + Nome1 + "</p>";
 							
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + threadsX + "</p>";
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + threadsY + "</p>";
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + threadsX + "</b></p>";
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + threadsY + "</b></p>";
+						} else {
+							htmlResposta += "\n\t\t\t\t<p>" +"E de threads</p>";
+							
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + threadsX + "</b></p>";
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + threadsY + "</b></p>";
 						}
 						
 					}
@@ -152,27 +168,33 @@ public class PecaComp extends Peca{
 					//Se Processador Y possuir mais nucleos que Processador X
 					else if(nucleosX < nucleosY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " É um processador melhor que " + Nome1 + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a sua quantidade de nucleos: " + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> É melhor que <b>" + Nome1 + "</b> quando comparado à quantidade de núcleos</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de nucleos: " + "</p>";
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + nucleosX + "</b></p>";
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + nucleosY + "</b></p>";
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
 						if(threadsX > threadsY){
+						
+							htmlResposta += "\n\t\t\t\t<p>" +"Porem, o processador <b>" + Nome1 + "</b> possui mais threads que o <b>" + Nome2 + "</b></p>";
 							
-							htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome1 + " possui mais threads que o " + Nome2 + "</p>";
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + threadsX + "</p>";
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + threadsY + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + threadsX + "</b></p>";
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + threadsY + "</b></p>";
+						} else {
+							htmlResposta += "\n\t\t\t\t<p>" +"E de threads</p>";
+							
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + threadsX + "</b></p>";
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + threadsY + "</b></p>";
 						}
 						
 					}
 					
-				}
+				//}
 				else{
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "Ambos os processadores possuem a mesma perfomance." + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambos os processadores possuem a mesma quantidade de threads." + "</p>";
 				}
 			}
 			
@@ -220,87 +242,108 @@ public class PecaComp extends Peca{
 				//COMPARANDO PLACA DE VIDEO DE ACORDO COM AS ESPECIFICAÇÕES
 				if(qtdCoresX > qtdCoresY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " é mais rapida que a placa de vídeo " + Nome2 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome1 + "</b> possui mais cores a placa de vídeo <b>" + Nome2 + "</b></p>";
 					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de cores de cada uma: " + "</p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + qtdCoresX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + qtdCoresY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + qtdCoresX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + qtdCoresY + "</b></p>"; 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX < baseClockY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo " + Nome2 + " possui uma frequencia basica maior que a " + Nome1 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo <b>" + Nome2 + "</b> possui uma frequencia basica maior que a <b>" + Nome1 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + baseClockY + "</b></p>"; 
+					} else {
+						htmlResposta += "\n\t\t\t\t<p>" + "Assim como possui uma frequencia basica maior</b></p>"; 
+						
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + baseClockY + "</b></p>"; 
 					}
 				}
 				
 				else if(qtdCoresX < qtdCoresY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " é mais rapida que a placa de vídeo " + Nome1 + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de cores de cada uma: " + "</p>";  
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome2 + "</b> possui mais cores que a placa de vídeo <b>" + Nome1 + "</b></p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de cores de cada uma: " + "</p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + qtdCoresX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + qtdCoresY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + qtdCoresX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + qtdCoresY + "</b></p>"; 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX > baseClockY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo " + Nome1 + " possui uma frequencia basica maior que a " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo <b>" + Nome1 + "</b> possui uma frequencia basica maior que a <b>" + Nome2 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + baseClockY + "</b></p>"; 
+					} else {
+						htmlResposta += "\n\t\t\t\t<p>" + "Assim como possui uma frequencia basica maior</b></p>"; 
+						
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + baseClockY + "</b></p>"; 
 					}
+				} else {
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo possui a mesma quantidade de cores</p>";
 				}
+			
 				
-				//CASO OS CORES SEJAM IGUAIS, COMPARAR A FREQUENCIA BASICA
-				else if(qtdCoresX == qtdCoresY){
+				//CASO OS CORES SEJAM IGUAIS
+				
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome2 + "</b> Possui a mesma quantidade de cores que <b>" + Nome1 + "</b></p>";
+					
+					//Avisar caso a outra placa possua uma frequencia maior.
+					if(baseClockX > baseClockY){
+						
+						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo <b>" + Nome1 + "</b> possui uma frequencia basica maior que a <b>" + Nome2 + "</b></p>"; 
+					
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + baseClockY + "</b></p>"; 
+					} else {
+						htmlResposta += "\n\t\t\t\t<p>" + "Assim como possui uma frequencia basica maior</b></p>"; 
+						
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + baseClockY + "</b></p>"; 
+					} 
+				
 					
 					if(baseClockX > baseClockY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " possui uma frequencia Basica maior que a " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome1 + "</b> possui uma frequencia Basica maior que a <b>" + Nome2 + "</b></p>"; 
 						
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + baseClockY + "</b></p>"; 
 					}
 					
 					else if(baseClockX < baseClockY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " possui uma frequencia Basica maior que a " + Nome1 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome2 + "</b> possui uma frequencia Basica maior que a <b>" + Nome1 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b>" + baseClockX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b>" + baseClockY + "</b></p>"; 
+					} else {
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome2 + "</b> possui uma frequencia Basica igual que a <b>" + Nome1 + "</b></p>"; 
 					}
 					
 					//CASO A FREQ.Basica SEJA IGUAL, COMPARAR A FREQ. Maxima
-					else if(baseClockX == baseClockY){
-						
 						if(boostClockX > boostClockY){
 							
-							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " possui uma frequencia Maxima maior que a " + Nome2 + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome1 + "</b> possui uma frequencia Maxima maior que a <b>" + Nome2 + "</b></p>"; 
 					
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + boostClockX + "</p>"; 
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + boostClockY + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + boostClockX + "</b></p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red'>" + boostClockY + "</b></p>"; 
 						}
 						
 						else if(boostClockX < boostClockY){
 							
-							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " possui uma frequencia Maxima maior que a " + Nome1 + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome2 + "</b> possui uma frequencia Maxima maior que a <b>" + Nome1 + "</b></p>"; 
 					
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + boostClockX + "</p>"; 
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + boostClockY + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + boostClockX + "</b></p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + boostClockY + "</b></p>"; 
+						} else {
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo <b>" + Nome1 + "</b> possui uma frequencia Maxima igual que a <b>" + Nome2 + "</b></p>"; 
 						}
-					}
-					
-					
-				}
-				
-				//---|Caso perfomance seja igual|---
-				else{
-					
-					htmlResposta += "\n\t\t\t\t<p>" + "Ambas Placa de Vídeos possuem a mesma perfomance" + "</p>"; 
-				}
 				
 			}
 			
@@ -356,35 +399,36 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM QUANTIDADE DE PORTAS SATA
 				if(QtdRAMX > QtdRAMY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais conectadores de memoria RAM que a placa " + Nome2 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome1 + "</b> possui mais conectadores de memoria RAM que a placa <b>" + Nome2 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdRAMX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdRAMY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'green'>" + QtdRAMX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'red'>" + QtdRAMY + "</b></p>"; 
 					
 				}
 				
 				else if(QtdRAMX < QtdRAMY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais conectadores de memoria RAM que a placa " + Nome1 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome2 + "</b> possui mais conectadores de memoria RAM que a placa <b>" + Nome1 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdRAMX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdRAMY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'red'>" + QtdRAMX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'green'>" + QtdRAMY + "</b.</p>"; 
+				} else {
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome2 + "</b> possui a mesma quantidade de memoria RAM que a placa <b>" + Nome1 + "</b></p>"; 
 				}
 				
 				//CASO A Quantidade de RAM SEJAM IGUAIS, COMPARAR AS ENTRADAS SATAs
-				else if(QtdRAMX == QtdRAMY){
 					
 					if(QtdSATAX > QtdSATAY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais entradas SATAs que a placa " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome1 + "</b> possui mais entradas SATAs que a placa <b>" + Nome2 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdSATAX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdSATAY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='green'>" + QtdSATAX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='red>" + QtdSATAY + "</b></p>"; 
 					}
 					
 					else if(QtdSATAX < QtdSATAY){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais entradas SATAs que a placa " + Nome1 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome2 + "</b> possui mais entradas SATAs que a placa <b>" + Nome1 + "</b></p>"; 
 					
 						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdSATAX + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdSATAY + "</p>"; 
@@ -409,14 +453,9 @@ public class PecaComp extends Peca{
 							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdM2Y + "</p>"; 
 						}
 					}	
-					
-				}
-				
-				//---|Caso perfomance seja igual|---
-				else{
-					
-					htmlResposta += "\n\t\t\t\t<p>" + "Ambas Placa Mães possuem a mesma especificade (POSSUA ATENÇÃO ESPECIAL RELACIONADAS A COMPATIBILIDADE)" + "</p>"; 
-				}
+					else{
+						htmlResposta += "\n\t\t\t\t<p>" + "Ambas Placa Mães possuem a mesma especificade (POSSUA ATENÇÃO ESPECIAL RELACIONADAS A COMPATIBILIDADE)" + "</p>"; 
+					}
 				
 			}
 			
