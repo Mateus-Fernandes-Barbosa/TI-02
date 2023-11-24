@@ -28,8 +28,8 @@ public class PecaComp extends Peca{
 	}
 
 	//--|CLASSE PARA COMPARAR Pecas, IDENTIFICANDO QUAL A MELHOR DE ACORDO COM AS INFO.Especificas|--
-		public void Comparacao(int x, int y){
-
+		public String Comparacao(int x, int y){
+			String htmlResposta = "";
 			Peca pecaComparar1 = pecaDAO.get(x);
 			Peca pecaComparar2 = pecaDAO.get(y);
 			
@@ -85,20 +85,20 @@ public class PecaComp extends Peca{
 				//Se Processador X possuir frequencia maior que Processador Y 
 				if(freqBaseX > freqBaseY){
 					
-					System.out.println(Nome1 + " É um processador melhor que " + Nome2); 
-					System.out.println("Isto devido á suas frequencias basicas: "); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " É um processador melhor que " + Nome2 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias basicas: " + "</p>";
 					
-					System.out.println(Nome1 + " : " + freqBaseX); 
-					System.out.println(Nome2 + " : " + freqBaseY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX < freqMaxY){
 						
-						System.out.println("Porem, o processador " + Nome2 + " possui um overclock melhor que o " + Nome1); 
-						System.out.println("Isto devido á suas frequencias maximas(overclock): "); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome2 + " possui um overclock melhor que o " + Nome1 + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias maximas(overclock): " + "</p>"; 
 						
-						System.out.println(Nome1 + " : " + freqMaxX); 
-						System.out.println(Nome2 + " : " + freqMaxY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqMaxX + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqMaxY + "</p>";
 					}
 				}
 				
@@ -106,20 +106,20 @@ public class PecaComp extends Peca{
 				//Se Processador Y possuir frequencia maior que Processador X
 				else if(freqBaseX < freqBaseY){
 					
-					System.out.println(Nome2 + " É um processador melhor que " + Nome1); 
-					System.out.println("Isto devido á suas frequencias basicas: "); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " É um processador melhor que " + Nome1 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias basicas: " + "</p>";
 					
-					System.out.println(Nome1 + " : " + freqBaseX); 
-					System.out.println(Nome2 + " : " + freqBaseY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
 					
 					//AVISAR SER CASO O OVERCLOCK FOR MELHOR QUE O OUTRO PROCESSADOR
 					if(freqMaxX > freqMaxY){
 						
-						System.out.println("Porem, o processador " + Nome1 + " possui um overclock melhor que o " + Nome2); 
-						System.out.println("Isto devido á suas frequencias maximas(overclock): "); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome1 + " possui um overclock melhor que o " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido á suas frequencias maximas(overclock): " + "</p>";
 						
-						System.out.println(Nome1 + " : " + freqMaxX); 
-						System.out.println(Nome2 + " : " + freqMaxY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqMaxX + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqMaxY + "</p>";
 					}
 				}
 				
@@ -131,20 +131,20 @@ public class PecaComp extends Peca{
 					//Se Processador X possuir mais nucleos que Processador Y 
 					if(nucleosX > nucleosY){
 						
-						System.out.println(Nome1 + " É um processador melhor que " + Nome2); 
-						System.out.println("Isto devido a quantidade de nucleos: "); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " É um processador melhor que " + Nome2 + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de nucleos: " + "</p>";
 						
-						System.out.println(Nome1 + " : " + nucleosX); 
-						System.out.println(Nome2 + " : " + nucleosY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + nucleosX + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + nucleosY + "</p>";
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
 						if(threadsX < threadsY){
 						
-							System.out.println("Porem, o processador " + Nome2 + " possui mais threads que o " + Nome1); 
+							htmlResposta += "\n\t\t\t\t<p>" +"Porem, o processador " + Nome2 + " possui mais threads que o " + Nome1 + "</p>";
 							
-							System.out.println(Nome1 + " : " + threadsX); 
-							System.out.println(Nome2 + " : " + threadsY); 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + threadsX + "</p>";
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + threadsY + "</p>";
 						}
 						
 					}
@@ -152,19 +152,19 @@ public class PecaComp extends Peca{
 					//Se Processador Y possuir mais nucleos que Processador X
 					else if(nucleosX < nucleosY){
 						
-						System.out.println(Nome2 + " É um processador melhor que " + Nome1); 
-						System.out.println("Isto devido a sua quantidade de nucleos: "); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " É um processador melhor que " + Nome1 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a sua quantidade de nucleos: " + "</p>";
 						
-						System.out.println(Nome1 + " : " + freqBaseX); 
-						System.out.println(Nome2 + " : " + freqBaseY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + freqBaseX + "</p>";
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + freqBaseY + "</p>";
 						
 						
 						//AVISAR SER CASO O OUTRO PROCESSADOR POSSUIR MAIS THREADS
 						if(threadsX > threadsY){
 							
-							System.out.println("Porem, o processador " + Nome1 + " possui mais threads que o " + Nome2); 
-							System.out.println(Nome1 + " : " + threadsX); 
-							System.out.println(Nome2 + " : " + threadsY); 
+							htmlResposta += "\n\t\t\t\t<p>" + "Porem, o processador " + Nome1 + " possui mais threads que o " + Nome2 + "</p>";
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + threadsX + "</p>";
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + threadsY + "</p>"; 
 						}
 						
 					}
@@ -172,7 +172,7 @@ public class PecaComp extends Peca{
 				}
 				else{
 					
-					System.out.println("Ambos os processadores possuem a mesma perfomance."); 
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambos os processadores possuem a mesma perfomance." + "</p>";
 				}
 			}
 			
@@ -220,37 +220,37 @@ public class PecaComp extends Peca{
 				//COMPARANDO PLACA DE VIDEO DE ACORDO COM AS ESPECIFICAÇÕES
 				if(qtdCoresX > qtdCoresY){
 					
-					System.out.println("A placa de vídeo " + Nome1 + " é mais rapida que a placa de vídeo " + Nome2); 
-					System.out.println("Isto devido a quantidade de cores de cada uma: ");  
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " é mais rapida que a placa de vídeo " + Nome2 + "</p>";
+					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de cores de cada uma: " + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + qtdCoresX); 
-					System.out.println(Nome2 + " : " + qtdCoresY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + qtdCoresX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + qtdCoresY + "</p>"; 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX < baseClockY){
 						
-						System.out.println("Porém, a placa de vídeo " + Nome2 + " possui uma frequencia basica maior que a " + Nome1); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo " + Nome2 + " possui uma frequencia basica maior que a " + Nome1 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + baseClockX); 
-						System.out.println(Nome2 + " : " + baseClockY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
 					}
 				}
 				
 				else if(qtdCoresX < qtdCoresY){
 					
-					System.out.println("A placa de vídeo " + Nome2 + " é mais rapida que a placa de vídeo " + Nome1); 
-					System.out.println("Isto devido a quantidade de cores de cada uma: ");  
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " é mais rapida que a placa de vídeo " + Nome1 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "Isto devido a quantidade de cores de cada uma: " + "</p>";  
 					
-					System.out.println(Nome1 + " : " + qtdCoresX); 
-					System.out.println(Nome2 + " : " + qtdCoresY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + qtdCoresX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + qtdCoresY + "</p>"; 
 					
 					//Avisar caso a outra placa possua uma frequencia maior.
 					if(baseClockX > baseClockY){
 						
-						System.out.println("Porém, a placa de vídeo " + Nome1 + " possui uma frequencia basica maior que a " + Nome2); 
+						htmlResposta += "\n\t\t\t\t<p>" + "Porém, a placa de vídeo " + Nome1 + " possui uma frequencia basica maior que a " + Nome2 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + baseClockX); 
-						System.out.println(Nome2 + " : " + baseClockY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
 					}
 				}
 				
@@ -259,18 +259,18 @@ public class PecaComp extends Peca{
 					
 					if(baseClockX > baseClockY){
 						
-						System.out.println("A placa de vídeo " + Nome1 + " possui uma frequencia Basica maior que a " + Nome2); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " possui uma frequencia Basica maior que a " + Nome2 + "</p>"; 
 						
-						System.out.println(Nome1 + " : " + baseClockX); 
-						System.out.println(Nome2 + " : " + baseClockY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
 					}
 					
 					else if(baseClockX < baseClockY){
 						
-						System.out.println("A placa de vídeo " + Nome2 + " possui uma frequencia Basica maior que a " + Nome1); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " possui uma frequencia Basica maior que a " + Nome1 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + baseClockX); 
-						System.out.println(Nome2 + " : " + baseClockY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + baseClockX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + baseClockY + "</p>"; 
 					}
 					
 					//CASO A FREQ.Basica SEJA IGUAL, COMPARAR A FREQ. Maxima
@@ -278,18 +278,18 @@ public class PecaComp extends Peca{
 						
 						if(boostClockX > boostClockY){
 							
-							System.out.println("A placa de vídeo " + Nome1 + " possui uma frequencia Maxima maior que a " + Nome2); 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome1 + " possui uma frequencia Maxima maior que a " + Nome2 + "</p>"; 
 					
-							System.out.println(Nome1 + " : " + boostClockX); 
-							System.out.println(Nome2 + " : " + boostClockY); 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + boostClockX + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + boostClockY + "</p>"; 
 						}
 						
 						else if(boostClockX < boostClockY){
 							
-							System.out.println("A placa de vídeo " + Nome2 + " possui uma frequencia Maxima maior que a " + Nome1); 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa de vídeo " + Nome2 + " possui uma frequencia Maxima maior que a " + Nome1 + "</p>"; 
 					
-							System.out.println(Nome1 + " : " + boostClockX); 
-							System.out.println(Nome2 + " : " + boostClockY); 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + boostClockX + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + boostClockY + "</p>"; 
 						}
 					}
 					
@@ -299,7 +299,7 @@ public class PecaComp extends Peca{
 				//---|Caso perfomance seja igual|---
 				else{
 					
-					System.out.println("Ambas Placa de Vídeos possuem a mesma perfomance"); 
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambas Placa de Vídeos possuem a mesma perfomance" + "</p>"; 
 				}
 				
 			}
@@ -356,19 +356,19 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM QUANTIDADE DE PORTAS SATA
 				if(QtdRAMX > QtdRAMY){
 					
-					System.out.println("A placa mãe " + Nome1 + " possui mais conectadores de memoria RAM que a placa " + Nome2); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais conectadores de memoria RAM que a placa " + Nome2 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + QtdRAMX); 
-					System.out.println(Nome2 + " : " + QtdRAMY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdRAMX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdRAMY + "</p>"; 
 					
 				}
 				
 				else if(QtdRAMX < QtdRAMY){
 					
-					System.out.println("A placa mãe " + Nome2 + " possui mais conectadores de memoria RAM que a placa " + Nome1); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais conectadores de memoria RAM que a placa " + Nome1 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + QtdRAMX); 
-					System.out.println(Nome2 + " : " + QtdRAMY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdRAMX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdRAMY + "</p>"; 
 				}
 				
 				//CASO A Quantidade de RAM SEJAM IGUAIS, COMPARAR AS ENTRADAS SATAs
@@ -376,18 +376,18 @@ public class PecaComp extends Peca{
 					
 					if(QtdSATAX > QtdSATAY){
 						
-						System.out.println("A placa mãe " + Nome1 + " possui mais entradas SATAs que a placa " + Nome2); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais entradas SATAs que a placa " + Nome2 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + QtdSATAX); 
-						System.out.println(Nome2 + " : " + QtdSATAY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdSATAX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdSATAY + "</p>"; 
 					}
 					
 					else if(QtdSATAX < QtdSATAY){
 						
-						System.out.println("A placa mãe " + Nome2 + " possui mais entradas SATAs que a placa " + Nome1); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais entradas SATAs que a placa " + Nome1 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + QtdSATAX); 
-						System.out.println(Nome2 + " : " + QtdSATAY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdSATAX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdSATAY + "</p>"; 
 					}
 					
 					//CASO A Quantidade de ENTRADAS SATAs SEJAM IGUAIS, COMPARAR A AS ENTRADAS M.2
@@ -395,18 +395,18 @@ public class PecaComp extends Peca{
 						
 						if(QtdM2X > QtdM2Y){
 							
-							System.out.println("A placa mãe " + Nome1 + " possui mais entradas M.2 que a placa " + Nome2); 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais entradas M.2 que a placa " + Nome2 + "</p>"; 
 					
-							System.out.println(Nome1 + " : " + QtdM2X); 
-							System.out.println(Nome2 + " : " + QtdM2Y); 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdM2X + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdM2Y + "</p>"; 
 					}
 						
 						else if(QtdM2X < QtdM2Y){
 							
-							System.out.println("A placa mãe " + Nome2 + " possui mais entradas M.2 que a placa " + Nome1); 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais entradas M.2 que a placa " + Nome1 + "</p>"; 
 					
-							System.out.println(Nome1 + " : " + QtdM2X); 
-							System.out.println(Nome2 + " : " + QtdM2Y); 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdM2X + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdM2Y + "</p>"; 
 						}
 					}	
 					
@@ -415,7 +415,7 @@ public class PecaComp extends Peca{
 				//---|Caso perfomance seja igual|---
 				else{
 					
-					System.out.println("Ambas Placa Mães possuem a mesma especificade (POSSUA ATENÇÃO ESPECIAL RELACIONADAS A COMPATIBILIDADE)"); 
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambas Placa Mães possuem a mesma especificade (POSSUA ATENÇÃO ESPECIAL RELACIONADAS A COMPATIBILIDADE)" + "</p>"; 
 				}
 				
 			}
@@ -451,19 +451,19 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM O TAMANHO DA MEMORIA
 				if(tamRamX > tamRamY){
 					
-					System.out.println("A RAM " + Nome1 + " possui mais memoria que a RAM " + Nome2); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A RAM " + Nome1 + " possui mais memoria que a RAM " + Nome2 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + tamRamX); 
-					System.out.println(Nome2 + " : " + tamRamY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tamRamX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tamRamY + "</p>"; 
 					
 				}
 				
 				else if(tamRamX < tamRamY){
 					
-					System.out.println("A RAM " + Nome2 + " possui mais memoria que a RAM " + Nome1); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A RAM " + Nome2 + " possui mais memoria que a RAM " + Nome1 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + tamRamX); 
-					System.out.println(Nome2 + " : " + tamRamY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tamRamX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tamRamY + "</p>"; 
 				}
 				
 				//CASO O TAMANHO DA MEMORIA SEJA IGUAL, COMPARAR O TIPO
@@ -473,23 +473,23 @@ public class PecaComp extends Peca{
 					
 					if(resultado > 0){
 						
-						System.out.println("A placa mãe " + Nome1 + " possui um tipo de memoria RAM melhor que a " + Nome2); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui um tipo de memoria RAM melhor que a " + Nome2 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + tipoRamX); 
-						System.out.println(Nome2 + " : " + tipoRamY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tipoRamX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tipoRamY + "</p>"; 
 					}
 					
 					else if(resultado < 0){
 						
-						System.out.println("A placa mãe " + Nome2 + " possui um tipo de memoria RAM melhor que a " + Nome1); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui um tipo de memoria RAM melhor que a " + Nome1 + "</p>"; 
 					
-						System.out.println(Nome1 + " : " + tipoRamX); 
-						System.out.println(Nome2 + " : " + tipoRamY); 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tipoRamX + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tipoRamY + "</p>"; 
 					}
 				}
 				else{
 					
-					System.out.println("Ambas as memorias rams possuem as mesmas especifidades"); 
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambas as memorias rams possuem as mesmas especifidades" + "</p>"; 
 				}
 				
 			}
@@ -529,30 +529,31 @@ public class PecaComp extends Peca{
 				//COMPARANDO DE ACORDO COM O SELO
 				if(compSeloX > compSeloY){
 					
-					System.out.println("A fonte " + Nome1 + " é melhor que a fonte " + Nome2); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A fonte " + Nome1 + " é melhor que a fonte " + Nome2 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + seloX); 
-					System.out.println(Nome2 + " : " + seloY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + seloX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + seloY + "</p>"; 
 				}
 				else if(compSeloX < compSeloY){
 					
-					System.out.println("A fonte " + Nome2 + " é melhor que a fonte " + Nome1); 
+					htmlResposta += "\n\t\t\t\t<p>" + "A fonte " + Nome2 + " é melhor que a fonte " + Nome1 + "</p>"; 
 					
-					System.out.println(Nome1 + " : " + seloX); 
-					System.out.println(Nome2 + " : " + seloY); 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + seloX + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + seloY + "</p>"; 
 				}
 				else{
 					
-					System.out.println("Ambas as fontes possuem a mesma qualidade (ATENÇÃO COM A POTENCIA NECESSÁRIA)"); 
+					htmlResposta += "\n\t\t\t\t<p>" + "Ambas as fontes possuem a mesma qualidade (ATENÇÃO COM A POTENCIA NECESSÁRIA)" + "</p>"; 
 				}
 				
 			}
 			
 			else {
 				
-				System.out.println("Ambos os componentes devem ser da mesma categoria/componente para ser feito a comparação"); 
+				htmlResposta += "\n\t\t\t\t<p>" + "Ambos os componentes devem ser da mesma categoria/componente para ser feito a comparação" + "</p>"; 
 			}
 			
+			return htmlResposta;
 		}
 		
 		

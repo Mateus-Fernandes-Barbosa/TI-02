@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/codigo/navbar.css">
+    <link rel="stylesheet" href="/codigo/comp.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -60,6 +61,14 @@
             padding: 0.4%;
             margin: auto !important;
         }
+
+        .dropdown-content {
+            min-width: 100% !important;
+        }
+
+        .pesquisa {
+            width: 100% !important;
+        }
     </style>
 
 
@@ -71,7 +80,7 @@
 
 
 
-<body onload="onLoad()">
+<body>
     <header class="header">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -116,59 +125,15 @@
     </header>
 
     <div id="conteiner">
-        <div id="conteudo" class="container-fluid align-items-center m-2">
-            <select class="form-select form-select-lg mb-3" id="Tipo_peca" aria-label=".form-select-lg example">
-                <option selected value="none">Escolha o tipo de peça para comparar</option>
-                <option value="Placa_Mãe">Placa-mãe</option>
-                <option value="Processador">Processador</option>
-                <option value="Memória_RAM">Memória RAM</option>
-                <option value="Placa_de_Vídeo">Placa de Vídeo</option>
-                <option value="Fontes">Fonte</option>
-            </select>
-            <div id="Conteudo_cadastro"></div>
+        <ESCOLHA>
+        <div id="conteudo">
+            <DROPDOWNS>
+    
+            <button id="compPeca" type="button" onclick="comp()" style='display: none;'>Comparar peças</button>
 
-            <br>
-
-            <div id="conteiner_Placa_Mãe" style="display: none;">
-
-                <select class="form-select form-select-lg mb-3" class="Placa_Mãe" aria-label=".form-select-lg example">
-                    <option selected disabled value="none">Escolha a placa</option>
-                    <option value="1">Placa 1</option>
-                    <option value="2">Placa 2</option>
-                    <option value="3">Placa 3</option>
-                </select>
-                <select class="form-select form-select-lg mb-3" class="Placa_Mãe" aria-label=".form-select-lg example">
-                    <option selected disabled value="none">Escolha a placa</option>
-                    <option value="1">Placa 1</option>
-                    <option value="2">Placa 2</option>
-                    <option value="3">Placa 3</option>
-                </select>
-
-                <br>
-            </div>
-
-            <div id="conteiner_Processador" style="display: none;">
-                <select class="form-select form-select-lg mb-3" class="Processador" aria-label=".form-select-lg example">
-                    <option selected disabled value="none">Escolha o processador</option>
-                    <option value="1">Processador 1</option>
-                    <option value="2">Processador 2</option>
-                    <option value="3">Processador 3</option>
-                </select>
-                <select class="form-select form-select-lg mb-3" class="Processador" aria-label=".form-select-lg example">
-                    <option selected disabled value="none">Escolha o processador</option>
-                    <option value="1">Processador 1</option>
-                    <option value="2">Processador 2</option>
-                    <option value="3">Processador 3</option>
-                </select>
-            </div>
-
-            <button id="compPeca" type="button" onclock="comp()" style="display: none;">Comparar peças</button>
-
-            <LISTAR-PRODUTO>
-
-                <input type="hidden" id="msg" name="msg" value="">
+            <TESTE>
         </div>
-
+        <input type="hidden" id="msg" name="msg" value="">
     </div>
 
 
@@ -176,26 +141,111 @@
 </body>
 
 <script type="text/javascript">
+    /* Ao clicar no botão de dropdown aparece a parte de pesquisa */
+    function showDropdown(dropdown) {    
+        document.getElementById(dropdown).classList.toggle("show");
+    }
 
+    function filterFunction(dropdown) {
+        var input, filter, ul, li, a, i;
+        div = document.getElementById(dropdown);
+        input = div.getElementsByTagName("input")[0];
+        
+        filter = input.value.toUpperCase();
+        
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function addVal(val, nome, id_input, id_btn, dropdown) {
+        document.getElementById(dropdown).classList.toggle("show");
+        document.getElementById(id_input).value = val;
+        document.getElementById(id_btn).textContent = nome;
+    } 
+
+    function comp() {
+        let escolha = $('#Tipo_peca').val();
+
+        if(escolha === "Placa_Mãe"){
+            let idPlacaMae = document.getElementById("in_Placa_Mãe").value;
+            let idPlacaMae1 = document.getElementById("in1_Placa_Mãe").value;
+            if (idPlacaMae === "" || idPlacaMae1 === "") {
+                alert("Selecione duas placas mãe para comparar");
+            } else {
+                location.href = `/comparacao/${idPlacaMae}/${idPlacaMae1}`;
+            }
+        } else if(escolha === "Processador"){
+            let idProcessador = document.getElementById("in_Processador").value;
+            let idProcessador1 = document.getElementById("in1_Processador").value;
+            console.log(idProcessador);
+            console.log(idProcessador1);
+            if (idProcessador === "" || idProcessador1 === "") {
+                alert("Selecione dois processadores para comparar");
+            } else {
+                location.href = `/comparacao/${idProcessador}/${idProcessador1}`;
+            }
+        } else if(escolha === "Memória_RAM"){
+            let idMemoria = document.getElementById("in_Memória_RAM").value;
+            let idMemoria1 = document.getElementById("in1_Memória_RAM").value;
+            if (idMemoria === "" || idMemoria1 === "") {
+                alert("Selecione duas memórias RAM para comparar");
+            } else {
+                location.href = `/comparacao/${idMemoria}/${idMemoria1}`;
+            }
+        } else if(escolha === "Placa_de_Vídeo"){
+            let idPlacaVideo = document.getElementById("in_Placa_de_Vídeo").value;
+            let idPlacaVideo1 = document.getElementById("in1_Placa_de_Vídeo").value;
+            if (idPlacaVideo === "" || idPlacaVideo1 === "") {
+                alert("Selecione duas placas de vídeo para comparar");
+            } else {
+                location.href = `/comparacao/${idPlacaVideo}/${idPlacaVideo1}`;
+            }
+        } else if(escolha === "Fontes"){
+            let idFonte = document.getElementById("in_Fontes").value;
+            let idFonte1 = document.getElementById("in1_Fontes").value;
+            if (idFonte === "" || idFonte1 === "") {
+                alert("Selecione duas fontes para comparar");
+            } else {
+                location.href = `/comparacao/${idFonte}/${idFonte1}`;
+            }
+        }
+    }
     function hidePlaca_Mãe() {
         var choice = document.getElementById("conteiner_Placa_Mãe");
+        var choice1 = document.getElementById("conteiner1_Placa_Mãe");
         choice.style.display = "none";
+        choice1.style.display = "none";
     }
     function hideProcessador() {
         var choice = document.getElementById("conteiner_Processador");
+        var choice1 = document.getElementById("conteiner1_Processador");
         choice.style.display = "none";
+        choice1.style.display = "none";
     }   
     function hideMemória_RAM() {
         var choice = document.getElementById("conteiner_Memória_RAM");
+        var choice1 = document.getElementById("conteiner1_Memória_RAM");
         choice.style.display = "none";
+        choice1.style.display = "none";
     }
     function hidePlaca_de_Vídeo() {
         var choice = document.getElementById("conteiner_Placa_de_Vídeo");
+        var choice1 = document.getElementById("conteiner1_Placa_de_Vídeo");
         choice.style.display = "none";
+        choice1.style.display = "none";
     }
     function hideFontes() {
         var choice = document.getElementById("conteiner_Fontes");
+        var choice1 = document.getElementById("conteiner1_Fontes");
         choice.style.display = "none";
+        choice1.style.display = "none";
     }   
 
     function hideElements() {
@@ -214,43 +264,43 @@
         if (escolha === "Placa_Mãe") {
             hideElements();
             var choice = document.getElementById("conteiner_Placa_Mãe");
+            var choice1 = document.getElementById("conteiner1_Placa_Mãe");
             button.style.display = "block";
             choice.style.display = "block";
+            choice1.style.display = "block";
         } else if (escolha === "Processador") {
             hideElements();
             var choice = document.getElementById("conteiner_Processador");
+            var choice1 = document.getElementById("conteiner1_Processador");
             button.style.display = "block";
             choice.style.display = "block";
+            choice1.style.display = "block";
         } else if (escolha === "Memória_RAM") {
             hideElements();
             var choice = document.getElementById("conteiner_Memória_RAM");
+            var choice1 = document.getElementById("conteiner1_Memória_RAM");
             button.style.display = "block";
             choice.style.display = "block";
+            choice1.style.display = "block";
         } else if (escolha === "Placa_de_Vídeo") {
             hideElements();
             var choice = document.getElementById("conteiner_Placa_de_Vídeo");
+            var choice1 = document.getElementById("conteiner1_Placa_de_Vídeo");
             button.style.display = "block";
             choice.style.display = "block";
+            choice1.style.display = "block";
         } else if (escolha === "Fontes") {
             hideElements();
             var choice = document.getElementById("conteiner_Fontes");
+            var choice1 = document.getElementById("conteiner1_Fontes");
             button.style.display = "block";
             choice.style.display = "block";
+            choice1.style.display = "block";
         } else {
             button.style.display = "none";
             hideElements();
         }
     })
-
-    function comp() {
-        let escolha = $('#Tipo_peca').val();
-        let shortBy = location.href.split('/')[5];
-        if (shortBy == null) {
-            location.href = `/comparar/${escolha}`;
-        } else {
-            location.href = `/produto/list/${shortBy}/${escolha}`;
-        }
-    }
 </script>
 
 

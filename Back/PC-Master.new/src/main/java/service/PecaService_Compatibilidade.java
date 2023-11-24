@@ -12,7 +12,6 @@ import spark.Response;
 
 public class PecaService_Compatibilidade {
 	PecaDAO pecaDao = new PecaDAO();
-	List<Peca> pecasComp = null;
 	private String form;
 	private final int FORM_UPDATE = 1;
 	private final int FORM_TEST = 2;
