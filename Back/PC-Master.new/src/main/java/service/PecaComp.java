@@ -430,27 +430,26 @@ public class PecaComp extends Peca{
 						
 						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome2 + "</b> possui mais entradas SATAs que a placa <b>" + Nome1 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdSATAX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdSATAY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'red'>" + QtdSATAX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'green'>" + QtdSATAY + "</b></p>"; 
 					}
 					
 					//CASO A Quantidade de ENTRADAS SATAs SEJAM IGUAIS, COMPARAR A AS ENTRADAS M.2
 					else if(QtdSATAX == QtdSATAY){
-						
 						if(QtdM2X > QtdM2Y){
 							
-							htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui mais entradas M.2 que a placa " + Nome2 + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome1 + "</b> possui mais entradas M.2 que a placa <b>" + Nome2 + "</b></p>"; 
 					
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdM2X + "</p>"; 
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdM2Y + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'green'>" + QtdM2X + "</b></p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'red'>" + QtdM2Y + "</b></p>"; 
 					}
 						
 						else if(QtdM2X < QtdM2Y){
 							
 							htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui mais entradas M.2 que a placa " + Nome1 + "</p>"; 
 					
-							htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + QtdM2X + "</p>"; 
-							htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + QtdM2Y + "</p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'red'>" + QtdM2X + "</b></p>"; 
+							htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'green'>" + QtdM2Y + "</b></p>"; 
 						}
 					}	
 					else{
@@ -490,19 +489,19 @@ public class PecaComp extends Peca{
 				//FAZENDO A COMPARAÇÃO DE ACORDO COM O TAMANHO DA MEMORIA
 				if(tamRamX > tamRamY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A RAM " + Nome1 + " possui mais memoria que a RAM " + Nome2 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A RAM <b>" + Nome1 + "</b> possui mais memoria que a RAM <b>" + Nome2 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tamRamX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tamRamY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class= 'green'>" + tamRamX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class= 'red'>" + tamRamY + "</b></p>"; 
 					
 				}
 				
 				else if(tamRamX < tamRamY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A RAM " + Nome2 + " possui mais memoria que a RAM " + Nome1 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A RAM <b>" + Nome2 + "</b> possui mais memoria que a RAM <b>" + Nome1 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tamRamX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tamRamY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + tamRamX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + tamRamY + "</b></p>"; 
 				}
 				
 				//CASO O TAMANHO DA MEMORIA SEJA IGUAL, COMPARAR O TIPO
@@ -512,18 +511,18 @@ public class PecaComp extends Peca{
 					
 					if(resultado > 0){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome1 + " possui um tipo de memoria RAM melhor que a " + Nome2 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome1 + "</b> possui um tipo de memoria RAM melhor que a <b>" + Nome2 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tipoRamX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tipoRamY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b>" + tipoRamX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b>" + tipoRamY + "</b></p>"; 
 					}
 					
 					else if(resultado < 0){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe " + Nome2 + " possui um tipo de memoria RAM melhor que a " + Nome1 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa mãe <b>" + Nome2 + "</b> possui um tipo de memoria RAM melhor que a <b>" + Nome1 + "</b></p>"; 
 					
-						htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + tipoRamX + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + tipoRamY + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b>" + tipoRamX + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b>" + tipoRamY + "</b></p>"; 
 					}
 				}
 				else{
@@ -568,17 +567,17 @@ public class PecaComp extends Peca{
 				//COMPARANDO DE ACORDO COM O SELO
 				if(compSeloX > compSeloY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A fonte " + Nome1 + " é melhor que a fonte " + Nome2 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A fonte <b>" + Nome1 + "</b> é melhor que a fonte <b>" + Nome2 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + seloX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + seloY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class = 'green'>" + seloX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class = 'red'>" + seloY + "</b></p>"; 
 				}
 				else if(compSeloX < compSeloY){
 					
-					htmlResposta += "\n\t\t\t\t<p>" + "A fonte " + Nome2 + " é melhor que a fonte " + Nome1 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "A fonte <b>" + Nome2 + "</b> é melhor que a fonte <b>" + Nome1 + "</b></p>"; 
 					
-					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + seloX + "</p>"; 
-					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + seloY + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome1 + "</b> : <b class='red'>" + seloX + "</b></p>"; 
+					htmlResposta += "\n\t\t\t\t<p><b>" + Nome2 + "</b> : <b class='green'>" + seloY + "</b></p>"; 
 				}
 				else{
 					
