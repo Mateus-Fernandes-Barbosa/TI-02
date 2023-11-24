@@ -119,6 +119,30 @@ public class PecaService_Compatibilidade {
 				test += pc.CompatibilidadeProcessadorMotherBoard(Integer.parseInt(idProcessador), Integer.parseInt(idPlacaMae));
 			}
 			test += "<p><b>---------------------------------------------------------------------------------------------------------------</b></p>";
+			
+			if(idProcessador.contains("O") || idPlacaVideo.contains("O") || idPlacaMae.contains("O")) {
+				test += "<p>Não possivel verificar compatibilidade entre processador, Placa de Vídeo e Placa Mãe devido à"+
+						" uma das peças informadas estar incorreto. <br>Escolha peças válidas e realize o teste novamente </p>";
+			} else {
+				test += pc.Compatibilidade(Integer.parseInt(idProcessador), Integer.parseInt(idPlacaVideo), Integer.parseInt(idPlacaMae));
+			}
+			test += "<p><b>---------------------------------------------------------------------------------------------------------------</b></p>";
+			
+			if(idProcessador.contains("O") || idMemoria.contains("O") || idPlacaMae.contains("O")) {
+				test += "<p>Não possivel verificar compatibilidade entre processador, Memória RAM e Placa Mãe devido à"+
+						" uma das peças informadas estar incorreto. <br>Escolha peças válidas e realize o teste novamente </p>";
+			} else {
+				test += pc.Compatibilidade(Integer.parseInt(idProcessador), Integer.parseInt(idMemoria), Integer.parseInt(idPlacaMae));
+			}
+			test += "<p><b>---------------------------------------------------------------------------------------------------------------</b></p>";
+			
+			if(idProcessador.contains("O") || idPlacaVideo.contains("O") || idFonte.contains("O")) {
+				test += "<p>Não possivel verificar compatibilidade entre processador, Placa de Vídeo e Fonte devido à"+
+						" uma das peças informadas estar incorreto. <br>Escolha peças válidas e realize o teste novamente </p>";
+			} else {
+				test += pc.Compatibilidade(Integer.parseInt(idProcessador), Integer.parseInt(idPlacaVideo), Integer.parseInt(idFonte));
+			}
+			test += "<p><b>---------------------------------------------------------------------------------------------------------------</b></p>";
 			form = form.replaceFirst("<TEST>", test);
 		}
 		

@@ -623,13 +623,8 @@ public class PecaComp extends Peca{
 				//-------------------------------------------------------------------
 				
 				boolean genCompativel = false;
-				if(fabricantePro.contains(("Intel"))) {
-					if((geracaoPro == geracao1) || (geracaoPro == geracao2))
-						genCompativel = true;
-				} else {
-					if(geracaoPro >= geracao1 && geracaoPro <= geracao2)
-						genCompativel = true;
-				}
+				if(geracaoPro >= geracao1 && geracaoPro <= geracao2)
+					genCompativel = true;
 				
 				if( genCompativel && (socketPro.contains(socketMother))){
 							
@@ -773,28 +768,26 @@ public class PecaComp extends Peca{
 					//Compatibilidade de acordo com a tecnologia pCLE
 					if(pCLEMother > pCLEVideo){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é maior que da placa de vídeo"); 
-						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " <b>é</b> compativel com " + Nome3 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é maior que da placa de vídeo" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIE : " +  pCLEMother + "</p>"; 
 					}
 					else if (pCLEMother == pCLEVideo){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é igual que da placa de vídeo"); 
-						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3 + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é igual que da placa de vídeo" + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIE : " +  pCLEMother + "</p>"; 
 						
 					}
-					else{
+					else{	
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3); 
-						
-						htmlResposta += "\n\t\t\t\t<p>" + "POREM, a placa nao será usada 100%"); 
-						
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCLE da placa mae é menor que da placa de vídeo"); 
-						htmlResposta += "\n\t\t\t\t<p>" + "----\nPlaca de video : " + Nome2 + " - pCLE : " +  pCLEVideo); 
-						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCLE : " +  pCLEMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "<b>POREM</b>, a placa nao será usada 100%" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é menor que da placa de vídeo" + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIsE : " +  pCLEMother + "</p>"; 
 					
 					}
 					
@@ -877,21 +870,21 @@ public class PecaComp extends Peca{
 					
 					if(tipoRam.contains(RAMPro) && tipoRam.contains(RAMMother)){
 						
-						System.out.println("A memoria RAM é compativel com a placa mãe e com o processador"); 
-						System.out.println("Isto porque o tipode de RAM é o mesmo dos outros dois componentes"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A memoria RAM é compativel com a placa mãe e com o processador" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipode de RAM é o mesmo dos outros dois componentes" + "</p>"; 
 						
-						System.out.println("---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam); 
-						System.out.println("Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro); 
-						System.out.println("Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother + "</p>"; 
 					}
 					else{
 						
-						System.out.println("A memoria RAM NAO é compativel com a placa mãe e com o processador"); 
-						System.out.println("Isto porque o tipode de RAM NAO é o mesmo dos outros dois componentes. Confira abaixo"); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A memoria RAM NAO é compativel com a placa mãe e com o processador" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipode de RAM NAO é o mesmo dos outros dois componentes. Confira abaixo" + "</p>"; 
 						
-						System.out.println("---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam); 
-						System.out.println("Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro); 
-						System.out.println("Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother); 
+						htmlResposta += "\n\t\t\t\t<p>" + "---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother + "</p>"; 
 					}
 					
 				}
@@ -960,27 +953,26 @@ public class PecaComp extends Peca{
 					
 					if(potencia >= resultado){
 						
-						System.out.println("A Fonte " + Nome3 + " é compativel com as Pecas escolhidas"); 
-						System.out.println("Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MENOR ou IGUAL a potencia da Fonte, confira: "); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " é compativel com as Pecas escolhidas" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MENOR ou IGUAL a potencia da Fonte, confira: " + "</p>"; 
 						
-						System.out.println("---\nFonte: " + Nome3 + " - Potencia : " + potencia); 
-						System.out.println("Processador: " + Nome1 + " - Potencia : " + TDPPro); 
-						System.out.println("Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo); 
-						System.out.println("Potencia do PC: " + resultado); 
+						htmlResposta += "\n\t\t\t\t<p>" + "---\nFonte: " + Nome3 + " - Potencia : " + potencia + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Processador: " + Nome1 + " - Potencia : " + TDPPro + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Potencia do PC: " + resultado + "</p>"; 
 					}
 					else{
 						
-						System.out.println("A Fonte " + Nome3 + " NAO é compativel com as Pecas escolhidas"); 
-						System.out.println("Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MAIOR que a potencia da Fonte, confira:"); 
-						
-						System.out.println("---\nFonte: " + Nome3 + " - Potencia : " + potencia); 
-						System.out.println("Processador: " + Nome1 + " - Potencia : " + TDPPro); 
-						System.out.println("Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo); 
-						System.out.println("Potencia do PC: " + resultado); 
+						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " NAO é compativel com as Pecas escolhidas" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MAIOR que a potencia da Fonte, confira:" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "---\nFonte: " + Nome3 + " - Potencia : " + potencia + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Processador: " + Nome1 + " - Potencia : " + TDPPro + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Potencia do PC: " + resultado + "</p>"; 
 					}	
 				
 				}
 				
-				return htmlResposta = "";
+				return htmlResposta;
 			}
 }
