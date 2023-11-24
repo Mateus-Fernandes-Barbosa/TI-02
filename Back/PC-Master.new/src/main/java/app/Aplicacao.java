@@ -1,5 +1,4 @@
 package app;
-import service.PecaComp_old;
 import service.PecaService_Cadastro;
 import service.PecaService_Compatibilidade;
 import service.PecaService_Comparacao;
