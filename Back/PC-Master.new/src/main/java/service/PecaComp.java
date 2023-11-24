@@ -628,7 +628,7 @@ public class PecaComp extends Peca{
 				
 				if( genCompativel && (socketPro.contains(socketMother))){
 							
-					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " É compativel com a Placa Mãe" + Nome2 + "</p>"; 
+					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " <b class = 'green'>É compativel</b> com a Placa Mãe" + Nome2 + "</p>"; 
 					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + geracaoPro + "</p>"; 
 					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + geracao1 + "/" + geracao2 + "\n"; 			
 					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + socketPro + "</p>";
@@ -636,21 +636,25 @@ public class PecaComp extends Peca{
 				}
 				else{
 							
-					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " <b>NAO</b> é compativel com a Placa Mãe " + Nome2 + "</p>";  
-					htmlResposta += "\n\t\t\t\t<p><b> " + "Geração ";
-					if(socketPro.contains(socketMother))
+					htmlResposta += "\n\t\t\t\t<p>" + "O processador " + Nome1 + " <b class = 'red'>NÃO</b> é compativel com a Placa Mãe " + Nome2 + "</p>";  
+					
+					if(socketPro.contains(socketMother)) {
+						htmlResposta += "\n\t\t\t\t<p class = 'green'><b> " + "Geração ";
 						htmlResposta += " igual</b></p>";
-					else
+					} else {
+						htmlResposta += "\n\t\t\t\t<p class = 'red'><b> " + "Geração ";
 						htmlResposta += " diferente</b></p>";
+					}
 					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + geracaoPro + "</p>";  
 					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + geracao1 + "/" + geracao2 + "\n" + "</p>";  
 					
-					htmlResposta += "\n\t\t\t\t<p><b> " + "Socket ";
-					
-					if(socketPro.contains(socketMother))
+					if(socketPro.contains(socketMother)) {
+						htmlResposta += "\n\t\t\t\t<p class = 'green'><b> " + "Socket ";
 						htmlResposta += " igual</b></p>";
-					else
+					} else {
+						htmlResposta += "\n\t\t\t\t<p class = 'red'><b> " + "Socket ";
 						htmlResposta += " diferente</b></p>";
+					}
 					htmlResposta += "\n\t\t\t\t<p>" + Nome1 + " : " + socketPro + "</p>"; 
 					htmlResposta += "\n\t\t\t\t<p>" + Nome2 + " : " + socketMother + "</p>"; 
 							
@@ -658,7 +662,7 @@ public class PecaComp extends Peca{
 					
 				if(GPUPro.contains("NAO")){
 						
-					htmlResposta += "\n\t\t\t\t<p>" + "<b>Atenção: </b>" +"Como este processador não possui uma GPU integrada."+
+					htmlResposta += "\n\t\t\t\t<p>" + "<b class = 'red'>Atenção: </b>" +"Como este processador não possui uma GPU integrada."+
 					"Caso não haja uma placa de vídeo, o computador irá ligar, mas não possuirá vídeo. Sendo assim inutilizavel" + "</p>"; 
 				}
 					
@@ -768,25 +772,25 @@ public class PecaComp extends Peca{
 					//Compatibilidade de acordo com a tecnologia pCLE
 					if(pCLEMother > pCLEVideo){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " <b>é</b> compativel com " + Nome3 + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é maior que da placa de vídeo" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " <b class = 'green'>é compativel</b> com " + Nome3 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mãe é maior que da placa de vídeo" + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIE : " +  pCLEMother + "</p>"; 
 					}
 					else if (pCLEMother == pCLEVideo){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3 + "</p>";  
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é igual que da placa de vídeo" + "</p>";  
-						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " <b class = 'green'>é compativel</b> com " + Nome3 + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mãe é igual que da placa de vídeo" + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de vídeo : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIE : " +  pCLEMother + "</p>"; 
 						
 					}
 					else{	
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " é compativel com " + Nome3 + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "<b>POREM</b>, a placa nao será usada 100%" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mae é menor que da placa de vídeo" + "</p>";  
-						htmlResposta += "\n\t\t\t\t<p>" + "Placa de video : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A placa de Vídeo " + Nome2 + " <b class = 'green'>é compativel</b> com " + Nome3 + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "<b class = 'red'>POREM</b>, a placa nao será usada 100%" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque a tecnologia da entrada pCIE da placa mãe é menor que da placa de vídeo" + "</p>";  
+						htmlResposta += "\n\t\t\t\t<p>" + "Placa de vídeo : " + Nome2 + " - pCIE : " +  pCLEVideo + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mãe : " + Nome3 + " - pCIsE : " +  pCLEMother + "</p>"; 
 					
 					}
@@ -870,19 +874,19 @@ public class PecaComp extends Peca{
 					
 					if(tipoRam.contains(RAMPro) && tipoRam.contains(RAMMother)){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A memoria RAM é compativel com a placa mãe e com o processador" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipode de RAM é o mesmo dos outros dois componentes" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A memória RAM <b class = 'green'>é compativel</b> com a placa mãe e com o processador" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipo de de RAM é o mesmo dos outros dois componentes" + "</p>"; 
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Memoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother + "</p>"; 
 					}
 					else{
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A memoria RAM NAO é compativel com a placa mãe e com o processador" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipode de RAM NAO é o mesmo dos outros dois componentes. Confira abaixo" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A memoria RAM <b class = 'red'>NÃO</b> é compativel com a placa mãe e com o processador" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque o tipode de RAM não é o mesmo dos outros dois componentes. Confira abaixo" + "</p>"; 
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "---\nMemoria RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Memória RAM : " + Nome2 + " - Tipo de RAM : " + tipoRam + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Processador : " + Nome1 + " - Tipo de RAM : " + RAMPro + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa Mae : " + Nome3 + " - Tipo de RAM : " + RAMMother + "</p>"; 
 					}
@@ -953,22 +957,21 @@ public class PecaComp extends Peca{
 					
 					if(potencia >= resultado){
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " é compativel com as Pecas escolhidas" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MENOR ou IGUAL a potencia da Fonte, confira: " + "</p>"; 
-						
-						htmlResposta += "\n\t\t\t\t<p>" + "---\nFonte: " + Nome3 + " - Potencia : " + potencia + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " <b class = 'green'>é compativel</b> com as Pecas escolhidas" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potência do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MENOR ou IGUAL a potencia da Fonte, confira: " + "</p>";  
 						htmlResposta += "\n\t\t\t\t<p>" + "Processador: " + Nome1 + " - Potencia : " + TDPPro + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Potencia do PC: " + resultado + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Potencia do PC: <b>" + resultado + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Fonte: " + Nome3 + " - Potencia : <b>" + potencia + "</b></p>";
 					}
 					else{
 						
-						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " NAO é compativel com as Pecas escolhidas" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potencia do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MAIOR que a potencia da Fonte, confira:" + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "---\nFonte: " + Nome3 + " - Potencia : " + potencia + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "A Fonte " + Nome3 + " <b class = 'red'>NAO</b> é compativel com as Pecas escolhidas" + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Isto porque, a soma entre a potência do processador e da placa de vídeo, multiplado por 1,10 á 1,25 é MAIOR que a potencia da Fonte, confira:" + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Processador: " + Nome1 + " - Potencia : " + TDPPro + "</p>"; 
 						htmlResposta += "\n\t\t\t\t<p>" + "Placa de Video: " + Nome2 + " - Potencia : " + TDPVideo + "</p>"; 
-						htmlResposta += "\n\t\t\t\t<p>" + "Potencia do PC: " + resultado + "</p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Potencia requisitada pelo PC: <b>" + resultado + "</b></p>"; 
+						htmlResposta += "\n\t\t\t\t<p>" + "Fonte: " + Nome3 + " - Potencia : <b>" + potencia + "</b></p>"; 
 					}	
 				
 				}

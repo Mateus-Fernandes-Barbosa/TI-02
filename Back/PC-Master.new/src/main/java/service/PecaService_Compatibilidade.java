@@ -94,8 +94,6 @@ public class PecaService_Compatibilidade {
 			
 			//excluir texto que sobrar no início inutilizado 
 			dropdowns = dropdowns.replaceFirst(textoExtra, "");
-			//Alterar layout dos botões para melhorar visualização
-			form = form.replaceFirst("flex-direction: column;", "flex-direction: row;");
 			
 			//----alterar os resultados do teste----//
 			
